@@ -1,0 +1,38 @@
+# The URL the site will be built for
+base_url = "https://tunjan.site"
+theme = "no-style-please"
+description = "My personal website"
+default_language = "en"
+
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+generate_feed = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+
+taxonomies = [
+    { name = "tags" },
+    { name = "categories" },
+    { name = "contexts" },
+]
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+smart_punctuation = true
+
+[extra]
+add_toc = true
+#list_pages = true
+author = "Alberto Trigo"
+header_nav = [
+    { name = "~home", url = "/" },
+    { name = "/posts", url = "/blog" },
+]
+footer_nav = [
+
+]
