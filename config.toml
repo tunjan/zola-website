@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://tunjan.site"
+base_url = "https://albertotrigo.netlify.app"
 theme = "no-style-please"
 description = "My personal website"
 default_language = "en"

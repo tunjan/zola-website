@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://tunjan.site/</loc>
+    </url>
+    <url>
+        <loc>https://tunjan.site/blog/</loc>
+    </url>
+    <url>
+        <loc>https://tunjan.site/blog/websites/</loc>
+        <lastmod>2024-04-26</lastmod>
+    </url>
+    <url>
+        <loc>https://tunjan.site/categories/</loc>
+    </url>
+    <url>
+        <loc>https://tunjan.site/contexts/</loc>
+    </url>
+    <url>
+        <loc>https://tunjan.site/gallery/</loc>
+    </url>
+    <url>
+        <loc>https://tunjan.site/tags/</loc>
+    </url>
+</urlset>

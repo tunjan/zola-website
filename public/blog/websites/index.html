@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        <title>Hosting websites</title>
+        
+        <meta name="title" content="Hosting websites">
+        <meta name="author" content="Alberto Trigo">
+        <meta name="description" content="My personal website">
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://tunjan.site/blog/websites/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Hosting websites">
+        <meta property="og:description" content="My personal website">
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://tunjan.site/blog/websites/">
+        <meta property="twitter:title" content="Hosting websites">
+        <meta property="twitter:description" content="My personal website">
+        
+        
+        
+        <link rel="canonical" href="https://tunjan.site/blog/websites/">
+        
+        <script type="application/ld+json">
+            {
+                "description":"My personal website",
+                "url":"https://tunjan.site/blog/websites/",
+                "@type":"WebSite",
+                "headline":"Hosting websites",
+                "name":"Hosting websites",
+                "author":{
+                    "@type":"Person",
+                    "name":"Alberto Trigo"
+                },
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://tunjan.site/atom.xml">
+        
+        
+        
+        <link rel="stylesheet" href="https://tunjan.site/style.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                <nav>
+                    
+                    <a href="/" >~home</a>
+                    
+                    <a href="/blog" >&#x2F;posts</a>
+                    
+                </nav>
+                
+                
+<p><a href="..">..</a>/websites</p>
+<p class="post-meta"><time datetime="2024-04-26">2024-04-26</time></p>
+<h1>Hosting websites</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+
+
+
+<p>A few days ago I decided to learn how to self-host multiple services (calibre, quartz, etc) on my own server. This lead me through a bit of a rabbithole and mutiple conversations with LLMs, which were of great help. After that, I decided to write this post to remind myself in case I need to do it in the future.</p>
+<h2 id="utilities">Utilities</h2>
+<p>The main utilities that I used to accomplish the task were <strong>Vultr</strong> for a virtual machine, <strong>DreamHost</strong> for domain names and <strong>nginx</strong> for serving the files.</p>
+<h3 id="vultr">Vultr</h3>
+<p>I am using one of the cheapest options. The machine has 25GB of internal storage, 1 vCPU and 1024MB of RAM. The monthly cost is 6$, which I consider to be a fair price. I might decide to buy a Raspberry Pi in the future, which may achieve similar results for a lower long-term cost.</p>
+<p>This machine will be were the files are stored. The main tool to connect from your host machine is using the <strong>ssh</strong> protocol.</p>
+<h3 id="dreamhost">Dreamhost</h3>
+<p>I got the <em>wiki</em> domain name for 2$/year. It costs more to renew it for another year, so I will decide when the time comes what to do with it.</p>
+<p>I am using subdomains (eg. subdomain.maindomain.org), so I needed to create new “A records” for each subdomain. Yes, I should also add the ipv6 addresses for the subdomains.</p>
+<p><img src="/dreamhost.png" alt="picture of dreamhost" /></p>
+<h3 id="nginx">Nginx</h3>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+</p>
+
+                
+            </footer>
+        </div>
+    </body>
+</html>
+        
