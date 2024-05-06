@@ -5,6 +5,11 @@ draft = false
 importance = 2
 stage = 'draft'
 date = 2024-04-26
+updated = 2024-05-06
+[taxonomies]
+tags=["websites"]
+[extra]
+status = 'seed'
 +++
 
 A few days ago I decided to learn how to self-host multiple services (calibre, quartz, etc) on my own server. This lead me through a bit of a rabbithole and mutiple conversations with LLMs, which were of great help. After that, I decided to write this post to remind myself in case I need to do it in the future.

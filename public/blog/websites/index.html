@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        <title>Hosting websites</title>
+        
+        <meta name="title" content="Hosting websites">
+        <meta name="author" content="Alberto Trigo">
+        <meta name="description" content="My personal website">
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://albertotrigo.eu/blog/websites/">
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="Hosting websites">
+        <meta property="og:description" content="My personal website">
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://albertotrigo.eu/blog/websites/">
+        <meta property="twitter:title" content="Hosting websites">
+        <meta property="twitter:description" content="My personal website">
+        
+        
+        
+        <link rel="canonical" href="https://albertotrigo.eu/blog/websites/">
+        
+        <script type="application/ld+json">
+            {
+                "description":"My personal website",
+                "url":"https://albertotrigo.eu/blog/websites/",
+                "@type":"WebSite",
+                "headline":"Hosting websites",
+                "name":"Hosting websites",
+                "author":{
+                    "@type":"Person",
+                    "name":"Alberto Trigo"
+                },
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://albertotrigo.eu/atom.xml">
+        
+        
+        
+        <link rel="stylesheet" href="https://albertotrigo.eu/style.css"/>
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                
+                <nav>
+                    
+                    <a href="/" >~home</a>
+                    
+                    <a href="/blog" >&amp;posts</a>
+                    
+                    <a href="/tags" >#tags</a>
+                    
+                </nav>
+                
+                
+<p><a href="..">..</a>/websites</p>
+<p class="post-meta"><time datetime="2024-04-26">created: 2024-04-26</time></p>
+<p class="post-meta"> updated: 2024-05-06</p>
+<p class="post-meta"> reading time: 2 min</p>
+<p class="post-meta"> word count: 385</p>
+<p class="post-meta"> status: seed</p>
+
+<h1>Hosting websites</h1>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+
+                
+
+
+
+<p>A few days ago I decided to learn how to self-host multiple services (calibre, quartz, etc) on my own server. This lead me through a bit of a rabbithole and mutiple conversations with LLMs, which were of great help. After that, I decided to write this post to remind myself in case I need to do it in the future.</p>
+<h2 id="utilities">Utilities</h2>
+<p>The main utilities that I used to accomplish the task were <strong>Vultr</strong> for a virtual machine, <strong>DreamHost</strong> for domain names and <strong>nginx</strong> for serving the files.</p>
+<h3 id="vultr">Vultr</h3>
+<p>I am using one of the cheapest options. The machine has 25GB of internal storage, 1 vCPU and 1024MB of RAM. The monthly cost is 6$, which I consider to be a fair price. I might decide to buy a Raspberry Pi in the future, which may achieve similar results for a lower long-term cost.</p>
+<p>This machine will be were the files are stored. The main tool to connect from your host machine is using the <strong>ssh</strong> protocol.</p>
+<h3 id="dreamhost">Dreamhost</h3>
+<p>I got the <em>wiki</em> domain name for 2$/year. It costs more to renew it for another year, so I will decide when the time comes what to do with it.</p>
+<p>I am using subdomains (eg. subdomain.maindomain.org), so I needed to create new “A records” for each subdomain. Yes, I should also add the ipv6 addresses for the subdomains.</p>
+<p><img src="/dreamhost.png" alt="picture of dreamhost" /></p>
+<h3 id="nginx">Nginx</h3>
+<p>After building the website into the <code>public/</code> folder of my project, I moved the content of that folder into the host machine folder <code>/var/www/mysite</code>. Next, I created a file in <code>/etc/nginx/sites-available/your-domain.conf</code>. Inside that file I put the following contents.</p>
+<pre data-lang="nginx" style="background-color:#0f1419;color:#bfbab0;" class="language-nginx "><code class="language-nginx" data-lang="nginx"><span>server {
+</span><span>    listen 80;
+</span><span>    server_name your-domain.com; 
+</span><span>    root /var/www/mysite;
+</span><span>    index index.html;
+</span><span>
+</span><span>    location / {
+</span><span>        try_files $uri $uri/ =404;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Then, I created a soft-link:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> ln</span><span style="color:#f29718;"> -s</span><span> /etc/nginx/sites-available/your-domain.conf /etc/nginx/sites-enabled/
+</span></code></pre>
+<p>Started nginx as a systemd service:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> systemctl enable nginx.service
+</span></code></pre>
+<p>Checked my nginx configuation:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> nginx</span><span style="color:#f29718;"> -t
+</span></code></pre>
+<p>And restarted nginx:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> systemctl restart nginx
+</span></code></pre>
+<p>To enable the https protocol I installed certbot and run it</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> apt install certbot python3-certbot-nginx 
+</span><span style="color:#ffb454;">sudo</span><span> certbot</span><span style="color:#f29718;"> --nginx -d</span><span> your-domain.com
+</span></code></pre>
+<p><strong>Note</strong>: To log into the virtual machine you need to use SSH:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">ssh</span><span> username@server_ip_address
+</span></code></pre>
+
+
+            </main>
+            <footer>
+                
+<p class="taxonomies">
+
+
+<a href="/tags/websites">#websites</a>
+
+
+
+
+
+</p>
+
+
+
+
+                
+            </footer>
+        </div>
+    </body>
+</html>
+        
