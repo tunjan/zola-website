@@ -2,13 +2,12 @@
 
 {% block header %}
 <p><a href="..">..</a>/{{ page.slug }}</p>
-<p class="post-meta"><time datetime="{{ page.date }}">created: {{ page.date }}</time></p>
-<p class="post-meta"> updated: {{ page.updated }}</p>
-<p class="post-meta"> reading time: {{ page.reading_time }} min</p>
-<p class="post-meta"> word count: {{ page.word_count }}</p>
-<p class="post-meta"> status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}</p>
-
 <h1>{{ page.title }}</h1>
+<p class="post-meta"><time datetime="{{ page.date }}">created: {{ page.date }}</time>  · 
+updated: {{ page.updated }} · 
+reading time: {{ page.reading_time }} min · 
+status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}</p>
+
 {% endblock header %}
 
 {% block content %}
