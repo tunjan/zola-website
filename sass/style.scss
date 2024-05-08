@@ -107,8 +107,9 @@ img {
   }
 }
 
-nav, .taxonomies { text-align: left}
+nav, .taxonomies { text-align: right}
 
-nav a { margin-right: 0.2rem;}
+nav a { margin-left: 1rem;
+text-decoration: none;}
 
 header p { font-family: monospace;}
