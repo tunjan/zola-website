@@ -1,4 +1,5 @@
 # The URL the site will be built for
+title = "Alberto Trigo"
 base_url = "https://albertotrigo.eu"
 theme = "no-style-please"
 description = "My personal website"

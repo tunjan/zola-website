@@ -2,8 +2,6 @@
 title  = 'Alberto Trigo'
 +++
 
-# Alberto Trigo
-
 I am currently a part-time Bachelor’s physics student. This fact reflects my interests in mathematics, science, computers and statistics.
  
 I have professional training as data scientist, specifically in the sub-field of machine learning engineering. 
