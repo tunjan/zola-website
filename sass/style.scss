@@ -127,7 +127,7 @@ img {
   }
 }
 
-nav, .taxonomies { text-align: right}
+nav, .taxonomies { display: flex; justify-content: space-between;}
 
 nav a { margin-left: 1rem;
 text-decoration: none;}
@@ -137,5 +137,11 @@ header p { font-family: monospace;}
 @media only screen and (max-width: 44rem) {
   .w {
     max-width: 100vw;
+  }
+
+  nav, .taxonomies {
+	  display: flex;
+	  flex-wrap: wrap;
+	  justify-content: space-evenly;
   }
 }
