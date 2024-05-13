@@ -41,12 +41,16 @@ a {
 
 body {
   color: #1a202c;
-  font-family: "Jetbrains Mono", monospace;
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 320;
   line-height: 1.75rem;
   min-height: 100%;
   overflow-wrap: break-word;
   margin: auto;
-}
+  }
+
 
 .post-meta { text-align: left; opacity: .5;}
 
