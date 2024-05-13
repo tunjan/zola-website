@@ -7,7 +7,7 @@ I am currently doing a Bachelor’s physics degree. This reflects my interests i
 I have professional training as data scientist, specifically in the sub-field of machine learning engineering. 
 
 I spend most of my day reading, solving problems, and designing websites.
-One of mylong-term goals is to have a broad and rigorous understanding of many disciplines and be able to find their intersections. 
+One of my long-term goals is to have a broad and rigorous understanding of many disciplines and be able to find their intersections. 
 
 Occasionally, I contribute to Wikipedia and open-source projects.
 
