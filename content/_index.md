@@ -2,17 +2,18 @@
 title  = 'Alberto Trigo'
 +++
 
-I am currently a part-time Bachelor’s physics student. This fact reflects my interests in mathematics, science, computers and statistics.
+I am currently doing a Bachelor’s physics degree. This reflects my interests in mathematics, science, computers and statistics.
  
 I have professional training as data scientist, specifically in the sub-field of machine learning engineering. 
 
-Most of my days are spent reading, directly correlated with the long-term goal to have a broad and rigorous understanding of many disciplines. 
+I spend most of my day reading, solving problems, and designing websites.
+One of mylong-term goals is to have a broad and rigorous understanding of many disciplines and be able to find their intersections. 
 
-Occasionally, I contribute to Wikipedia and open-source projects. 
+Occasionally, I contribute to Wikipedia and open-source projects.
 
-If you want to discuss, you can send me an [email](mailto:contact@albertotrigo.eu), or tag me on [mastodon](https://scicomm.xyz/@tunjan).
+My favourite programming languages are Julia and Rust, although I mainly use Python.
 
-**Note**: this page is subject to constant change. Expect the content to change on a weekly basis.
+Feel free to contatct me by [email](mailto:contact@albertotrigo.eu), or [mastodon](https://scicomm.xyz/@tunjan).
 
 - [gallery](./gallery)
 - [feed](./atom.xml)
