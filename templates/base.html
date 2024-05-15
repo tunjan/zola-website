@@ -97,7 +97,7 @@
                 {% if config.extra.header_nav %}
                 <nav>
 		    {% if title %}<span class='title'>{{ config.title }}</span>{% endif %}
-		    <div>
+		    <div class='centered-nav'>
                     {% for nav_item in config.extra.header_nav %}
                     <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %}target="_blank" rel="noreferrer noopener"{% endif %}>{{ nav_item.name }}</a>
                     {% endfor %}

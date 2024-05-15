@@ -1,6 +1,7 @@
 // -------------- THEME SWITCHER -------------- //
 @mixin dark-appearance {
   filter: invert(1);
+
   img {
     filter: invert(1);
 
@@ -27,11 +28,11 @@ body[theme="dark"] {
 // see: https://stackoverflow.com/a/61265706
 * {
   box-sizing: border-box;
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='10px' height='10px'><circle cx='4' cy='4' r='4' fill='gray' /></svg>") 4 4, auto !important;
 }
 
-html,
-body {
-  background: #f8f8f6;
+html {
+  background-color: rgb(255, 252, 240);
 }
 
 html {
@@ -39,29 +40,33 @@ html {
 }
 
 a {
-  color: #0050db;
+  color: #4385BE;
 }
 
 .title {
   float: left;
-  font-weight: bold;
-  font-size: 1.1em;
+  word-spacing: normal;
+}
+
+::selection {
+  background: rgba(187, 220, 206, 0.3);
 }
 
 body {
-  color: #23252f;
-  font-family: "Lexend", sans-serif;
-  font-optical-sizing: auto;
+  color: rgb(16, 15, 15);
+  font-family: "ibm plex sans", sans-serif;
   font-style: normal;
-  line-height: 1.5em;
+  font-size: calc(.85rem + 0.25vw);
+  line-height: 1.5;
   min-height: 100%;
   overflow-wrap: break-word;
   margin: auto;
+  text-rendering: optimizeLegibility;
 }
 
 .post-meta {
-  font-size: 0.875em;
   color: #8e8f93;
+  margin-top: 0;
 }
 
 h2,
@@ -72,8 +77,11 @@ h6 {
   margin-top: 3rem;
 }
 
-hr {
-  margin: 2rem 0;
+h1 {
+  font-size: calc(1.35em + 0.55vw);
+  margin-top: 2em;
+  font-weight: 500;
+  margin-bottom: 0.25em;
 }
 
 p {
@@ -90,26 +98,24 @@ li {
 }
 
 .w {
-  max-width: 44rem;
+  max-width: 44em;
   margin: 0 auto;
-  padding: 2rem 2rem;
+  padding: 2em 2em;
 }
 
 main {
   margin-top: 3em;
 }
 
-nav h1 {
-  text-align: left;
-}
-
 hr {
+  margin: 2rem 0;
   text-align: center;
   border: 0;
 
   &:before {
     content: "/////";
   }
+
   &:after {
     content: attr(data-content) "/////";
   }
@@ -129,6 +135,7 @@ td {
 
 code {
   // color: white;
+  font-family: monospace;
   // background: black;
 }
 
@@ -157,10 +164,12 @@ img {
 
 .footnote-definition {
   padding: 0 1rem;
+
   &:target {
     background: yellow;
     color: #212121;
   }
+
   p {
     display: inline;
   }
@@ -170,22 +179,24 @@ nav,
 .taxonomies {
   display: flex;
   justify-content: space-between;
+  word-spacing: 1rem;
 }
 
 nav a {
-  margin-left: 1rem;
   text-decoration: none;
 }
 
-@media only screen and (max-width: 44rem) {
+nav a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 30rem) {
   .w {
     max-width: 100vw;
   }
 
-  nav,
-  .taxonomies {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+  .centered-nav> :nth-child(3) {
+    display: none;
   }
+
 }
