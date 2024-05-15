@@ -1,68 +1,78 @@
 <!doctype html>
 <html lang="{{ lang }}">
-    <head>
-        <meta charset="utf-8">
-        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
-        <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
-        {% if page.title %}
-        {% set title = page.title %}
-        {% elif section.title %}
-        {% set title = section.title %}
-        {% elif config.title %}
-        {% set title = config.title %}
-        {% endif %}
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-        {% if page.extra.author %}
-        {% set author = page.extra.author %}
-        {% elif section.extra.author %}
-        {% set author = section.extra.author %}
-        {% elif config.extra.author %}
-        {% set author = config.extra.author %}
-        {% endif %}
+  {% if page.title %}
+  {% set title = page.title %}
+  {% elif section.title %}
+  {% set title = section.title %}
+  {% elif config.title %}
+  {% set title = config.title %}
+  {% endif %}
 
-        {% if page.description %}
-        {% set description = page.description | truncate(length=150) %}
-        {% elif section.description %}
-        {% set description = section.description | truncate(length=150) %}
-        {% elif config.description %}
-        {% set description = config.description | truncate(length=150) %}
-        {% endif %}
+  {% if page.extra.author %}
+  {% set author = page.extra.author %}
+  {% elif section.extra.author %}
+  {% set author = section.extra.author %}
+  {% elif config.extra.author %}
+  {% set author = config.extra.author %}
+  {% endif %}
 
-        {% if page.extra.image %}
-        {% set image = get_url(path=page.extra.image, trailing_slash=false) %}
-        {% elif section.extra.image %}
-        {% set image = get_url(path=section.extra.image, trailing_slash=false) %}
-        {% elif config.extra.logo %}
-        {% set image = get_url(path=config.extra.logo, trailing_slash=false) %}
-        {% endif %}
+  {% if page.description %}
+  {% set description = page.description | truncate(length=150) %}
+  {% elif section.description %}
+  {% set description = section.description | truncate(length=150) %}
+  {% elif config.description %}
+  {% set description = config.description | truncate(length=150) %}
+  {% endif %}
 
-        {% if page.permalink %}
-        {% set url = page.permalink %}
-        {% elif section.permalink %}
-        {% set url = section.permalink %}
-        {% elif config.base_url %}
-        {% set url = config.base_url %}
-        {% endif %}
+  {% if page.extra.image %}
+  {% set image = get_url(path=page.extra.image, trailing_slash=false) %}
+  {% elif section.extra.image %}
+  {% set image = get_url(path=section.extra.image, trailing_slash=false) %}
+  {% elif config.extra.logo %}
+  {% set image = get_url(path=config.extra.logo, trailing_slash=false) %}
+  {% endif %}
 
-        {% if title %}<title>{{ title }}</title>{% endif %}
-        {% block metatags %}
-        {% if title %}<meta name="title" content="{{ title }}">{% endif %}
-        {% if author %}<meta name="author" content="{{ author }}">{% endif %}
-        {% if description %}<meta name="description" content="{{ description }}">{% endif %}
-        <meta name="generator" content="Zola v0.18.0">
+  {% if page.permalink %}
+  {% set url = page.permalink %}
+  {% elif section.permalink %}
+  {% set url = section.permalink %}
+  {% elif config.base_url %}
+  {% set url = config.base_url %}
+  {% endif %}
 
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="{{ url | safe }}">
-        {% if title %}<meta property="og:site_name" content="{{ config.title }}">{% endif %}
-        {% if title %}<meta property="og:title" content="{{ title }}">{% endif %}
-        {% if description %}<meta property="og:description" content="{{ description }}">{% endif %}
-        {% if image %}<meta property="og:image" content="{{ image }}">{% endif %}
-        
-        <link rel="canonical" href="{{ url | safe }}">
-        {% if image %}<link rel="shortcut icon" type="image/x-icon" href="{{ get_url(path=config.extra.logo, trailing_slash=false) }}">{% endif %}
-        <script type="application/ld+json">
+  {% if title %}<title>{{ title }}</title>{% endif %}
+  {% block metatags %}
+  {% if title %}
+  <meta name="title" content="{{ title }}">{% endif %}
+  {% if author %}
+  <meta name="author" content="{{ author }}">{% endif %}
+  {% if description %}
+  <meta name="description" content="{{ description }}">{% endif %}
+  <meta name="generator" content="Zola v0.18.0">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ url | safe }}">
+  {% if title %}
+  <meta property="og:site_name" content="{{ config.title }}">{% endif %}
+  {% if title %}
+  <meta property="og:title" content="{{ title }}">{% endif %}
+  {% if description %}
+  <meta property="og:description" content="{{ description }}">{% endif %}
+  {% if image %}
+  <meta property="og:image" content="{{ image }}">{% endif %}
+
+  <link rel="canonical" href="{{ url | safe }}">
+  {% if image %}
+  <link rel="shortcut icon" type="image/x-icon" href="{{ get_url(path=config.extra.logo, trailing_slash=false) }}">{%
+  endif %}
+  <script type="application/ld+json">
             {
                 {% if description %}"description":"{{ description | safe }}",{% endif %}
                 "url":"{{ url | safe }}",
@@ -76,53 +86,56 @@
                 "@context":"https://schema.org"
             }
         </script>
-        {% endblock metatags %}
-        {% if config.generate_feed %}
-        {% block feed %}
-        <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
-        {% endblock feed %}
-        {% endif %}
-        {% block css %}
-        <link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) | safe }}"/>
-        {% endblock css %}
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&display=swap');
-</style>
+  {% endblock metatags %}
+  {% if config.generate_feed %}
+  {% block feed %}
+  <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path=" atom.xml", trailing_slash=false)
+    }}">
+  {% endblock feed %}
+  {% endif %}
+  {% block css %}
+  <link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) | safe }}" />
+  {% endblock css %}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&display=swap');
+  </style>
 
-    </head>
-    <body theme="auto">
-        <div class="w">
-            <header>
-                {% if config.extra.header_nav %}
-                <nav>
-		    {% if title %}<span class='title'>{{ config.title }}</span>{% endif %}
-		    <div class='centered-nav'>
-                    {% for nav_item in config.extra.header_nav %}
-                    <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %}target="_blank" rel="noreferrer noopener"{% endif %}>{{ nav_item.name }}</a>
-                    {% endfor %}
-		    </div>
-                </nav>
-		    {% block header %}{% endblock header %}
-                {% endif %}
-            </header>
-            <main class="page-content" aria-label="Content">
-{% if page.status %}
-<p> {{ page.status }} </p>
-{% endif %}
-                {% block content %}{% endblock content %}
-            </main>
-            <footer>
-                {% block footer %}{% endblock footer %}
-                {% if config.extra.footer_nav %}
-                <nav>
-                    {% for nav_item in config.extra.footer_nav %}
-                    <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
-                    {% endfor %}
-                </nav>
-                {% endif %}
-            </footer>
+</head>
+
+<body theme="auto">
+  <div class="w">
+    <header>
+      {% if config.extra.header_nav %}
+      <nav>
+        {% if title %}<span class='title'>{{ config.title }}</span>{% endif %}
+        <div class='centered-nav'>
+          {% for nav_item in config.extra.header_nav %}
+          <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %}target="_blank" rel="noreferrer noopener" {%
+            endif %}>{{ nav_item.name }}</a>
+          {% endfor %}
         </div>
-    </body>
+      </nav>
+      {% block header %}{% endblock header %}
+      {% endif %}
+    </header>
+    <main class="page-content" aria-label="Content">
+      {% if page.status %}
+      <p> {{ page.status }} </p>
+      {% endif %}
+      {% block content %}{% endblock content %}
+    </main>
+    <footer>
+      {% block footer %}{% endblock footer %}
+      {% if config.extra.footer_nav %}
+      <nav>
+        {% for nav_item in config.extra.footer_nav %}
+        <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
+        {% endfor %}
+      </nav>
+      {% endif %}
+    </footer>
+  </div>
+</body>
+
 </html>
-        
