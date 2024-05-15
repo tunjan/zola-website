@@ -19,7 +19,7 @@ taxonomies = [{ name = "tags" }]
 [markdown]
 highlight_code = true
 smart_punctuation = true
-highlight_theme = "ayu-dark"
+highlight_theme = "gruvbox-dark"
 
 [extra]
 add_toc = true
