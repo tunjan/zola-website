@@ -17,17 +17,16 @@ build_search_index = false
 taxonomies = [{ name = "tags" }]
 
 [markdown]
-highlight_code = true
+highlight_code = false
 smart_punctuation = true
-highlight_theme = "gruvbox-dark"
 
 [extra]
 add_toc = true
 #list_pages = true
 author = "Alberto Trigo"
 header_nav = [
-  { name = "home", url = "/" },
-  { name = "posts", url = "/blog" },
+  { name = "Home", url = "/" },
+  { name = "Posts", url = "/blog" },
   { name = "#tags", url = "/tags" },
 ]
 footer_nav = []

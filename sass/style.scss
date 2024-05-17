@@ -44,6 +44,15 @@ a {
   text-decoration: none;
 }
 
+nav a {
+  color: rgb(111, 110, 105);
+}
+
+nav a:hover {
+  text-decoration: none;
+  color: #24837B;
+}
+
 .title {
   float: left;
   word-spacing: normal;
@@ -55,7 +64,7 @@ a {
 
 body {
   color: rgb(16, 15, 15);
-  font: normal 320 calc(.9rem + .2vw)/1.5 "Lexend", sans-serif;
+  font: normal 320 calc(1rem + .2vw)/1.5 "Lexend", sans-serif;
   min-height: 100%;
   overflow-wrap: break-word;
   margin: auto;
@@ -76,7 +85,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 3em;
+  margin-top: 2em;
   font-weight: 500;
 }
 
@@ -149,6 +158,16 @@ pre {
   border-radius: 5px;
 }
 
+code {
+  background-color: rgb(242, 240, 229);
+  border: 1px dotted rgb(111, 110, 105);
+  border-bottom: 2px solid rgb(135, 154, 57);
+  border-radius: 2px;
+  color: #611f00;
+  overflow-wrap: anywhere;
+  padding-inline: .5rem;
+}
+
 pre code {
   display: block;
   overflow-x: auto;
@@ -192,14 +211,6 @@ nav,
   display: flex;
   justify-content: space-between;
   word-spacing: 1em;
-}
-
-nav a {
-  text-decoration: none;
-}
-
-nav a:hover {
-  text-decoration: underline;
 }
 
 @media only screen and (max-width: 30em) {
