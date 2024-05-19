@@ -25,7 +25,6 @@ add_toc = true
 #list_pages = true
 author = "Alberto Trigo"
 header_nav = [
-  { name = "Home", url = "/" },
   { name = "Posts", url = "/blog" },
   { name = "#tags", url = "/tags" },
 ]
