@@ -5,7 +5,7 @@ title  = 'Alberto Trigo'
 # About
 
 Welcome to my little spot on the internet. As is obvious to many of us, introductions are rather limiting and reductionist.
-Humans are a difficult beings to understand, even harder to describe them accurately.
+Humans are difficult beings to understand, even harder to describe them accurately.
 Nonetheless, I venture into the task of doing that to myself, and in my failure I ask the reader not to judge it harshly.
 
 While general and broad, my main interests are science, mathematics, statistics and languages.

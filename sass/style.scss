@@ -32,10 +32,6 @@ body[theme="dark"] {
 }
 
 html {
-  background-color: rgb(255, 252, 240);
-}
-
-html {
   height: 100%;
 }
 
@@ -63,8 +59,9 @@ nav a:hover {
 }
 
 body {
-  color: rgb(16, 15, 15);
-  font: normal 320 calc(1rem + .2vw)/1.5 "Lexend", sans-serif;
+  background-color: rgb(255, 252, 255);
+  color: rgb(0, 0, 0);
+  font: normal 400 calc(1rem + .2vw)/1.5 "IBM Plex Sans", sans-serif;
   min-height: 100%;
   overflow-wrap: break-word;
   margin: auto;
