@@ -31,7 +31,7 @@ ideas otherwise inaccessible before.
 In future writing I may decide to write about topics I find interesting, or keep talking about myself. This should not be seen
 in a bad light, since after all, this is my own place.
 
----
+# Contact
 
 Please feel free to contact me through [email](mailto:contact@albertotrigo.eu) or [mastodon](https://scicomm.xyz/@tunjan). I enjoy discussing ideas and always try to be social.
 

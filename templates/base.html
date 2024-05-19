@@ -97,44 +97,41 @@
   <link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) | safe }}" />
   {% endblock css %}
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+    @import url('https://free.bboxtype.com/embedfonts/?family=FiraGO:300,300i,400,400i,500,500i,600,600i,700');
   </style>
-
 </head>
 
 <body theme="auto">
-  <div class="w">
-    <header>
-      {% if config.extra.header_nav %}
-      <nav>
-        {% if title %}<a class='title' href="/">{{ config.title }}</a>{% endif %}
-        <div class='centered-nav'>
-          {% for nav_item in config.extra.header_nav %}
-          <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %}target="_blank" rel="noreferrer noopener" {%
-            endif %}>{{ nav_item.name }}</a>
-          {% endfor %}
-        </div>
-      </nav>
-      {% block header %}{% endblock header %}
-      {% endif %}
-    </header>
-    <main class="page-content" aria-label="Content">
-      {% if page.status %}
-      <p> {{ page.status }} </p>
-      {% endif %}
-      {% block content %}{% endblock content %}
-    </main>
-    <footer>
-      {% block footer %}{% endblock footer %}
-      {% if config.extra.footer_nav %}
-      <nav>
-        {% for nav_item in config.extra.footer_nav %}
-        <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
+  <header>
+    {% if config.extra.header_nav %}
+    {% if title %}<a class='title' href="/">{{ config.title }}</a>{% endif %}
+    <nav>
+      <div class='centered-nav'>
+        {% for nav_item in config.extra.header_nav %}
+        <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %}target="_blank" rel="noreferrer noopener" {% endif
+          %}>{{ nav_item.name }}</a>
         {% endfor %}
-      </nav>
-      {% endif %}
-    </footer>
-  </div>
+      </div>
+    </nav>
+    {% block header %}{% endblock header %}
+    {% endif %}
+  </header>
+  <main>
+    {% if page.status %}
+    <p> {{ page.status }} </p>
+    {% endif %}
+    {% block content %}{% endblock content %}
+  </main>
+  <footer>
+    {% block footer %}{% endblock footer %}
+    {% if config.extra.footer_nav %}
+    <nav>
+      {% for nav_item in config.extra.footer_nav %}
+      <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
+      {% endfor %}
+    </nav>
+    {% endif %}
+  </footer>
 </body>
 
 </html>

@@ -1,5 +1,2 @@
 ---
-title: 'blog'
 ---
-
-Blog posts
