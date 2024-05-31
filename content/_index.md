@@ -8,7 +8,7 @@ I enjoy learning and teaching science, mathematics, statistics and physics, havi
 
 I actively participate in animal rights educational activism.
 
-You can find my code contributions [here](https://github.com/tunjan)
+You can find my code contributions [here](https://github.com/tunjan).
 
 ## Contact
 

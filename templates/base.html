@@ -106,12 +106,10 @@
     {% if config.extra.header_nav %}
     {% if title %}<a class='title' href="/">{{ config.title }}</a>{% endif %}
     <nav>
-      <div class='centered-nav'>
-        {% for nav_item in config.extra.header_nav %}
-        <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %}target="_blank" rel="noreferrer noopener" {% endif
-          %}>{{ nav_item.name }}</a>
-        {% endfor %}
-      </div>
+      {% for nav_item in config.extra.header_nav %}
+      <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %}target="_blank" rel="noreferrer noopener" {% endif
+        %}>{{ nav_item.name }}</a>
+      {% endfor %}
     </nav>
     {% block header %}{% endblock header %}
     {% endif %}

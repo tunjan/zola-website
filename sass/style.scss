@@ -1,4 +1,3 @@
-// -------------- THEME SWITCHER -------------- //
 @mixin dark-appearance {
   filter: invert(1);
 
@@ -21,14 +20,9 @@ body[theme="dark"] {
   }
 }
 
-// -------------------------------------------- //
-
-// bg color is also needed in html in order to
-// block body's background propagation
-// see: https://stackoverflow.com/a/61265706
 * {
   box-sizing: border-box;
-  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='10px' height='10px'><circle cx='4' cy='4' r='4' fill='gray' /></svg>") 4 4, auto !important;
+  // cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='10px' height='10px'><circle cx='4' cy='4' r='4' fill='gray' /></svg>") 4 4, auto !important;
 }
 
 html {
@@ -36,18 +30,43 @@ html {
   background-color: white;
 }
 
-a {
-  color: #4385be;
-  text-decoration: none;
+body {
+  background-color: white;
+  color: #373737;
+  font: normal 400 calc(1rem + .2vw)/1.6em "FiraGO", sans-serif;
+  min-height: 100%;
+  overflow-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  max-width: clamp(65ch, 50%, 75ch);
+  padding: 3em;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
 }
 
 nav a {
   color: rgb(111, 110, 105);
+  text-decoration: none;
 }
 
 nav a:hover {
-  text-decoration: none;
-  color: #4385be;
+  color: #373737;
+}
+
+main a {
+  text-decoration: underline;
+  text-decoration-color: red;
+  text-decoration-thickness: .1em;
+  text-underline-offset: .1em;
+  color: #373737;
+  transition: text-decoration-color 200ms;
+}
+
+main a:hover {
+  text-decoration-color: #a855f7;
 }
 
 .title:hover {
@@ -66,17 +85,6 @@ nav a:hover {
 
 ::selection {
   background: rgba(187, 220, 206, 0.3);
-}
-
-body {
-  background-color: white;
-  color: #373737;
-  font: normal 400 calc(1rem + .2vw)/1.6em "FiraGO", sans-serif;
-  min-height: 100%;
-  overflow-wrap: break-word;
-  text-rendering: optimizeLegibility;
-  max-width: clamp(65ch, 50%, 75ch);
-  padding: 2em;
 }
 
 .post-meta {
@@ -105,14 +113,6 @@ h1 {
   margin-bottom: 0.25em;
 }
 
-
-main a::before {
-  content: '[';
-}
-
-main a::after {
-  content: "]";
-}
 
 p {
   margin: 1em 0;
@@ -210,24 +210,10 @@ img {
   }
 }
 
-nav,
-.taxonomies {
-  word-spacing: 1em;
-}
-
-header {
-  display: flex;
-  flex-direction: column;
-}
-
 @media only screen and (max-width: 30em) {
   body {
     max-width: 100vw;
-    padding: .8em;
-  }
-
-  .centered-nav> :nth-child(3) {
-    display: none;
+    padding: 1em;
   }
 
   .mobile {
@@ -237,5 +223,4 @@ header {
   .desktop {
     display: none;
   }
-
 }
