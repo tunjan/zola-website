@@ -40,7 +40,7 @@ body {
   overflow-wrap: break-word;
   text-rendering: optimizeLegibility;
   max-width: clamp(65ch, 50%, 75ch);
-  padding: 2em;
+  padding: 2em 0 0 2em;
   margin: 0;
 }
 
@@ -222,6 +222,10 @@ img {
   bottom: 20px;
   right: 20px;
   width: 50px;
+  border-radius: 5px;
+  background: white;
+  padding: 10px;
+  color: white;
   /* Adjust size as needed */
   height: 50px;
   /* Adjust size as needed */
@@ -230,19 +234,9 @@ img {
   /* Hidden by default */
   z-index: 1000;
   /* Ensures it stays on top */
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-#scrollToTopBtn svg {
-  width: 100%;
-  height: 100%;
-  fill: #007BFF;
-  /* Adjust color as needed */
-}
-
-#scrollToTopBtn:hover svg {
-  fill: #0056b3;
-  /* Adjust hover color as needed */
-}
 
 @media only screen and (max-width: 30em) {
   body {
