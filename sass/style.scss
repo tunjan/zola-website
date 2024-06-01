@@ -217,6 +217,33 @@ img {
   }
 }
 
+#scrollToTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  /* Adjust size as needed */
+  height: 50px;
+  /* Adjust size as needed */
+  cursor: pointer;
+  display: none;
+  /* Hidden by default */
+  z-index: 1000;
+  /* Ensures it stays on top */
+}
+
+#scrollToTopBtn svg {
+  width: 100%;
+  height: 100%;
+  fill: #007BFF;
+  /* Adjust color as needed */
+}
+
+#scrollToTopBtn:hover svg {
+  fill: #0056b3;
+  /* Adjust hover color as needed */
+}
+
 @media only screen and (max-width: 30em) {
   body {
     max-width: 100vw;

@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block header %}
 {# <p><a href="..">..</a>/{{ page.slug }}</p> #}
 <h1>{{ page.title }}</h1>
@@ -66,6 +65,30 @@ Table of contents
     {% endfor %}
 </ul>
 {% endif %}
+<img id="scrollToTopBtn" src="{{ get_url(path='totop.svg') }}" alt="Scroll to Top" />
+
+<script>
+window.onscroll = function() {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        scrollToTopBtn.style.display = "block";
+    } else {
+        scrollToTopBtn.style.display = "none";
+    }
+}
+
+// Smooth scroll to the top
+document.getElementById("scrollToTopBtn").addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+</script>
 
 
 {% endblock footer %}
