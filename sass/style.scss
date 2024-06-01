@@ -22,6 +22,8 @@ body[theme="dark"] {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   // cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='10px' height='10px'><circle cx='4' cy='4' r='4' fill='gray' /></svg>") 4 4, auto !important;
 }
 
@@ -32,13 +34,13 @@ html {
 
 body {
   background-color: white;
-  color: #373737;
-  font: normal 400 calc(1rem + .2vw)/1.6em "FiraGO", sans-serif;
+  color: black;
+  font: normal 400 calc(1rem + .2vw)/1.7em "FiraGO", sans-serif;
   min-height: 100%;
   overflow-wrap: break-word;
   text-rendering: optimizeLegibility;
   max-width: clamp(65ch, 50%, 75ch);
-  padding: 3em;
+  padding: 2em;
   margin: 0;
 }
 
@@ -61,13 +63,16 @@ main a {
   text-decoration-color: red;
   text-decoration-thickness: .1em;
   text-underline-offset: .1em;
-  color: #373737;
-  transition: text-decoration-color 200ms;
+  transition: text-underline-offset 200ms;
+  color: black;
 }
 
 main a:hover {
-  text-decoration-color: #a855f7;
+  transition: text-underline-offset 200ms;
+  text-underline-offset: -1em;
 }
+
+
 
 .title:hover {
   color: #4385be;
@@ -81,6 +86,7 @@ main a:hover {
   text-underline-offset: .3em;
   text-decoration-thickness: 2px;
   margin-bottom: 1em;
+  font-size: 1.1em;
 }
 
 ::selection {
@@ -88,9 +94,10 @@ main a:hover {
 }
 
 .post-meta {
-  color: #8e8f93;
-  margin-top: 0;
-  font-size: .9em;
+  font-size: .85em;
+  margin-top: .4em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
 }
 
 .mobile {
@@ -110,7 +117,7 @@ h1 {
   font-size: calc(1.35em + 0.55vw);
   margin-top: 2em;
   font-weight: 500;
-  margin-bottom: 0.25em;
+  margin-bottom: 0;
 }
 
 
@@ -120,7 +127,11 @@ p {
 }
 
 li {
-  margin: 0.4em 0;
+  margin: 0.4em 1em;
+}
+
+ul {
+  margin: 1em 0em;
 }
 
 *:target {
@@ -160,7 +171,6 @@ pre {
 code {
   background-color: #f2f2f2;
   padding-inline: .5rem;
-  font-family: monospace;
 }
 
 strong {
@@ -169,16 +179,13 @@ strong {
 
 pre code {
   display: block;
-  overflow-x: auto;
   white-space: pre-wrap;
   padding: 1em;
   font-family: monospace;
   font-weight: normal;
-  background-color: #fafafa;
-  border: 1px solid rgb(111, 110, 105);
-  border-bottom: 2px solid rgb(135, 154, 57);
-  border-radius: 2px;
-  color: #611f00;
+  background-color: #efefef;
+  overflow: auto;
+  // border-bottom: 2px solid rgb(135, 154, 57);
 }
 
 blockquote {

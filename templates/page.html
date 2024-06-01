@@ -3,12 +3,13 @@
 {% block header %}
 {# <p><a href="..">..</a>/{{ page.slug }}</p> #}
 <h1>{{ page.title }}</h1>
-<p class="post-meta desktop"><time datetime="{{ page.date }}">created: {{ page.date }}</time>  · 
-updated: {{ page.updated }} · 
-reading time: {{ page.reading_time }} min · 
-status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}</p>
-<p class="post-meta mobile"><time datetime="{{ page.date }}">created: {{ page.date }}</time>  · 
-reading time: {{ page.reading_time }} min
+<div class="desktop post-meta">
+<time datetime="{{ page.date }}">Created: {{ page.date }}</time> ·
+Updated: {{ page.updated }} ·
+Reading: {{ page.reading_time }}min ·
+Status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}</div>
+<p class="post-meta mobile"><time datetime="{{ page.date }}">Created: {{ page.date }}</time>  · 
+Reading: {{ page.reading_time }} min
 </p>
 
 {% endblock header %}
