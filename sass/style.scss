@@ -29,17 +29,16 @@ body[theme="dark"] {
 html {
   height: 100%;
   background-color: white;
-  font-size: 62.5%;
+  font-size: 60%;
   box-sizing: border-box;
 }
 
 .content {
   color: black;
   background-color: white;
-  font: normal 400 calc(1.5rem + .25vw)/1.5em "Onest", sans-serif;
+  font: normal 400 calc(1.5rem + .25vw)/1.5em "DM Sans", sans-serif;
   font-optical-sizing: auto;
   min-height: 100%;
-  overflow-wrap: break-word;
   text-rendering: optimizeLegibility;
   width: clamp(65ch, 40%, 75ch);
   padding: 3em 3em 0em 3em;
@@ -110,8 +109,6 @@ main a:hover {
 }
 
 .post-meta {
-  font-family: "Space Grotesk";
-
   font-size: .85em;
   margin-top: .4em;
   margin-bottom: 2em;
@@ -145,9 +142,13 @@ main h3,
 main h4,
 main h5,
 main h6 {
-  margin-top: 2em;
+  margin-top: 1.5em;
   margin-bottom: 1em;
-  font-weight: 600;
+  font-weight: 550;
+  // text-decoration: underline;
+  // text-decoration-color: black;
+  // text-decoration-thickness: 2px;
+  // text-underline-offset: .3em;
 }
 
 /* CSS */
@@ -179,7 +180,6 @@ main h6 {
 p {
   margin-top: 0em;
   margin-bottom: 1em;
-  hyphens: auto;
 }
 
 li {
@@ -305,6 +305,12 @@ footer {
   margin-bottom: 0em;
   font-size: 1em;
   opacity: .8;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 2px;
+  text-underline-offset: .3em;
+
 }
 
 .toc {
@@ -334,7 +340,7 @@ footer {
 
 .toc a {
   text-decoration: none;
-  opacity: 0.5;
+  opacity: 0.55;
   color: black;
 }
 
@@ -346,6 +352,27 @@ footer {
 
 body {
   display: flex;
+}
+
+#cursor {
+  position: fixed;
+  pointer-events: none;
+  transform: none;
+  opacity: .8;
+  transform-origin: center center;
+  transition: all 300ms ease-out;
+  padding: 2px;
+}
+
+.cursor-circle {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 5s ease-out;
+}
+
+.cursor-circle.animate {
+  stroke-dashoffset: 0;
+  /* stroke: white; */
 }
 
 @media only screen and (max-width: 600px) {

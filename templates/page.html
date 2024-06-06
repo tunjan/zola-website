@@ -5,11 +5,11 @@
 <div class="desktop post-meta">
 <time datetime="{{ page.date }}">Created: {{ page.date }}</time> ·
 Updated: {{ page.updated }} ·
-Reading: {{ page.reading_time }} min
+Reading time: {{ page.reading_time }} min
 <!--Status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}-->
 </div>
 <p class="post-meta mobile"><time datetime="{{ page.date }}">Created: {{ page.date }}</time>  · 
-Reading: {{ page.reading_time }} min
+Reading time: {{ page.reading_time }} min
 </p>
 
 {% endblock header %}
@@ -92,7 +92,7 @@ Table of contents
           }
 
           var numberStr = numbers.slice(0, level + 1).join('.');
-          header.innerHTML = numberStr + ' ' + header.innerHTML;
+          header.innerHTML = numberStr + '. ' + header.innerHTML;
         });
       });
     </script>

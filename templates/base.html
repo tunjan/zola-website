@@ -98,7 +98,7 @@
   {% endblock css %}
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
   </style>
 </head>
 
@@ -224,6 +224,50 @@
   </div>
 
   {% block toc %}{% endblock toc %}
+
+  <svg id="cursor" width="20" height="20">
+    <circle cx="10" cy="10" r="8" fill="grey" stroke="grey" stroke-width="1" class="cursor-circle" />
+  </svg>
+  <section id="section-one" class="section">
+  </section>
+
+  <script>
+    let cursor = document.getElementById("cursor");
+    let circle = document.querySelector(".cursor-circle");
+
+    let setCursorPosition = function (e) {
+      let xPosition = e.clientX - cursor.clientWidth / 2 + "px";
+      let yPosition = e.clientY - cursor.clientHeight / 2 + "px";
+      cursor.style.transform =
+        "translate(" + xPosition + "," + yPosition + ") scale(1)";
+      return {
+        x: xPosition,
+        y: yPosition
+      };
+    };
+
+    document.addEventListener("mousemove", e => setCursorPosition(e));
+    let scaleCursor = function (e, scale) {
+      setCursorPosition(e);
+      cursor.style.transform =
+        "translate(" +
+        setCursorPosition(e).x +
+        "," +
+        setCursorPosition(e).y +
+        ") scale(" +
+        scale +
+        ")";
+    };
+
+    document.addEventListener("mousedown", function (e) {
+      scaleCursor(e, 0.8);
+      circle.classList.add("animate");
+    });
+    document.addEventListener("mouseup", function (e) {
+      scaleCursor(e, 1);
+      circle.classList.remove("animate");
+    });
+  </script>
 
 </body>
 
