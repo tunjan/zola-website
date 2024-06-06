@@ -48,7 +48,6 @@ server {
     }
 }
 ```
-
 Then, I created a soft-link:
 ```bash
 sudo ln -s /etc/nginx/sites-available/your-domain.conf /etc/nginx/sites-enabled/

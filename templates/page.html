@@ -98,7 +98,8 @@ Table of contents
     </script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
+
+document.addEventListener("DOMContentLoaded", function() {
     const content = document.querySelector('main');
     const toc = document.querySelector('.toc ul');
     const headings = content.querySelectorAll('h1, h2');
@@ -112,6 +113,12 @@ Table of contents
         tocLink.setAttribute('href', `#${id}`);
         tocLink.textContent = heading.textContent;
         tocItem.appendChild(tocLink);
+
+        // Check if the heading is an h2 (subheading) and add indentation
+        if (heading.tagName === 'H2') {
+            tocItem.style.paddingLeft = '20px'; // Adjust the indentation as needed
+        }
+
         toc.appendChild(tocItem);
     });
 
@@ -135,6 +142,7 @@ Table of contents
         });
     });
 });
+
 </script>
 
 {% endblock footer %}
