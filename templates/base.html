@@ -224,50 +224,86 @@
   </div>
 
   {% block toc %}{% endblock toc %}
+  <script>  const pointer = document.createElement("div")
+    pointer.id = "pointer-dot"
+    const ring = document.createElement("div")
+    ring.id = "pointer-ring"
+    document.body.insertBefore(pointer, document.body.children[0])
+    document.body.insertBefore(ring, document.body.children[0])
 
-  <svg id="cursor" width="20" height="20">
-    <circle cx="10" cy="10" r="8" fill="grey" stroke="grey" stroke-width="1" class="cursor-circle" />
-  </svg>
-  <section id="section-one" class="section">
-  </section>
+    let mouseX = -100
+    let mouseY = -100
+    let ringX = -100
+    let ringY = -100
+    let isHover = false
+    let mouseDown = false
+    const init_pointer = (options) => {
+
+      window.onmousemove = (mouse) => {
+        mouseX = mouse.clientX
+        mouseY = mouse.clientY
+      }
+
+      window.onmousedown = (mouse) => {
+        mouseDown = true
+      }
+
+      window.onmouseup = (mouse) => {
+        mouseDown = false
+      }
+
+      const trace = (a, b, n) => {
+        return (1 - n) * a + n * b;
+      }
+      window["trace"] = trace
+
+      const getOption = (option) => {
+        let defaultObj = {
+          pointerColor: "#750c7e",
+          ringSize: 15,
+          ringClickSize: (options["ringSize"] || 15) - 5,
+        }
+        if (options[option] == undefined) {
+          return defaultObj[option]
+        } else {
+          return options[option]
+        }
+      }
+
+      const render = () => {
+        ringX = trace(ringX, mouseX, 0.2)
+        ringY = trace(ringY, mouseY, 0.2)
+
+        if (document.querySelector(".p-action-click:hover")) {
+          pointer.style.borderColor = getOption("pointerColor")
+          isHover = true
+        } else {
+          pointer.style.borderColor = "black"
+          isHover = false
+        }
+        ring.style.borderColor = getOption("pointerColor")
+        if (mouseDown) {
+          ring.style.padding = getOption("ringClickSize") + "px"
+        } else {
+          ring.style.padding = getOption("ringSize") + "px"
+        }
+
+        pointer.style.transform = `translate(${mouseX}px, ${mouseY}px)`
+        ring.style.transform = `translate(${ringX - (mouseDown ? getOption("ringClickSize") : getOption("ringSize"))}px, ${ringY - (mouseDown ? getOption("ringClickSize") : getOption("ringSize"))}px)`
+
+        requestAnimationFrame(render)
+      }
+      requestAnimationFrame(render)
+    }</script>
 
   <script>
-    let cursor = document.getElementById("cursor");
-    let circle = document.querySelector(".cursor-circle");
-
-    let setCursorPosition = function (e) {
-      let xPosition = e.clientX - cursor.clientWidth / 2 + "px";
-      let yPosition = e.clientY - cursor.clientHeight / 2 + "px";
-      cursor.style.transform =
-        "translate(" + xPosition + "," + yPosition + ") scale(1)";
-      return {
-        x: xPosition,
-        y: yPosition
-      };
-    };
-
-    document.addEventListener("mousemove", e => setCursorPosition(e));
-    let scaleCursor = function (e, scale) {
-      setCursorPosition(e);
-      cursor.style.transform =
-        "translate(" +
-        setCursorPosition(e).x +
-        "," +
-        setCursorPosition(e).y +
-        ") scale(" +
-        scale +
-        ")";
-    };
-
-    document.addEventListener("mousedown", function (e) {
-      scaleCursor(e, 0.8);
-      circle.classList.add("animate");
-    });
-    document.addEventListener("mouseup", function (e) {
-      scaleCursor(e, 1);
-      circle.classList.remove("animate");
-    });
+    init_pointer({
+      pointerColor: "black", // Css color
+      ringSize: 15, // Pixels
+      ringClickSize: 10 // Pixels when clicking
+    })
   </script>
+
 
 </body>
 
