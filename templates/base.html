@@ -210,7 +210,6 @@
         });
       </script>
 
-
     </main>
     <footer>
       {% block footer %}{% endblock footer %}
@@ -223,12 +222,9 @@
       {% endif %}
     </footer>
   </div>
-  <div class="toc desktop">
-    <h3>Table of contents</h3>
-    <ul>
-      <!-- TOC will be generated here -->
-    </ul>
-  </div>
+
+  {% block toc %}{% endblock toc %}
+
 </body>
 
 

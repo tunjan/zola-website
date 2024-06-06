@@ -97,8 +97,13 @@ Table of contents
       });
     </script>
 
-    <script>
 
+
+{% endblock footer %}
+
+{% block toc%}
+
+<script>
 document.addEventListener("DOMContentLoaded", function() {
     const content = document.querySelector('main');
     const toc = document.querySelector('.toc ul');
@@ -142,10 +147,17 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-
 </script>
 
-{% endblock footer %}
+
+  <div class="toc desktop">
+    <h3>Table of contents</h3>
+    <ul>
+      <!-- TOC will be generated here -->
+    </ul>
+  </div>
+
+{% endblock toc %}
 
 
 

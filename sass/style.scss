@@ -146,8 +146,7 @@ main h5,
 main h6 {
   margin-top: 2em;
   margin-bottom: 1em;
-  font-weight: 500;
-  font-family: monospace;
+  font-weight: 600;
 }
 
 /* CSS */
@@ -312,10 +311,10 @@ footer {
   background-color: white;
   font: normal 400 calc(1.5rem + .25vw)/1.5em "Onest", sans-serif;
   position: fixed;
-  bottom: 0;
+  top: 0;
   right: 0;
-  margin-bottom: 2em;
-  margin-right: 2em;
+  margin-top: 3em;
+  margin-right: 3em;
 }
 
 .toc ul {
