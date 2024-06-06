@@ -37,6 +37,7 @@ body {
   color: black;
   background-color: white;
   font: normal 400 calc(1.5rem + .25vw)/1.5em "Onest", sans-serif;
+  font-optical-sizing: auto;
   min-height: 100%;
   overflow-wrap: break-word;
   text-rendering: optimizeLegibility;
@@ -49,13 +50,12 @@ body {
 header {
   display: flex;
   flex-direction: column;
+  font-family: "Space Grotesk";
 }
 
 header h1 {
   font-weight: 500;
-  font-size: 2em;
-  font-size: calc(1.35em + 0.55vw);
-  letter-spacing: -0.02em;
+  font-size: calc(1.5em + 0.55vw);
   line-height: 1.25;
   margin-top: 1.5em;
   margin-bottom: 0.25em;
@@ -101,6 +101,7 @@ main a:hover {
   text-decoration-thickness: 2px;
   margin-bottom: 1em;
   font-size: 1.1em;
+
 }
 
 ::selection {
@@ -108,11 +109,13 @@ main a:hover {
 }
 
 .post-meta {
+
+  font-family: "Space Grotesk";
   font-size: .85em;
   margin-top: .4em;
   margin-bottom: 2em;
   border-bottom: 2px solid black;
-  font-weight: 300;
+  font-weight: 400;
   padding-bottom: .6em;
 }
 
@@ -123,7 +126,6 @@ main a:hover {
 h2 {
   font-weight: 500;
   font-size: calc(1em + 0.2vw);
-  letter-spacing: -0.015em;
   margin-top: 2em;
   margin-bottom: 0.5em;
   line-height: 1.3;
@@ -217,7 +219,7 @@ td {
 
 pre {
   margin-top: .6em;
-  margin-bottom: .6em;
+  margin-bottom: 1em;
   border-radius: 5px;
 }
 
@@ -231,11 +233,13 @@ strong {
 }
 
 pre code {
-  display: inline-block;
+  display: block;
   white-space: pre-wrap;
+
   padding: 1em;
   font-family: monospace;
   font-weight: normal;
+  font-size: .8em;
   background-color: #efefef;
   overflow: auto;
   // border-bottom: 2px solid rgb(135, 154, 57);
@@ -276,6 +280,9 @@ img {
   text-decoration: none;
   border-radius: 5px;
   transition: transform 0.3s;
+  margin-right: .4em;
+
+  font-family: "Space Grotesk";
 }
 
 #back-to-top:hover {
@@ -286,6 +293,7 @@ img {
 
 footer {
   display: flex;
+  margin-top: 1em;
   justify-content: space-between;
 }
 
