@@ -66,29 +66,16 @@ Table of contents
     {% endfor %}
 </ul>
 {% endif %}
-<img id="scrollToTopBtn" src="{{ get_url(path='totop.svg') }}" alt="Scroll to Top" />
+<a href="#" id="back-to-top">↑  Back to top</a>
 
 <script>
-window.onscroll = function() {
-    scrollFunction();
-};
-
-function scrollFunction() {
-    var scrollToTopBtn = document.getElementById("scrollToTopBtn");
-    if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
-        scrollToTopBtn.style.display = "block";
-    } else {
-        scrollToTopBtn.style.display = "none";
-    }
-}
-
-// Smooth scroll to the top
-document.getElementById("scrollToTopBtn").addEventListener("click", function() {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    document.getElementById('back-to-top').addEventListener('click', function(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-});
 </script>
 
 
