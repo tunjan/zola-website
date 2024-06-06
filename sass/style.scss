@@ -33,7 +33,7 @@ html {
   box-sizing: border-box;
 }
 
-body {
+.content {
   color: black;
   background-color: white;
   font: normal 400 calc(1.5rem + .25vw)/1.5em "Onest", sans-serif;
@@ -41,8 +41,8 @@ body {
   min-height: 100%;
   overflow-wrap: break-word;
   text-rendering: optimizeLegibility;
-  max-width: clamp(65ch, 40%, 75ch);
-  padding: 3em 0em 0 3em;
+  width: clamp(65ch, 40%, 75ch);
+  padding: 3em 3em 0em 3em;
   margin: 0;
   overflow-x: hidden;
 }
@@ -300,13 +300,59 @@ footer {
   justify-content: space-between;
 }
 
+.toc {
+  color: black;
+  background-color: white;
+  font: normal 400 calc(1.5rem + .25vw)/1.5em "Onest", sans-serif;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  border-left: 2px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 2em;
+  margin-right: 2em;
+}
 
-@media only screen and (max-width: 30em) {
-  body {
+.toc ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.toc li {
+  margin-bottom: 10px;
+}
+
+.toc a {
+  text-decoration: none;
+  opacity: 0.5;
+  color: black;
+}
+
+.toc a.active {
+
+  opacity: 1;
+  color: black;
+}
+
+body {
+  display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .content {
     max-width: 100vw;
     padding: 1em;
   }
 
+  .mobile {
+    display: initial;
+  }
+
+  .desktop {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
   .mobile {
     display: initial;
   }
