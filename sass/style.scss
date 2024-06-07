@@ -6,7 +6,7 @@
   --background-color: white;
   --font-space-grotesk: "Space Grotesk", sans-serif;
   --font-dm-sans: "DM Sans", sans-serif;
-  --font-size-base: 1.5rem;
+  --font-size-base: 2rem;
   --font-size-small: 1.2rem;
   --line-height-base: 1.5em;
 }
@@ -31,7 +31,7 @@ body {
 .container {
   color: var(--primary-color);
   background-color: var(--background-color);
-  font: normal 400 calc(var(--font-size-base) + 0.25vw) /
+  font: normal 400 calc(var(--font-size-base) + 0.1vw) /
     var(--line-height-base) var(--font-dm-sans);
   font-optical-sizing: auto;
   min-height: 100%;
