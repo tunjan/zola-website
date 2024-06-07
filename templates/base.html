@@ -1,229 +1,216 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ lang }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-  <meta content="width=device-width, initial-scale=1" name="viewport" />
+    {% if page.title %} {% set title = page.title %} {% elif section.title %} {%
+    set title = section.title %} {% elif config.title %} {% set title =
+    config.title %} {% endif %} {% if page.extra.author %} {% set author =
+    page.extra.author %} {% elif section.extra.author %} {% set author =
+    section.extra.author %} {% elif config.extra.author %} {% set author =
+    config.extra.author %} {% endif %} {% if page.description %} {% set
+    description = page.description | truncate(length=150) %} {% elif
+    section.description %} {% set description = section.description |
+    truncate(length=150) %} {% elif config.description %} {% set description =
+    config.description | truncate(length=150) %} {% endif %} {% if
+    page.extra.image %} {% set image = get_url(path=page.extra.image,
+    trailing_slash=false) %} {% elif section.extra.image %} {% set image =
+    get_url(path=section.extra.image, trailing_slash=false) %} {% elif
+    config.extra.logo %} {% set image = get_url(path=config.extra.logo,
+    trailing_slash=false) %} {% endif %} {% if page.permalink %} {% set url =
+    page.permalink %} {% elif section.permalink %} {% set url =
+    section.permalink %} {% elif config.base_url %} {% set url = config.base_url
+    %} {% endif %} {% if title %}
+    <title>{{ title }}</title>
+    {% endif %} {% block metatags %} {% if title %}
+    <meta name="title" content="{{ title }}" />
+    {% endif %} {% if author %}
+    <meta name="author" content="{{ author }}" />
+    {% endif %} {% if description %}
+    <meta name="description" content="{{ description }}" />
+    {% endif %}
+    <meta name="generator" content="Zola v0.18.0" />
 
-  {% if page.title %}
-  {% set title = page.title %}
-  {% elif section.title %}
-  {% set title = section.title %}
-  {% elif config.title %}
-  {% set title = config.title %}
-  {% endif %}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url | safe }}" />
+    {% if title %}
+    <meta property="og:site_name" content="{{ config.title }}" />
+    {% endif %} {% if title %}
+    <meta property="og:title" content="{{ title }}" />
+    {% endif %} {% if description %}
+    <meta property="og:description" content="{{ description }}" />
+    {% endif %} {% if image %}
+    <meta property="og:image" content="{{ image }}" />
+    {% endif %}
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+    <link rel="canonical" href="{{ url | safe }}" />
+    {% if image %}
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{{ get_url(path=config.extra.logo, trailing_slash=false) }}"
+    />
+    {% endif %}
+    <script type="application/ld+json">
+      {
+          {% if description %}"description":"{{ description | safe }}",{% endif %}
+          "url":"{{ url | safe }}",
+          "@type":"WebSite",
+          {% if title %}"headline":"{{ title | safe }}",{% endif %}
+          {% if title %}"name":"{{ title | safe }}",{% endif %}
+          {% if author %}"author":{
+              "@type":"Person",
+              "name":"{{ author | safe }}"
+          },{% endif %}
+          "@context":"https://schema.org"
+      }
+    </script>
+    {% endblock metatags %} {% if config.generate_feed %} {% block feed %} <link
+    rel="alternate" type="application/atom+xml" title="RSS" href="{{
+    get_url(path=" atom.xml", trailing_slash=false) }}"> {% endblock feed %} {%
+    endif %} {% block css %}
+    <link
+      rel="stylesheet"
+      href="{{ get_url(path='style.css', trailing_slash=false) | safe }}"
+    />
+    {% endblock css %}
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap");
+    </style>
+  </head>
 
-  {% if page.extra.author %}
-  {% set author = page.extra.author %}
-  {% elif section.extra.author %}
-  {% set author = section.extra.author %}
-  {% elif config.extra.author %}
-  {% set author = config.extra.author %}
-  {% endif %}
+  <body theme="auto">
+    <div class="container">
+      <header>
+        {% if config.extra.header_nav %} {% if title %}
+        <div><a class="title" href="/">{{ config.title }}</a>{% endif %}</div>
+        <nav>
+          {% for nav_item in config.extra.header_nav %}
+          <a
+            href="{{ nav_item.url | safe }}"
+            {%
+            if
+            nav_item.new_tab
+            %}target="_blank"
+            rel="noreferrer noopener"
+            {%
+            endif
+            %}
+            >{{ nav_item.name }}</a
+          >
+          {% endfor %}
+        </nav>
+        {% block header %}{% endblock header %} {% endif %}
+      </header>
+      <main>
+        {% if page.status %}
+        <p>{{ page.status }}</p>
+        {% endif %} {% block content %}{% endblock content %}
 
-  {% if page.description %}
-  {% set description = page.description | truncate(length=150) %}
-  {% elif section.description %}
-  {% set description = section.description | truncate(length=150) %}
-  {% elif config.description %}
-  {% set description = config.description | truncate(length=150) %}
-  {% endif %}
+        <div id="preview-container" class="desktop"></div>
+      </main>
+      <footer>
+        {% block footer %}{% endblock footer %} {% if config.extra.footer_nav %}
+        <nav>
+          {% for nav_item in config.extra.footer_nav %}
+          <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
+          {% endfor %}
+        </nav>
+        {% endif %}
+      </footer>
+    </div>
 
-  {% if page.extra.image %}
-  {% set image = get_url(path=page.extra.image, trailing_slash=false) %}
-  {% elif section.extra.image %}
-  {% set image = get_url(path=section.extra.image, trailing_slash=false) %}
-  {% elif config.extra.logo %}
-  {% set image = get_url(path=config.extra.logo, trailing_slash=false) %}
-  {% endif %}
+    {% block toc %}{% endblock toc %}
 
-  {% if page.permalink %}
-  {% set url = page.permalink %}
-  {% elif section.permalink %}
-  {% set url = section.permalink %}
-  {% elif config.base_url %}
-  {% set url = config.base_url %}
-  {% endif %}
+    <script>
+      // JavaScript
+      const mainElement = document.querySelector("main");
+      const previewLinks = mainElement.querySelectorAll("a");
+      const previewContainer = document.getElementById("preview-container");
+      let previewTimeout;
+      let previewDelayTimeout;
 
-  {% if title %}<title>{{ title }}</title>{% endif %}
-  {% block metatags %}
-  {% if title %}
-  <meta name="title" content="{{ title }}">{% endif %}
-  {% if author %}
-  <meta name="author" content="{{ author }}">{% endif %}
-  {% if description %}
-  <meta name="description" content="{{ description }}">{% endif %}
-  <meta name="generator" content="Zola v0.18.0">
-
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ url | safe }}">
-  {% if title %}
-  <meta property="og:site_name" content="{{ config.title }}">{% endif %}
-  {% if title %}
-  <meta property="og:title" content="{{ title }}">{% endif %}
-  {% if description %}
-  <meta property="og:description" content="{{ description }}">{% endif %}
-  {% if image %}
-  <meta property="og:image" content="{{ image }}">{% endif %}
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
-  <link rel="canonical" href="{{ url | safe }}">
-  {% if image %}
-  <link rel="shortcut icon" type="image/x-icon" href="{{ get_url(path=config.extra.logo, trailing_slash=false) }}">{%
-  endif %}
-  <script type="application/ld+json">
-            {
-                {% if description %}"description":"{{ description | safe }}",{% endif %}
-                "url":"{{ url | safe }}",
-                "@type":"WebSite",
-                {% if title %}"headline":"{{ title | safe }}",{% endif %}
-                {% if title %}"name":"{{ title | safe }}",{% endif %}
-                {% if author %}"author":{
-                    "@type":"Person",
-                    "name":"{{ author | safe }}"
-                },{% endif %}
-                "@context":"https://schema.org"
-            }
-        </script>
-  {% endblock metatags %}
-  {% if config.generate_feed %}
-  {% block feed %}
-  <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path=" atom.xml", trailing_slash=false)
-    }}">
-  {% endblock feed %}
-  {% endif %}
-  {% block css %}
-  <link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) | safe }}" />
-  {% endblock css %}
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
-  </style>
-</head>
-
-<body theme="auto">
-  <div class="content">
-    <header>
-      {% if config.extra.header_nav %}
-      {% if title %}<a class='title' href="/">{{ config.title }}</a>{% endif %}
-      <nav>
-        {% for nav_item in config.extra.header_nav %}
-        <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %}target="_blank" rel="noreferrer noopener" {% endif
-          %}>{{ nav_item.name }}</a>
-        {% endfor %}
-      </nav>
-      {% block header %}{% endblock header %}
-      {% endif %}
-    </header>
-    <main>
-      {% if page.status %}
-      <p> {{ page.status }} </p>
-      {% endif %}
-      {% block content %}{% endblock content %}
-
-      <div id="preview-container"></div>
-      <script>
-        // JavaScript
-        const mainElement = document.querySelector('main');
-        const previewLinks = mainElement.querySelectorAll('a');
-        const previewContainer = document.getElementById('preview-container');
-        let previewTimeout;
-        let previewDelayTimeout;
-
-        previewLinks.forEach(link => {
-          link.addEventListener('mouseenter', () => {
-            clearTimeout(previewTimeout);
-            clearTimeout(previewDelayTimeout);
-
-            previewDelayTimeout = setTimeout(() => {
-              fetch(link.href)
-                .then(response => response.text())
-                .then(html => {
-                  const parser = new DOMParser();
-                  const doc = parser.parseFromString(html, 'text/html');
-                  const mainContent = doc.querySelector('main');
-                  if (mainContent) {
-                    previewContainer.innerHTML = mainContent.innerHTML;
-                  } else {
-                    previewContainer.innerHTML = 'No main content found.';
-                  }
-                  previewContainer.style.display = 'block';
-                  positionPreviewContainer(link);
-                  previewContainer.classList.add('show');
-                })
-                .catch(error => {
-                  console.error('Error fetching preview:', error);
-                });
-            }, 200);
-          });
-
-          link.addEventListener('mouseleave', () => {
-            clearTimeout(previewDelayTimeout);
-            previewTimeout = setTimeout(() => {
-              previewContainer.classList.remove('show');
-              setTimeout(() => {
-                previewContainer.style.display = 'none';
-              }, 200);
-            }, 200);
-          });
-        });
-
-        previewContainer.addEventListener('mouseenter', () => {
+      previewLinks.forEach((link) => {
+        link.addEventListener("mouseenter", () => {
           clearTimeout(previewTimeout);
-        });
+          clearTimeout(previewDelayTimeout);
 
-        previewContainer.addEventListener('mouseleave', () => {
-          previewTimeout = setTimeout(() => {
-            previewContainer.classList.remove('show');
-            setTimeout(() => {
-              previewContainer.style.display = 'none';
-            }, 200);
+          previewDelayTimeout = setTimeout(() => {
+            fetch(link.href)
+              .then((response) => response.text())
+              .then((html) => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+                const mainContent = doc.querySelector("main");
+                if (mainContent) {
+                  previewContainer.innerHTML = mainContent.innerHTML;
+                } else {
+                  previewContainer.innerHTML = "No main content found.";
+                }
+                previewContainer.style.display = "block";
+                positionPreviewContainer(link);
+                previewContainer.classList.add("show");
+              })
+              .catch((error) => {
+                console.error("Error fetching preview:", error);
+              });
           }, 200);
         });
 
-        function positionPreviewContainer(link) {
-          const linkRect = link.getBoundingClientRect();
-          const containerRect = previewContainer.getBoundingClientRect();
-          const windowWidth = window.innerWidth;
-          const windowHeight = window.innerHeight;
+        link.addEventListener("mouseleave", () => {
+          clearTimeout(previewDelayTimeout);
+          previewTimeout = setTimeout(() => {
+            previewContainer.classList.remove("show");
+            setTimeout(() => {
+              previewContainer.style.display = "none";
+            }, 200);
+          }, 200);
+        });
+      });
 
-          let left = linkRect.left + linkRect.width + 10;
-          let top = linkRect.top;
+      previewContainer.addEventListener("mouseenter", () => {
+        clearTimeout(previewTimeout);
+      });
 
-          if (left + containerRect.width > windowWidth) {
-            left = linkRect.left - containerRect.width - 10;
-          }
+      previewContainer.addEventListener("mouseleave", () => {
+        previewTimeout = setTimeout(() => {
+          previewContainer.classList.remove("show");
+          setTimeout(() => {
+            previewContainer.style.display = "none";
+          }, 200);
+        }, 200);
+      });
 
-          if (top + containerRect.height > windowHeight) {
-            top = windowHeight - containerRect.height - 10;
-          }
+      function positionPreviewContainer(link) {
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = previewContainer.getBoundingClientRect();
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
 
-          previewContainer.style.left = `${left}px`;
-          previewContainer.style.top = `${top}px`;
+        let left = linkRect.left + linkRect.width + 10;
+        let top = linkRect.top;
+
+        if (left + containerRect.width > windowWidth) {
+          left = linkRect.left - containerRect.width - 10;
         }
 
-        previewContainer.addEventListener('mouseenter', event => {
-          if (event.target.tagName === 'A') {
-            event.stopPropagation();
-          }
-        });
-      </script>
+        if (top + containerRect.height > windowHeight) {
+          top = windowHeight - containerRect.height - 10;
+        }
 
-    </main>
-    <footer>
-      {% block footer %}{% endblock footer %}
-      {% if config.extra.footer_nav %}
-      <nav>
-        {% for nav_item in config.extra.footer_nav %}
-        <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
-        {% endfor %}
-      </nav>
-      {% endif %}
-    </footer>
-  </div>
+        previewContainer.style.left = `${left}px`;
+        previewContainer.style.top = `${top}px`;
+      }
 
-  {% block toc %}{% endblock toc %}
-</body>
-
+      previewContainer.addEventListener("mouseenter", (event) => {
+        if (event.target.tagName === "A") {
+          event.stopPropagation();
+        }
+      });
+    </script>
+  </body>
 </html>

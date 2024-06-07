@@ -85,7 +85,16 @@
   });
 </script>
 
-{% endblock footer %} {% block toc%}
+{% endblock footer %} 
+
+
+{% block toc%}
+<div class="toc desktop">
+  <h3>Table of contents</h3>
+  <ul>
+    <!-- TOC will be generated here -->
+  </ul>
+</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -133,11 +142,6 @@
   });
 </script>
 
-<div class="toc desktop">
-  <h3>Table of contents</h3>
-  <ul>
-    <!-- TOC will be generated here -->
-  </ul>
-</div>
-
 {% endblock toc %}
+
+
