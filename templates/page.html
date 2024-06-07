@@ -1,163 +1,143 @@
-{% extends "base.html" %}
-{% block header %}
-{# <p><a href="..">..</a>/{{ page.slug }}</p> #}
+{% extends "base.html" %} {% block header %} {#
+<p><a href="..">..</a>/{{ page.slug }}</p>
+#}
 <h1>{{ page.title }}</h1>
 <div class="desktop post-meta">
-<time datetime="{{ page.date }}">Created: {{ page.date }}</time> ·
-Updated: {{ page.updated }} ·
-Reading time: {{ page.reading_time }} min
-<!--Status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}-->
+  <time datetime="{{ page.date }}">Created: {{ page.date }}</time> · Updated: {{
+  page.updated }} · Reading time: {{ page.reading_time }} min
+  <!--Status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}-->
 </div>
-<p class="post-meta mobile"><time datetime="{{ page.date }}">Created: {{ page.date }}</time>  · 
-Reading time: {{ page.reading_time }} min
+<p class="post-meta mobile">
+  <time datetime="{{ page.date }}">Created: {{ page.date }}</time> · Reading
+  time: {{ page.reading_time }} min
 </p>
 
-{% endblock header %}
-
-{% block content %}
-
-{% if page.toc and page.extra.add_toc %}
-Table of contents
+{% endblock header %} {% block content %} {% if page.toc and page.extra.add_toc
+%} Table of contents
 <ul>
-{% for h1 in page.toc %}
-    <li>
-        <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
-        {% if h1.children %}
-            <ul>
-                {% for h2 in h1.children %}
-                    <li>
-                        <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </li>
-{% endfor %}
+  {% for h1 in page.toc %}
+  <li>
+    <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+    {% if h1.children %}
+    <ul>
+      {% for h2 in h1.children %}
+      <li>
+        <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+  {% endfor %}
 </ul>
-{% endif %}
-
-{{ page.content | safe }}
-{% endblock content %}
-
-{% block footer %}
+{% endif %} {{ page.content | safe }} {% endblock content %} {% block footer %}
 <p class="taxonomies">
-{% if page.taxonomies.tags %}
-{% for tag in page.taxonomies.tags %}
-<a href="/tags/{{ tag | slugify }}">#{{ tag }}</a>
-{% endfor %}
-{% if page.taxonomies.categories %}
-{% for category in page.taxonomies.categories %}
-<a href="/categories/{{ category | slugify }}">+{{ category }}</a>
-{% endfor %}
-{% endif %}
-{% if page.taxonomies.contexts %}
-{% for context in page.taxonomies.contexts %}
-<a href="/contexts/{{ context | slugify }}">@{{ context }}</a>
-{% endfor %}
-{% endif %}
-{% endif %}
-
+  {% if page.taxonomies.tags %} {% for tag in page.taxonomies.tags %}
+  <a href="/tags/{{ tag | slugify }}">#{{ tag }}</a>
+  {% endfor %} {% if page.taxonomies.categories %} {% for category in
+  page.taxonomies.categories %}
+  <a href="/categories/{{ category | slugify }}">+{{ category }}</a>
+  {% endfor %} {% endif %} {% if page.taxonomies.contexts %} {% for context in
+  page.taxonomies.contexts %}
+  <a href="/contexts/{{ context | slugify }}">@{{ context }}</a>
+  {% endfor %} {% endif %} {% endif %}
 </p>
 {% if page.backlinks %}
 <h2>Backlinks</h2>
 <ul>
-    {% for backlink in page.backlinks %}
-    <li><a href="{{ backlink.permalink }}">[[ {{ backlink.title }} ]]</a></li>
-    {% endfor %}
+  {% for backlink in page.backlinks %}
+  <li><a href="{{ backlink.permalink }}">[[ {{ backlink.title }} ]]</a></li>
+  {% endfor %}
 </ul>
 {% endif %}
-<a href="#" id="back-to-top">↑  Back to top</a>
+<a href="#" id="back-to-top">↑ Back to top</a>
 
 <script>
-    document.getElementById('back-to-top').addEventListener('click', function(event) {
-        event.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-</script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var headers = document.querySelectorAll("main h1, main h2, main h3, main h4, main h5, main h6");
-        var numbers = [0, 0, 0, 0, 0, 0];
-
-        headers.forEach(function (header) {
-          var level = parseInt(header.tagName.substr(1)) - 1;
-
-          numbers[level]++;
-          for (var i = level + 1; i < numbers.length; i++) {
-            numbers[i] = 0;
-          }
-
-          var numberStr = numbers.slice(0, level + 1).join('.');
-          header.innerHTML = numberStr + '. ' + header.innerHTML;
-        });
+  document
+    .getElementById("back-to-top")
+    .addEventListener("click", function (event) {
+      event.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
       });
-    </script>
-
-
-
-{% endblock footer %}
-
-{% block toc%}
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const content = document.querySelector('main');
-    const toc = document.querySelector('.toc ul');
-    const headings = content.querySelectorAll('h1, h2');
-    
-    headings.forEach((heading, index) => {
-        const id = `section-${index + 1}`;
-        heading.setAttribute('id', id);
-
-        const tocItem = document.createElement('li');
-        const tocLink = document.createElement('a');
-        tocLink.setAttribute('href', `#${id}`);
-        tocLink.textContent = heading.textContent;
-        tocItem.appendChild(tocLink);
-
-        // Check if the heading is an h2 (subheading) and add indentation
-        if (heading.tagName === 'H2') {
-            tocItem.style.paddingLeft = '20px'; // Adjust the indentation as needed
-        }
-
-        toc.appendChild(tocItem);
     });
-
-    const tocLinks = document.querySelectorAll('.toc a');
-    
-    window.addEventListener('scroll', () => {
-        let currentSection = '';
-
-        headings.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (scrollY >= sectionTop - 50) {
-                currentSection = section.getAttribute('id');
-            }
-        });
-
-        tocLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSection}`) {
-                link.classList.add('active');
-            }
-        });
-    });
-});
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var headers = document.querySelectorAll(
+      "main h1, main h2, main h3, main h4, main h5, main h6"
+    );
+    var numbers = [0, 0, 0, 0, 0, 0];
 
-  <div class="toc desktop">
-    <h3>Table of contents</h3>
-    <ul>
-      <!-- TOC will be generated here -->
-    </ul>
-  </div>
+    headers.forEach(function (header) {
+      var level = parseInt(header.tagName.substr(1)) - 1;
+
+      numbers[level]++;
+      for (var i = level + 1; i < numbers.length; i++) {
+        numbers[i] = 0;
+      }
+
+      var numberStr = numbers.slice(0, level + 1).join(".");
+      header.innerHTML = numberStr + ". " + header.innerHTML;
+    });
+  });
+</script>
+
+{% endblock footer %} {% block toc%}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const content = document.querySelector("main");
+    const toc = document.querySelector(".toc ul");
+    const headings = content.querySelectorAll("h1, h2");
+
+    headings.forEach((heading, index) => {
+      const id = `section-${index + 1}`;
+      heading.setAttribute("id", id);
+
+      const tocItem = document.createElement("li");
+      const tocLink = document.createElement("a");
+      tocLink.setAttribute("href", `#${id}`);
+      tocLink.textContent = heading.textContent;
+      tocItem.appendChild(tocLink);
+
+      // Check if the heading is an h2 (subheading) and add indentation
+      if (heading.tagName === "H2") {
+        tocItem.style.paddingLeft = "20px"; // Adjust the indentation as needed
+      }
+
+      toc.appendChild(tocItem);
+    });
+
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let currentSection = "";
+
+      headings.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 50) {
+          currentSection = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${currentSection}`) {
+          link.classList.add("active");
+        }
+      });
+    });
+  });
+</script>
+
+<div class="toc desktop">
+  <h3>Table of contents</h3>
+  <ul>
+    <!-- TOC will be generated here -->
+  </ul>
+</div>
 
 {% endblock toc %}
-
-
-
