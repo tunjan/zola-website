@@ -88,8 +88,6 @@
         {% if title %}
         <a class="title" href="/">{{ config.title }}</a>
         {% endif %}
-        {% block header %}
-        {% endblock header %}
         {% if config.extra.header_nav %}
         <nav>
           {% for nav_item in config.extra.header_nav %}
