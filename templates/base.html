@@ -83,11 +83,14 @@
     </style>
   </head>
 
-  <body theme="auto">
-    <div class="container">
+  <body>
       <header>
-        {% if config.extra.header_nav %} {% if title %}
-        <div><a class="title" href="/">{{ config.title }}</a>{% endif %}</div>
+        {% if title %}
+        <a class="title" href="/">{{ config.title }}</a>
+        {% endif %}
+        {% block header %}
+        {% endblock header %}
+        {% if config.extra.header_nav %}
         <nav>
           {% for nav_item in config.extra.header_nav %}
           <a
@@ -104,113 +107,38 @@
           >
           {% endfor %}
         </nav>
-        {% block header %}{% endblock header %} {% endif %}
+         {% endif %}
       </header>
+
+
       <main>
         {% if page.status %}
-        <p>{{ page.status }}</p>
-        {% endif %} {% block content %}{% endblock content %}
-
-        <div id="preview-container" class="desktop"></div>
-      </main>
-      <footer>
-        {% block footer %}{% endblock footer %} {% if config.extra.footer_nav %}
-        <nav>
-          {% for nav_item in config.extra.footer_nav %}
-          <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
-          {% endfor %}
-        </nav>
+          <p>{{ page.status }}</p>
         {% endif %}
+
+        {% block content %}
+        {% endblock content %}
+
+        <!-- <div id="preview-container" class="desktop"></div> -->
+         <div class="bottom">
+          {% block bottom %}
+          {% endblock bottom %} 
+          {% if config.extra.bottom_nav %}
+          <nav>
+            {% for nav_item in config.extra.bottom_nav %}
+            <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
+            {% endfor %}
+          </nav>
+          {% endif %}
+         </div>
+      </main>
+
+
+      <footer>
+        <div>Alberto Trigo Medina © 2024</div>
+        <div>BY-NC-SA 4.0</div>
       </footer>
-    </div>
-
-    {% block toc %}{% endblock toc %}
-
-    <script>
-      // JavaScript
-      const mainElement = document.querySelector("main");
-      const previewLinks = mainElement.querySelectorAll("a");
-      const previewContainer = document.getElementById("preview-container");
-      let previewTimeout;
-      let previewDelayTimeout;
-
-      previewLinks.forEach((link) => {
-        link.addEventListener("mouseenter", () => {
-          clearTimeout(previewTimeout);
-          clearTimeout(previewDelayTimeout);
-
-          previewDelayTimeout = setTimeout(() => {
-            fetch(link.href)
-              .then((response) => response.text())
-              .then((html) => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, "text/html");
-                const mainContent = doc.querySelector("main");
-                if (mainContent) {
-                  previewContainer.innerHTML = mainContent.innerHTML;
-                } else {
-                  previewContainer.innerHTML = "No main content found.";
-                }
-                previewContainer.style.display = "block";
-                positionPreviewContainer(link);
-                previewContainer.classList.add("show");
-              })
-              .catch((error) => {
-                console.error("Error fetching preview:", error);
-              });
-          }, 200);
-        });
-
-        link.addEventListener("mouseleave", () => {
-          clearTimeout(previewDelayTimeout);
-          previewTimeout = setTimeout(() => {
-            previewContainer.classList.remove("show");
-            setTimeout(() => {
-              previewContainer.style.display = "none";
-            }, 200);
-          }, 200);
-        });
-      });
-
-      previewContainer.addEventListener("mouseenter", () => {
-        clearTimeout(previewTimeout);
-      });
-
-      previewContainer.addEventListener("mouseleave", () => {
-        previewTimeout = setTimeout(() => {
-          previewContainer.classList.remove("show");
-          setTimeout(() => {
-            previewContainer.style.display = "none";
-          }, 200);
-        }, 200);
-      });
-
-      function positionPreviewContainer(link) {
-        const linkRect = link.getBoundingClientRect();
-        const containerRect = previewContainer.getBoundingClientRect();
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-
-        let left = linkRect.left + linkRect.width + 10;
-        let top = linkRect.top;
-
-        if (left + containerRect.width > windowWidth) {
-          left = linkRect.left - containerRect.width - 10;
-        }
-
-        if (top + containerRect.height > windowHeight) {
-          top = windowHeight - containerRect.height - 10;
-        }
-
-        previewContainer.style.left = `${left}px`;
-        previewContainer.style.top = `${top}px`;
-      }
-
-      previewContainer.addEventListener("mouseenter", (event) => {
-        if (event.target.tagName === "A") {
-          event.stopPropagation();
-        }
-      });
-    </script>
+    <!-- {% block toc %}{% endblock toc %} -->
+    <!-- <script type="text/javascript" src="{{ get_url(path="preview.js") }}"></script> -->
   </body>
 </html>

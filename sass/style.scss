@@ -6,45 +6,57 @@
   --background-color: white;
   --font-space-grotesk: "Space Grotesk", sans-serif;
   --font-dm-sans: "DM Sans", sans-serif;
-  --font-size-base: 2rem;
-  --font-size-small: 1.2rem;
+  --font-size-base: 1rem;
+  --font-size-small: 0.8rem;
   --line-height-base: 1.5em;
 }
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
 }
 
 html {
   height: 100%;
   background-color: var(--background-color);
-  font-size: 50%;
-  box-sizing: border-box;
 }
 
 body {
-  display: flex;
-  padding: 4em;
-}
-
-.container {
+  // padding: 2rem;
+  // width: 900px;
+  // margin: 2rem auto;
+  font: normal 400 calc(var(--font-size-base) + 0.1vw) / var(--line-height-base)
+  var(--font-dm-sans);
+  text-rendering: optimizeLegibility;
+  // border: 2px solid black;
+  display:flex;
+  flex-direction: column;
   color: var(--primary-color);
   background-color: var(--background-color);
-  font: normal 400 calc(var(--font-size-base) + 0.1vw) /
-    var(--line-height-base) var(--font-dm-sans);
   font-optical-sizing: auto;
-  min-height: 100%;
-  text-rendering: optimizeLegibility;
-  width: clamp(65ch, 40%, 75ch);
-  margin: 0;
-  overflow-x: hidden;
-}
+  height: 100%;
+} 
 
 header {
   display: flex;
-  flex-direction: column;
+  flex:0;
+  flex-direction: row;
+  justify-content: space-between;
   font-family: var(--font-space-grotesk);
+  border-bottom: 2px solid black;
+  padding: 0.75rem; /* 6px */
+}
+
+main {
+  width: 900px;
+  margin: 0 auto;
+  flex:1;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  padding-right: 1em;
+  padding-left: 1em;
 }
 
 header h1 {
@@ -63,27 +75,25 @@ nav a:hover {
   color: var(--primary-color);
 }
 
+
 /* Links */
-main a,
-.taxonomies a {
+main a{
   position: relative;
   color: var(--primary-color);
   text-decoration: none;
 }
 
-main a:hover,
-.taxonomies a:hover {
+main a:hover{
   color: var(--primary-color);
 }
 
-main a::before,
-.taxonomies a::before {
+main a::before{
   content: "";
   position: absolute;
   display: block;
   width: 100%;
   height: 2px;
-  bottom: 0;
+  bottom: 2px;
   left: 0;
   background-color: var(--underline-color);
   transform: scaleX(1);
@@ -91,34 +101,38 @@ main a::before,
   transition: transform 0.3s ease;
 }
 
-main a:hover::before,
-.taxonomies a:hover::before {
+main a:hover::before {
   transform: scaleX(0);
 }
 
 .title {
   text-decoration: none;
   position: relative;
-  display: inline-block;
   color: var(--primary-color);
-  margin-bottom: 1em;
-  font-size: 1.1em;
+  font-weight: 450;
 }
 
-.title::after {
+.title:hover {
+  color: #000;
+}
+
+.title::before {
   content: "";
   position: absolute;
+  display: block;
   width: 100%;
   height: 2px;
-  bottom: -5px;
+  bottom: 0;
   left: 0;
-  background-color: var(--primary-color);
-  transition: width 0.3s ease-in-out;
+  background-color: #000;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
 }
 
-.title:hover::after {
-  width: 0;
+.title:hover::before {
+  transform: scaleX(1);
 }
+
 
 /* Selection */
 ::selection {
@@ -128,10 +142,13 @@ main a:hover::before,
 /* Post Meta */
 .post-meta {
   font-size: 0.85em;
-  margin: 0.4em 0 2em;
-  border-bottom: 2px solid var(--primary-color);
+  margin-top: 1em;
+  // border-bottom: 2px solid var(--primary-color);
   font-weight: 400;
-  padding-bottom: 0.6em;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 2em;
+  // padding-bo1ttom: 0.6em;
 }
 
 /* Mobile and Desktop Views */
@@ -139,10 +156,11 @@ main a:hover::before,
   display: none;
 }
 
-@media only screen and (max-width: 600px) {
-  body {
-    max-width: 100vw !important;
-    padding: 2em !important;
+@media only screen and (max-width: 900px) {
+  main {
+    width: 100vw;
+    border-right: none;
+    border-left: none;
   }
 
   .mobile {
@@ -151,18 +169,6 @@ main a:hover::before,
 
   .desktop {
     display: none !important;
-    opacity: 0 !important;
-  }
-}
-
-@media only screen and (max-width: 1600px) {
-  .mobile {
-    display: initial !important;
-  }
-
-  .desktop {
-    display: none !important;
-    opacity: 0 !important;
   }
 }
 
@@ -188,12 +194,10 @@ main h3,
 main h4,
 main h5,
 main h6 {
-  margin: 1.5em 0 1em;
   font-weight: 550;
 }
 
-/* Preview Container */
-#preview-container {
+/* #preview-container {
   position: fixed;
   z-index: 9999;
   display: none;
@@ -213,11 +217,10 @@ main h6 {
 
 #preview-container.show {
   opacity: 1;
-}
+} */
 
-/* Text Elements */
 p {
-  margin: 0 0 1em;
+  margin: 1em 0 1em 0;
 }
 
 li {
@@ -261,7 +264,6 @@ td {
   padding: 0.4em;
 }
 
-/* Code Blocks */
 pre {
   margin: 0.6em 0 1em;
   border-radius: 5px;
@@ -285,7 +287,6 @@ pre code {
   color: var(--primary-color);
 }
 
-/* Blockquotes */
 blockquote {
   font-style: italic;
   border: thin solid var(--primary-color);
@@ -303,7 +304,7 @@ img {
   margin: 0 auto;
 }
 
-/* Footnote Definitions */
+/*
 .footnote-definition {
   padding: 0 1em;
 }
@@ -315,28 +316,30 @@ img {
 
 .footnote-definition p {
   display: inline;
-}
+} */
 
-/* Back to Top */
 #back-to-top {
   color: var(--primary-color);
-  text-decoration: none;
-  border-radius: 5px;
-  transition: transform 0.3s;
-  margin-right: 0.4em;
   font-family: var(--font-space-grotesk);
 }
 
-#back-to-top:hover {
-  margin-bottom: 2em;
-  transform: translateY(-5px);
+#back-to-top::before{
+  background-color: var(--background-color);
+
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Footer */
 footer {
+  border-top: 2px solid black;
+  padding: 0.75rem;
   display: flex;
-  margin-top: 1em;
   justify-content: space-between;
+
 }
 
 /* Table of Contents */
@@ -346,17 +349,18 @@ footer {
   font-size: 1em;
   opacity: 0.8;
   font-weight: 500;
-  text-decoration: underline;
+  // text-decoration: underline;
   text-decoration-color: var(--primary-color);
   text-decoration-thickness: 2px;
   text-underline-offset: 0.3em;
 }
 
-.toc {
+/* .toc {
   color: var(--primary-color);
   background-color: var(--background-color);
-  font: normal 400 calc(var(--font-size-base) + 0.25vw) /
-      var(--line-height-base) "Onest",
+  font:
+    normal 400 calc(var(--font-size-base) + 0.1vw) / var(--line-height-base)
+      "Onest",
     sans-serif;
   position: fixed;
   top: 0;
@@ -382,4 +386,24 @@ footer {
 
 .toc a.active {
   opacity: 1;
+} */
+
+/* .sidenote {
+  display: inline-block;
+  position: absolute;
+  margin-left: 40em;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  color: #555;
+  max-width: 250px;
+  transform: translateX(100%);
 }
+
+@media screen and (max-width: 800px) {
+  .sidenote {
+      position: relative;
+      transform: translateX(0);
+      display: block;
+      margin: 10px 0;
+  }
+} */
