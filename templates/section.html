@@ -7,7 +7,7 @@
 
 {% block content %}
 {% if section.title %}
-    <p>{{ section.title }}</p>
+    <h1 style="margin-top:0">{{ section.title }}</h1>
 {% endif %}
     {{ section.content | safe }}
 {% if paginator %}

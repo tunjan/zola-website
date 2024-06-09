@@ -6,7 +6,7 @@
 {% block content %}
 
 
-<p class=" post-meta desktop">
+<p class=" post-meta desktop" style="margin-top: 0;">
   <time datetime="{{ page.date }}">Created: {{ page.date }}</time> · Updated: {{
   page.updated }} · Reading time: {{ page.reading_time }} min
   <!--Status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}-->
@@ -38,7 +38,7 @@ Table of contents
 
 {% block bottom %}
 
-<p class="taxonomies">
+<p class="taxonomies" style="margin-bottom: 0;">
   {% if page.taxonomies.tags %} 
   {% for tag in page.taxonomies.tags %}
   <a href="/tags/{{ tag | slugify }}">#{{ tag }}</a>
@@ -57,13 +57,23 @@ Table of contents
   </ul>
 {% endif %}
 
-<p>
+<!-- <p style="margin-bottom: 0;">
   <a href="#" id="back-to-top">↑ Back to top</a>
 </p>
+<script type="text/javascript" src="{{ get_url(path="backtotop.js") }}"></script> -->
 <!-- <script type="text/javascript" src="{{ get_url(path="headers.js") }}"></script> -->
-<script type="text/javascript" src="{{ get_url(path="backtotop.js") }}"></script>
-
-{% endblock bottom %} 
+{% if page.extra.math %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+{% endif %}
+{% endblock bottom %} >
 
 <!-- {% block toc%}
 <div class="toc desktop">
