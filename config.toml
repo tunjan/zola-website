@@ -19,6 +19,7 @@ highlight_code = false
 smart_punctuation = true
 
 [extra]
+list_pages = true
 add_toc = true
 #list_pages = true
 author = "Alberto Trigo"
