@@ -7,6 +7,7 @@
   --background-color: white;
   --font-space-grotesk: "Space Grotesk", sans-serif;
   --font-dm-sans: "DM Sans", sans-serif;
+  --font-monospace: "DM Mono", monospace;
   --font-size-base: 16px;
   --line-height-base: 1.5;
 }
@@ -156,6 +157,10 @@ ul {
   padding-left: 0px;
 }
 
+li{
+  margin: .25em 0;
+}
+
 h1 {
   display: block;
   font-size: 2em;
@@ -216,12 +221,15 @@ pre {
   border-radius: 5px;
   background-color: #f2f2f2;
   color: var(--primary-color);
+  font-family: var(--font-monospace);
+
 }
 
 code {
   background-color: #f2f2f2;
   padding-inline: 0.2rem;
   color: var(--primary-color);
+  font-family: var(--font-monospace);
 }
 
 pre code {
@@ -230,6 +238,8 @@ pre code {
   padding: 1em;
   overflow: auto;
   color: var(--primary-color);
+  font-family: var(--font-monospace);
+
 }
 
 blockquote {
