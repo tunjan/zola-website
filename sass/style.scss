@@ -33,10 +33,13 @@ body {
   color: var(--primary-color);
   background-color: var(--background-color);
   font-optical-sizing: auto;
-  background-image: radial-gradient(rgb(68, 68, 68) 12.8%, transparent 12.8%),
-    radial-gradient(rgb(68, 68, 68) 12.8%, transparent 12.8%);
-  background-position: 0 0, 8px 8px;
-  background-size: 16px 16px;
+  background-image: 
+    radial-gradient(rgb(94, 92, 100) 12.8%, transparent 12.8%),
+    radial-gradient(rgb(94, 92, 100) 12.8%, transparent 12.8%);
+  background-position: 0px 0px, 4px 4px;
+  background-size: 8px 8px;
+  background-color: rgb(255, 255, 255);
+
   margin: 0 auto;
 }
 

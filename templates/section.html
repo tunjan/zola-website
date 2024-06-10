@@ -18,7 +18,7 @@
 <ul>
 {% for page in pages %}
     <li>
-        <a href="{{ page.permalink | safe }}">{{ page.date }} - {{ page.title }}</a>
+        <span style="margin-right: 1em; color: grey;">{{ page.date }} </span><a href="{{ page.permalink | safe }}"> {{ page.title }}</a>
         <br />
         {{ page.description }}
     </li>
