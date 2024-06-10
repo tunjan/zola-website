@@ -1,20 +1,27 @@
-{% extends "base.html" %} 
+{% extends "base.html" %} {% block header %}{{ page.title }}{% endblock header
+%} {% block content %} {% if page.title %}
+<h1
+  style="
+    margin-bottom: 0.25rem;
+    font-size: 1.75rem;
+    font-family: 'Space Grotesk';
+  "
+>
+  {{ page.title }}
+</h1>
+{% endif %}
+<p class="post-meta" style="margin-top: 0; font-weight: 600">
+  <time datetime="{{ page.date }}">{{ page.date }}</time> / {{ page.reading_time
+  }} min read
+  <span class="tooltip">
+    <span class="plus-button">*</span>
+    <span class="tooltiptext">Last Updated: {{page.updated }}</span>
+  </span>
 
-{% block header %}{{ page.title }}{% endblock header %} 
+  <!--Status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}-->
+</p>
 
-{% block content %}
-
-  {% if page.title %} 
-  <h1 style="margin-bottom: 0.25rem; font-size: 1.75rem; font-family: 'Space Grotesk';">{{ page.title }}</h1>
-  {% endif %}
-  <p class="post-meta" style="margin-top: 0; font-weight:600;">
-    <time datetime="{{ page.date }}">{{ page.date }}</time> / {{ page.reading_time }} min read
-    <span class=" desktop" style="font-weight:400; padding: .2rem; background: #ececec;margin-left: .725em; border-radius:3px">Last Updated: {{page.updated }} </span>
-    <!--Status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}-->
-    </p>
-
-{% if page.toc and page.extra.add_toc %} 
-Table of contents
+{% if page.toc and page.extra.add_toc %} Table of contents
 <ul>
   {% for h1 in page.toc %}
   <li>
@@ -31,62 +38,71 @@ Table of contents
   </li>
   {% endfor %}
 </ul>
-{% endif %} 
+{% endif %}
 
-<hr>
+<hr />
 
-{{ page.content | safe }}
+<article>{{ page.content | safe }}</article>
 
-<hr>
+<hr />
 
-<div id="remark42" style="margin-top: 2rem;"></div>
+<div id="remark42" style="margin-top: 2rem"></div>
 <script>
   var remark_config = {
     host: "https://remark42.albertotrigo.eu",
-    site_id: 'albrtotrigo',
-    components: ['embed']
+    site_id: "albrtotrigo",
+    components: ["embed"],
   };
 </script>
-<script>!function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);</script>
-
+<script>
+  !(function (e, n) {
+    for (var o = 0; o < e.length; o++) {
+      var r = n.createElement("script"),
+        c = ".js",
+        d = n.head || n.body;
+      "noModule" in r ? ((r.type = "module"), (c = ".mjs")) : (r.async = !0),
+        (r.defer = !0),
+        (r.src = remark_config.host + "/web/" + e[o] + c),
+        d.appendChild(r);
+    }
+  })(remark_config.components || ["embed"], document);
+</script>
 
 <div class="bottom">
-  <p class="taxonomies" style="margin-bottom: 0;">
-    {% if page.taxonomies.tags %} 
-    {% for tag in page.taxonomies.tags %}
+  <p class="taxonomies" style="margin-bottom: 0">
+    {% if page.taxonomies.tags %} {% for tag in page.taxonomies.tags %}
     <a href="/tags/{{ tag | slugify }}">#{{ tag }}</a>
-    {% endfor %}
-    {% endif %}
+    {% endfor %} {% endif %}
   </p>
-  
+
   {% if page.backlinks %}
-    <h2>Backlinks</h2>
-    <ul>
-      {% for backlink in page.backlinks %}
-      <li>
-        <a href="{{ backlink.permalink }}">[[ {{ backlink.title }} ]]</a>
-      </li>
-      {% endfor %}
-    </ul>
+  <h2>Backlinks</h2>
+  <ul>
+    {% for backlink in page.backlinks %}
+    <li>
+      <a href="{{ backlink.permalink }}">[[ {{ backlink.title }} ]]</a>
+    </li>
+    {% endfor %}
+  </ul>
   {% endif %}
-
-
-
 </div>
-  {% if page.extra.math %}
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    };
-  </script>
 
-  {% endif %}
+{% if page.extra.math %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"],
+      ],
+    },
+  };
+</script>
 
-
-
-
-{% endblock content %} 
+{% endif %} {% endblock content %}
