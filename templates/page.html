@@ -37,6 +37,19 @@ Table of contents
 
 {{ page.content | safe }}
 
+<hr>
+
+<div id="remark42" style="margin-top: 2rem;"></div>
+<script>
+  var remark_config = {
+    host: "https://remark42.albertotrigo.eu",
+    site_id: 'albrtotrigo',
+    components: ['embed']
+  };
+</script>
+<script>!function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);</script>
+
+
 <div class="bottom">
   <p class="taxonomies" style="margin-bottom: 0;">
     {% if page.taxonomies.tags %} 
@@ -56,6 +69,10 @@ Table of contents
       {% endfor %}
     </ul>
   {% endif %}
+
+
+
+</div>
   {% if page.extra.math %}
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -69,7 +86,7 @@ Table of contents
 
   {% endif %}
 
+
+
+
 {% endblock content %} 
-
-
-</div>
