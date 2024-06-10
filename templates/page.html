@@ -2,19 +2,16 @@
 
 {% block header %}{{ page.title }}{% endblock header %} 
 
-
 {% block content %}
 
-
-<p class=" post-meta desktop" style="margin-top: 0;">
-  <time datetime="{{ page.date }}">Created: {{ page.date }}</time> · Updated: {{
-  page.updated }} · Reading time: {{ page.reading_time }} min
-  <!--Status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}-->
-  </p>
-
   {% if page.title %} 
-  <h1>{{ page.title }}</h1>
+  <h1 style="margin-bottom: 0.25rem; font-size: 1.75rem; font-family: 'Space Grotesk';">{{ page.title }}</h1>
   {% endif %}
+  <p class="post-meta" style="margin-top: 0; font-weight:600;">
+    <time datetime="{{ page.date }}">{{ page.date }}</time> / {{ page.reading_time }} min read  <span class=" desktop" style="padding: .25rem; background: #ececec; font-weight:400;">Last Updated: {{
+      page.updated }} </span>
+    <!--Status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}-->
+    </p>
 
 {% if page.toc and page.extra.add_toc %} 
 Table of contents
@@ -36,57 +33,43 @@ Table of contents
 </ul>
 {% endif %} 
 
+<hr>
+
 {{ page.content | safe }}
+
+<div class="bottom">
+  <p class="taxonomies" style="margin-bottom: 0;">
+    {% if page.taxonomies.tags %} 
+    {% for tag in page.taxonomies.tags %}
+    <a href="/tags/{{ tag | slugify }}">#{{ tag }}</a>
+    {% endfor %}
+    {% endif %}
+  </p>
+  
+  {% if page.backlinks %}
+    <h2>Backlinks</h2>
+    <ul>
+      {% for backlink in page.backlinks %}
+      <li>
+        <a href="{{ backlink.permalink }}">[[ {{ backlink.title }} ]]</a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% if page.extra.math %}
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+
+  {% endif %}
 
 {% endblock content %} 
 
-{% block bottom %}
 
-<p class="taxonomies" style="margin-bottom: 0;">
-  {% if page.taxonomies.tags %} 
-  {% for tag in page.taxonomies.tags %}
-  <a href="/tags/{{ tag | slugify }}">#{{ tag }}</a>
-  {% endfor %}
-  {% endif %}
-</p>
-
-{% if page.backlinks %}
-  <h2>Backlinks</h2>
-  <ul>
-    {% for backlink in page.backlinks %}
-    <li>
-      <a href="{{ backlink.permalink }}">[[ {{ backlink.title }} ]]</a>
-    </li>
-    {% endfor %}
-  </ul>
-{% endif %}
-
-<!-- <p style="margin-bottom: 0;">
-  <a href="#" id="back-to-top">↑ Back to top</a>
-</p>
-<script type="text/javascript" src="{{ get_url(path="backtotop.js") }}"></script> -->
-<!-- <script type="text/javascript" src="{{ get_url(path="headers.js") }}"></script> -->
-{% if page.extra.math %}
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-{% endif %}
-{% endblock bottom %} >
-
-<!-- {% block toc%}
-<div class="toc desktop">
-  <h3>Table of contents</h3>
-  <ul>
-  </ul>
 </div>
-<script type="text/javascript" src="{{ get_url(path="toc.js") }}"></script>
-{% endblock toc %} -->
-
-
-

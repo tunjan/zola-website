@@ -28,8 +28,8 @@ body {
   line-height: var(--line-height-base);
   text-rendering: optimizeLegibility;
   display: flex;
-  height: 100%;
   flex-direction: column;
+  height: 100%;
   color: var(--primary-color);
   background-color: var(--background-color);
   font-optical-sizing: auto;
@@ -37,6 +37,7 @@ body {
     radial-gradient(rgb(68, 68, 68) 12.8%, transparent 12.8%);
   background-position: 0 0, 8px 8px;
   background-size: 16px 16px;
+  margin: 0 auto;
 }
 
 /* Header Styles */
@@ -48,6 +49,11 @@ header {
   border-bottom: 2px solid black;
   padding: 1rem;
   background: #fff;
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
 }
 
 nav a {
@@ -61,13 +67,19 @@ nav a:hover {
 
 main {
   width: 800px;
-  margin: 0 auto;
   flex: 1;
   border-right: 2px solid black;
   border-left: 2px solid black;
   padding: 2rem;
   background: #fff;
   overflow-y: auto;
+  margin: 0 auto;
+}
+
+main a{
+  color: black;
+  text-decoration-line: underline;
+  text-underline-offset: 2px;
 }
 
 .title {
@@ -104,8 +116,8 @@ main {
 
 .post-meta {
   font-weight: 500;
-  text-align: center;
   margin-bottom: 2rem;
+  font-family: "Space Grotesk";
 }
 
 /*  main h1 {
@@ -133,25 +145,25 @@ p {
 
 ul {
   display: block;
-  list-style-type: disc;
+  list-style-type: none;
   margin-top: 1em;
   margin-bottom: 1 em;
   margin-left: 0;
   margin-right: 0;
-  padding-left: 40px;
+  padding-left: 0px;
 }
 
-h1{
+h1 {
   display: block;
-font-size: 2em;
-margin-top: 0.67em;
-margin-bottom: 0.67em;
-margin-left: 0;
-margin-right: 0;
-font-weight: bold;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
 }
 
-h2{
+h2 {
   display: block;
   font-size: 1.5em;
   margin-top: 0.83em;
@@ -161,7 +173,7 @@ h2{
   font-weight: bold;
 }
 
-h3{
+h3 {
   display: block;
   font-size: 1.17em;
   margin-top: 1em;
@@ -171,29 +183,17 @@ h3{
   font-weight: bold;
 }
 
-h4 {	display: block;
-margin-top: 1.33em;
-margin-bottom: 1.33em;
-margin-left: 0;
-margin-right: 0;
-font-weight: bold;}
+h4 {
+  display: block;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
 
 *:target {
   background: yellow;
-}
-
-hr {
-  margin: 2em 0;
-  text-align: center;
-  border: 0;
-}
-
-hr:before {
-  content: "/////";
-}
-
-hr:after {
-  content: attr(data-content) "/////";
 }
 
 table {
@@ -258,6 +258,18 @@ img {
   display: flex;
   justify-content: space-between;
 }
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+section{
+  display: block;
+}
 
 /* Footer Styles */
 footer {
@@ -266,6 +278,11 @@ footer {
   display: flex;
   justify-content: space-between;
   background: #fff;
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
 }
 
 /* Responsive Styles */
@@ -276,9 +293,12 @@ footer {
 @media only screen and (max-width: 800px) {
   main {
     width: 100vw;
+    padding: 1.25rem;
+  }
+
+  main, footer, header{
     border-right: none;
     border-left: none;
-    padding: 1.25rem;
   }
 
   footer {

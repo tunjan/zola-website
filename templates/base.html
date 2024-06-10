@@ -119,9 +119,7 @@
         {% endblock content %}
 
         <!-- <div id="preview-container" class="desktop"></div> -->
-         <div class="bottom">
-          {% block bottom %}
-          {% endblock bottom %} 
+
           {% if config.extra.bottom_nav %}
           <nav>
             {% for nav_item in config.extra.bottom_nav %}
@@ -129,7 +127,6 @@
             {% endfor %}
           </nav>
           {% endif %}
-         </div>
       </main>
 
 
