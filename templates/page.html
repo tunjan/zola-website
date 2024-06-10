@@ -11,14 +11,12 @@
 </h1>
 {% endif %}
 <p class="post-meta" style="margin-top: 0; font-weight: 600">
-  <time datetime="{{ page.date }}">{{ page.date }}</time> / {{ page.reading_time
+  <time datetime="{{ page.date }}">{{ page.date | date(format="%d %B %Y") }}</time> / {{ page.reading_time
   }} min read
   <span class="tooltip">
     <span class="plus-button">*</span>
     <span class="tooltiptext">Last Updated: {{page.updated }}</span>
   </span>
-
-  <!--Status: {% if page.extra.status %}{{ page.extra.status }}{% endif %}-->
 </p>
 
 {% if page.toc and page.extra.add_toc %} Table of contents
@@ -47,26 +45,6 @@
 <hr />
 
 <div id="remark42" style="margin-top: 2rem"></div>
-<script>
-  var remark_config = {
-    host: "https://remark42.albertotrigo.eu",
-    site_id: "albrtotrigo",
-    components: ["embed"],
-  };
-</script>
-<script>
-  !(function (e, n) {
-    for (var o = 0; o < e.length; o++) {
-      var r = n.createElement("script"),
-        c = ".js",
-        d = n.head || n.body;
-      "noModule" in r ? ((r.type = "module"), (c = ".mjs")) : (r.async = !0),
-        (r.defer = !0),
-        (r.src = remark_config.host + "/web/" + e[o] + c),
-        d.appendChild(r);
-    }
-  })(remark_config.components || ["embed"], document);
-</script>
 
 <div class="bottom">
   <p class="taxonomies" style="margin-bottom: 0">
@@ -105,4 +83,27 @@
   };
 </script>
 
-{% endif %} {% endblock content %}
+{% endif %}
+
+<script>
+  var remark_config = {
+    host: "https://remark42.albertotrigo.eu",
+    site_id: "albrtotrigo",
+    components: ["embed"],
+  };
+</script>
+<script>
+  !(function (e, n) {
+    for (var o = 0; o < e.length; o++) {
+      var r = n.createElement("script"),
+        c = ".js",
+        d = n.head || n.body;
+      "noModule" in r ? ((r.type = "module"), (c = ".mjs")) : (r.async = !0),
+        (r.defer = !0),
+        (r.src = remark_config.host + "/web/" + e[o] + c),
+        d.appendChild(r);
+    }
+  })(remark_config.components || ["embed"], document);
+</script>
+
+{% endblock content %}
