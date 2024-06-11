@@ -1,9 +1,8 @@
 +++
 author = 'Alberto Trigo'
 title = "Hosting websites"
-draft = false
+draft = true
 importance = 2
-stage = 'draft'
 date = 2024-04-26
 updated = 2024-05-06
 [taxonomies]

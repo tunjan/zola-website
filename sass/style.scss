@@ -2,18 +2,17 @@
 :root {
   --primary-color: black;
   --secondary-color: rgb(51, 51, 51);
-  --highlight-color: rgba(255, 238, 0, 0.548);
+  --highlight-color: rgba(127, 255, 212, 0.808);
   --underline-color: red;
   --background-color: white;
   --font-space-grotesk: "Space Grotesk", sans-serif;
-  --font-sans: "DM Sans", sans-serif;
-  --font-monospace: "DM Mono", monospace;
-  --font-size-base: 16px;
+  --font-sans: "PT Sans", sans-serif;
+  --font-monospace: "PT Mono", monospace;
+  --font-size-base: 20px;
   --line-height-base: 1.5;
 }
 
 * {
-  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -21,6 +20,12 @@
 html {
   height: 100%;
   background-color: var(--background-color);
+  background-image: 
+  radial-gradient(rgb(94, 92, 100) 12.8%, transparent 12.8%),
+  radial-gradient(rgb(94, 92, 100) 12.8%, transparent 12.8%);
+  background-position: 0px 0px, 4px 4px;
+  background-size: 8px 8px;
+  background-color: rgb(255, 255, 255);
 }
 
 body {
@@ -32,14 +37,7 @@ body {
   flex-direction: column;
   height: 100%;
   color: var(--primary-color);
-  background-color: var(--background-color);
   font-optical-sizing: auto;
-  background-image: 
-    radial-gradient(rgb(94, 92, 100) 12.8%, transparent 12.8%),
-    radial-gradient(rgb(94, 92, 100) 12.8%, transparent 12.8%);
-  background-position: 0px 0px, 4px 4px;
-  background-size: 8px 8px;
-  background-color: rgb(255, 255, 255);
   margin: 0 auto;
 }
 
@@ -50,10 +48,10 @@ header {
   justify-content: space-between;
   font-family: var(--font-space-grotesk);
   border-bottom: 2px solid black;
-  padding: 1rem;
-  background: #fff;
+  padding: 1rem 2rem;
+  background: #f4f4f4;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
   border-right: 2px solid black;
   border-left: 2px solid black;
@@ -69,13 +67,14 @@ nav a:hover {
 }
 
 main {
-  width: 800px;
+  width: 900px;
   flex: 1;
   border-right: 2px solid black;
   border-left: 2px solid black;
-  padding: 2rem;
+  padding: 1rem 2rem;
+
   background: #fff;
-  overflow-y: auto;
+  // overflow-y: auto;
   margin: 0 auto;
 }
 
@@ -83,6 +82,11 @@ main a{
   color: black;
   text-decoration-line: underline;
   text-underline-offset: 2px;
+}
+main a:hover{
+  color: white;
+  background-color: black;
+  text-decoration: none;
 }
 
 .title {
@@ -140,63 +144,15 @@ main a{
 
 p {
   display: block;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  margin-left: 0;
-  margin-right: 0;
 }
 
 ul {
   display: block;
   list-style-type: none;
-  margin-top: 1em;
-  margin-bottom: 1 em;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 0px;
 }
 
 li{
-  margin: .25em 0;
-}
-
-h1 {
-  display: block;
-  font-size: 2em;
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold;
-}
-
-h2 {
-  display: block;
-  font-size: 1.5em;
-  margin-top: 0.83em;
-  margin-bottom: 0.83em;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold;
-}
-
-h3 {
-  display: block;
-  font-size: 1.17em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold;
-}
-
-h4 {
-  display: block;
-  margin-top: 1.33em;
-  margin-bottom: 1.33em;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold;
+  margin: .25rem 0;
 }
 
 *:target {
@@ -286,12 +242,12 @@ section{
 /* Footer Styles */
 footer {
   border-top: 2px solid black;
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
-  background: #fff;
+  background: #f4f4f4;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
   border-right: 2px solid black;
   border-left: 2px solid black;
