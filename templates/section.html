@@ -1,34 +1,23 @@
-{% extends "base.html" %}
-
-{% block header %}
-{#<p><a href="{{ section.path }}..">..</a>{{ section.path }}</p> #}
-
-{% endblock header %}
-
-{% block content %}
-{% if section.title %}
-    <h2>{{ section.title }}</h2>
-{% endif %}
-    {{ section.content | safe }}
-{% if paginator %}
-{% set pages = paginator.pages %}
-{% else %}
-{% set pages = section.pages %}
-{% endif %}
+{% extends "base.html" %} {% block header %} {#
+<p><a href="{{ section.path }}..">..</a>{{ section.path }}</p>
+#} {% endblock header %} {% block content %} {% if section.title %}
+<h2>{{ section.title }}</h2>
+{% endif %} {{ section.content | safe }} {% if paginator %} {% set pages =
+paginator.pages %} {% else %} {% set pages = section.pages %} {% endif %}
 <ul>
-{% for page in pages %}
-    <li>
-        <span style="margin-right: 1em; color: grey;">{{ page.date }} </span><a href="{{ page.permalink | safe }}"> {{ page.title }}</a>
-    </li>
-{% endfor %}
+  {% for page in pages %}
+  <li>
+    <span style="margin-right: 1em; color: grey">{{ page.date }} </span
+    ><a href="{{ page.permalink | safe }}"> {{ page.title }}</a>
+  </li>
+  {% endfor %}
 </ul>
-
 <nav class="pagination">
-    {% if paginator.previous %}
-        <a class="previous" href="{{ paginator.previous }}">‹ Previous</a>
-    {% endif %}
-    {% if paginator.next %}
-        <a class="next" href="{{ paginator.next }}">Next ›</a>
-    {% endif %}
+  {% if paginator.previous %}
+  <a class="previous" href="{{ paginator.previous }}">‹ Previous</a>
+  {% endif %} {% if paginator.next %}
+  <a class="next" href="{{ paginator.next }}">Next ›</a>
+  {% endif %}
 </nav>
+
 {% endblock content %}

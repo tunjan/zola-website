@@ -6,7 +6,7 @@
   --font-family-grotesk: "Space Grotesk", sans-serif;
   --font-family-sans: "PT Sans", sans-serif;
   --font-family-monospace: "PT Mono", monospace;
-  --font-size-base: 20px;
+  --font-size-base: 18px;
   --line-height-base: 1.6;
 }
 
@@ -26,8 +26,7 @@ a {
 /* Base Styles */
 html {
   height: 100%;
-  background-image: 
-    radial-gradient(var(--color-primary) 10%, transparent 10%);
+  background-image: radial-gradient(var(--color-primary) 10%, transparent 10%);
   background-position: 8px 8px;
   background-size: 16px 16px;
   background-color: var(--color-background);
@@ -53,8 +52,7 @@ footer {
   justify-content: space-between;
   padding: 1rem 2rem;
   background: var(--color-secondary);
-  max-width: 900px;
-  width: 100%;
+  width: 900px;
   border: 2px solid var(--color-primary);
   font-family: var(--font-family-grotesk);
   margin: 0 auto;
@@ -79,21 +77,19 @@ main {
   border-bottom: none;
 }
 
-/* Navigation */
+nav a {
+  color: var(--color-primary);
+}
+
+nav a:hover {
+  color: var(--color-primary);
+}
 
 nav{
   display: flex;
   justify-content: space-evenly;
   gap: 0 1.25rem;
-    width: auto;
-}
-nav a {
-  color: var(--color-primary);
-
-}
-
-nav a:hover {
-  color: var(--color-primary);
+  width: auto;
 }
 
 /* Links */
@@ -140,6 +136,10 @@ main > * {
   background-color: var(--color-primary);
   transform: scaleX(0);
   transition: transform 0.3s ease;
+}
+
+p {
+  margin: 1.25em 0;
 }
 
 .title:hover::before {
@@ -263,6 +263,7 @@ hr {
   header {
     width: 100%;
     border: none;
+    padding: 1.125rem 1.125rem;
   }
 
   footer {
@@ -277,6 +278,11 @@ hr {
     display: none;
   }
 }
+@media (min-width: 900px) {
+  .mobile {
+    display: none;
+  }
+}
 
 /* Utility Classes */
 .flex-between {
@@ -284,7 +290,9 @@ hr {
   justify-content: space-between;
 }
 
-
+header ul {
+  display: flex;
+}
 
 body {
   transition: background-color 0.3s, color 0.3s;
@@ -299,11 +307,9 @@ body {
   fill: var(--color-primary);
 }
 
-
-
 html.dark-mode {
   --color-primary: white;
-  --color-secondary: rgb(51, 51, 51);
+  --color-secondary: rgb(31, 30, 30);
   --color-highlight: rgba(127, 255, 212, 0.808);
   --color-background: black;
 }
