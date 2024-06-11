@@ -69,6 +69,17 @@
           },{% endif %}"@context": "https://schema.org"
       }
     </script>
+    <script>
+      function applyColorScheme() {
+        const html = document.documentElement;
+        const isDarkMode = localStorage.getItem("darkMode") === "true";
+        const theme =
+          localStorage.getItem("theme") || (isDarkMode ? "dark" : "light");
+        html.classList.toggle("dark-mode", isDarkMode);
+      }
+
+      applyColorScheme();
+    </script>
     {% endblock metatags %} {% block css %}
     <link
       rel="stylesheet"
@@ -151,18 +162,7 @@
         localStorage.setItem("theme", isDarkMode ? "dark" : "light");
       }
 
-      function applyColorScheme() {
-        const isDarkMode = localStorage.getItem("darkMode") === "true";
-        const theme =
-          localStorage.getItem("theme") || (isDarkMode ? "dark" : "light");
-        html.classList.toggle("dark-mode", isDarkMode);
-        themeToggle.classList.toggle("dark-mode", isDarkMode);
-        // You can use the 'theme' variable to apply additional styling or logic based on the theme
-        console.log(`The current theme is: ${theme}`);
-      }
-
       themeToggle.addEventListener("click", toggleTheme);
-      window.addEventListener("DOMContentLoaded", applyColorScheme);
     </script>
     <script>
       const htmlElement = document.documentElement;
