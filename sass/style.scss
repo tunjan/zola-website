@@ -108,7 +108,12 @@ main a:hover {
 /* Spacing */
 article > *,
 main > * {
-  margin-bottom: 1.875rem; /* 30px */
+  margin-bottom: 1rem; /* 30px */
+}
+
+article > p,
+main > p {
+  margin-bottom: 1.725rem; /* 30px */
 }
 
 /* Typography */
@@ -138,9 +143,10 @@ main > * {
   transition: transform 0.3s ease;
 }
 
-p {
-  margin: 1.25em 0;
-}
+/* 
+:is(h1, h2, h3, h4, h5, h6) {
+  margin-bottom: .875rem;
+} */
 
 .title:hover::before {
   transform: scaleX(1);
@@ -148,10 +154,6 @@ p {
 
 ::selection {
   background: var(--color-highlight);
-}
-
-p {
-  margin-bottom: 1.875rem; /* 30px */
 }
 
 ul {
