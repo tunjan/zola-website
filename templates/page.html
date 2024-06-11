@@ -126,6 +126,9 @@
     host: "https://remark42.albertotrigo.eu",
     site_id: "albertotrigo",
     components: ["embed"],
+    theme: localStorage.getItem("theme")
+      ? localStorage.getItem("theme")
+      : "light",
   };
 </script>
 <script>
