@@ -5,129 +5,146 @@
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-    {% if page.title %}
-      {% set title = page.title %} {% elif section.title %} {%
-  set title = section.title %} {% elif config.title %} {% set title = config.title %}
+    {% if page.title %} {% set title = page.title %} {% elif section.title %} {%
+    set title = section.title %} {% elif config.title %} {% set title =
+    config.title %} {% endif %} {% if page.extra.author %} {% set author =
+    page.extra.author %} {% elif section.extra.author %} {% set author =
+    section.extra.author %} {% elif config.extra.author %} {% set author =
+    config.extra.author %} {% endif %} {% if page.description %} {% set
+    description = page.description | truncate(length=150) %} {% elif
+    section.description %} {% set description = section.description |
+    truncate(length=150) %} {% elif config.description %} {% set description =
+    config.description | truncate(length=150) %} {% endif %} {% if
+    page.extra.image %} {% set image = get_url(path=page.extra.image ,
+    trailing_slash=false) %} {% elif section.extra.image %} {% set image =
+    get_url(path=section.extra.image , trailing_slash=false) %} {% elif
+    config.extra.logo %} {% set image = get_url(path=config.extra.logo ,
+    trailing_slash=false) %} {% endif %} {% if page.permalink %} {% set url =
+    page.permalink %} {% elif section.permalink %} {% set url =
+    section.permalink %} {% elif config.base_url %} {% set url = config.base_url
+    %} {% endif %} {% if title %}
+    <title>{{ title }}</title>
+    {% endif %} {% block metatags %} {% if title %}
+    <meta name="title" content="{{ title }}" />
+    {% endif %} {% if author %}
+    <meta name="author" content="{{ author }}" />
+    {% endif %} {% if description %}
+    <meta name="description" content="{{ description }}" />
     {% endif %}
-    {% if page.extra.author %}
-      {% set author = page.extra.author %} {% elif section.extra.author %} {% set author = section.extra.author %} {% elif config.extra.author %} {% set author = config.extra.author %}
-    {% endif %}
-    {% if page.description %}
-      {% set description = page.description | truncate(length=150) %} {% elif section.description %} {% set description = section.description |  truncate(length=150) %} {% elif config.description %} {% set description = config.description | truncate(length=150) %}
-    {% endif %}
-    {% if page.extra.image %}
-      {% set image = get_url(path=page.extra.image
-        , trailing_slash=false) %} {% elif section.extra.image %} {% set image = get_url(path=section.extra.image
-  , trailing_slash=false) %} {% elif config.extra.logo %} {% set image = get_url(path=config.extra.logo
-  , trailing_slash=false) %}
-    {% endif %}
-    {% if page.permalink %}
-      {% set url = page.permalink %} {% elif section.permalink %} {% set url = section.permalink %} {% elif config.base_url %} {% set url = config.base_url
-%}
-    {% endif %}
+    <meta name="generator" content="Zola v0.18.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url | safe }}" />
     {% if title %}
-      <title>{{ title }}</title>
+    <meta property="og:site_name" content="{{ config.title }}" />
+    {% endif %} {% if title %}
+    <meta property="og:title" content="{{ title }}" />
+    {% endif %} {% if description %}
+    <meta property="og:description" content="{{ description }}" />
+    {% endif %} {% if image %}
+    <meta property="og:image" content="{{ image }}" />
     {% endif %}
-    {% block metatags %}
-      {% if title %}
-        <meta name="title" content="{{ title }}" />
-      {% endif %}
-      {% if author %}
-        <meta name="author" content="{{ author }}" />
-      {% endif %}
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+    <link rel="canonical" href="{{ url | safe }}" />
+    {% if image %}
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{{ get_url(path=config.extra.logo, trailing_slash=false) }}"
+    />
+    {% endif %}
+    <script type="application/ld+json">
+      {
       {% if description %}
-        <meta name="description" content="{{ description }}" />
-      {% endif %}
-      <meta name="generator" content="Zola v0.18.0" />
-      <meta name="referrer" content="strict-origin-when-cross-origin">
-
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content="{{ url | safe }}" />
-      {% if title %}
-        <meta property="og:site_name" content="{{ config.title }}" />
-      {% endif %}
-      {% if title %}
-        <meta property="og:title" content="{{ title }}" />
-      {% endif %}
-      {% if description %}
-        <meta property="og:description" content="{{ description }}" />
-      {% endif %}
-      {% if image %}
-        <meta property="og:image" content="{{ image }}" />
-      {% endif %}
-      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
-      <link rel="canonical" href="{{ url | safe }}" />
-      {% if image %}
-        <link
-          rel="shortcut icon"
-          type="image/x-icon"
-          href="{{ get_url(path=config.extra.logo, trailing_slash=false) }}" />
-      {% endif %}
-      <script type="application/ld+json">
-        {
-        {% if description %}
-            "description" :"{{ description | safe }}",
-          {% endif %}"url":"{{ url | safe }}",
-          "@type": "WebSite",
-          {% if title %}
-            "headline" :"{{ title | safe }}",{% endif %}{% if title %}
-            "name" :"{{ title | safe }}",{% endif %}{% if author %}
-            "author" : {
-              "@type": "Person",
-              "name":"{{ author | safe }}"
-            },{% endif %}"@context": "https://schema.org"
-        }
-      </script>
-    {% endblock metatags %}
-
-    {% block css %}
-      <link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) | safe }}" />
+          "description" :"{{ description | safe }}",
+        {% endif %}"url":"{{ url | safe }}",
+        "@type": "WebSite",
+        {% if title %}
+          "headline" :"{{ title | safe }}",{% endif %}{% if title %}
+          "name" :"{{ title | safe }}",{% endif %}{% if author %}
+          "author" : {
+            "@type": "Person",
+            "name":"{{ author | safe }}"
+          },{% endif %}"@context": "https://schema.org"
+      }
+    </script>
+    {% endblock metatags %} {% block css %}
+    <link
+      rel="stylesheet"
+      href="{{ get_url(path='style.css', trailing_slash=false) | safe }}"
+    />
     {% endblock css %}
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
-      @import url('https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');    </style>
+      @import url("https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+    </style>
   </head>
 
   <body>
     <header>
       {% if title %}
-        <!-- <a class="title" href="/">{{ config.title }}</a> -->
-        <a class="title" href="/">Home</a>
-      {% endif %}
-      {% if config.extra.header_nav %}
-        <nav>
-          {% for nav_item in config.extra.header_nav %}
-            <a
-              href="{{ nav_item.url | safe }}"
-
-
-              {% if nav_item.new_tab %}
-              target="_blank"
-              rel="noreferrer noopener"
-
-              {% endif %}>{{ nav_item.name }}</a>
-          {% endfor %}
-        </nav>
+      <!-- <a class="title" href="/">{{ config.title }}</a> -->
+      <a class="title" href="/">Home</a>
+      {% endif %} {% if config.extra.header_nav %}
+      <nav>
+        {% for nav_item in config.extra.header_nav %}
+        <a
+          href="{{ nav_item.url | safe }}"
+          {%
+          if
+          nav_item.new_tab
+          %}
+          target="_blank"
+          rel="noreferrer noopener"
+          {%
+          endif
+          %}
+          >{{ nav_item.name }}</a
+        >
+        {% endfor %}
+        <button class="theme-toggle" aria-label="Toggle Dark Mode">
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <path
+              d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z"
+              class="sun-icon"
+            ></path>
+            <path
+              d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z"
+              class="moon-icon"
+            ></path>
+          </svg>
+        </button>
+      </nav>
       {% endif %}
     </header>
 
     <main>
-      {% block content %}
-      {% endblock content %}
-      {% if config.extra.bottom_nav %}
-        <nav>
-          {% for nav_item in config.extra.bottom_nav %}
-            <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
-          {% endfor %}
-        </nav>
+      {% block content %} {% endblock content %} {% if config.extra.bottom_nav
+      %}
+      <nav>
+        {% for nav_item in config.extra.bottom_nav %}
+        <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
+        {% endfor %}
+      </nav>
+
       {% endif %}
     </main>
-
 
     <footer>
       <div>Alberto Trigo Medina © 2024</div>
       <div>BY-NC-SA 4.0</div>
     </footer>
+    <script>
+      const themeToggleButton = document.querySelector(".theme-toggle");
+      const htmlElement = document.documentElement;
+
+      function toggleTheme() {
+        htmlElement.classList.toggle("dark-mode");
+      }
+
+      themeToggleButton.addEventListener("click", toggleTheme);
+    </script>
   </body>
 </html>
