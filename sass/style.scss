@@ -85,7 +85,7 @@ nav a:hover {
   color: var(--color-primary);
 }
 
-nav{
+nav {
   display: flex;
   justify-content: space-evenly;
   gap: 0 1.25rem;
@@ -213,47 +213,12 @@ hr {
   border-top: 1px solid #ccc;
 }
 
-/* Tooltips */
 .tooltip {
   position: relative;
-  display: inline-block;
-  text-decoration: underline;
-  text-underline-offset: -2px;
-}
-
-.tooltiptext {
-  visibility: hidden;
-  max-width: 10vw;
-  min-width: 100px;
-  font-size: 0.75rem;
-  background-color: var(--color-primary);
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 0.3125rem 0; /* 5px 0 */
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -50%;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -0.3125rem; /* -5px */
-  border-width: 5px;
-  border-style: solid;
-  border-color: var(--color-primary) transparent transparent transparent;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
+  color: #01b6ad;
+  // background-color: #00b4ab27;
+  padding: 0 0rem;
+  margin: 0 .75rem;
 }
 
 /* Responsive Styles */
@@ -270,17 +235,13 @@ hr {
     font-size: 0.9rem;
   }
 
-  .mobile {
-    display: block;
-  }
-
   .desktop {
-    display: none;
+    display: none !important;
   }
 }
 @media (min-width: 900px) {
   .mobile {
-    display: none;
+    display: none !important;
   }
 }
 
