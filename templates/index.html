@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
+
 {% block content %}
+<article>
+
+<div class="content">
 
 {{ section.content | safe }}
 
@@ -16,4 +20,5 @@
 {% endfor %}
 </ul>
 {% endif %}
+</div>
 {% endblock content %}

@@ -1,5 +1,5 @@
 :root {
-  --color-primary: 0,0,0;
+  --color-primary: 0, 0, 0;
   --color-secondary: 25, 84, 193;
   --color-highlight: 255, 221, 0;
   --color-background: 255, 255, 255;
@@ -9,7 +9,7 @@ html.dark-mode {
   --color-primary: 255, 255, 255;
   --color-secondary: 255, 221, 0;
   --color-highlight: 25, 84, 193;
-  --color-background: 0,0,0;
+  --color-background: 0, 0, 0;
 }
 
 /* Reset */
@@ -25,10 +25,12 @@ a {
   text-decoration-color: rgb(var(--color-primary));
 }
 
-a:hover, button:hover, input[type="submit"]:hover {
+a:hover,
+button:hover,
+input[type="submit"]:hover {
   text-decoration-color: rgb(var(--color-primary));
   text-decoration-line: line-through;
-  text-decoration-thickness: .1em;
+  text-decoration-thickness: 0.1em;
 }
 
 /* Base Styles */
@@ -52,9 +54,9 @@ body {
   margin: 0;
 }
 
-.container{
+.container {
   min-width: 20rem;
-  min-height: max(100vh,480px);
+  min-height: max(100vh, 480px);
   display: flex;
   position: relative;
   padding-left: 1rem;
@@ -78,15 +80,17 @@ main {
   flex-grow: 1;
   width: 100%;
   position: relative;
-  font-family: "PT Sans";
+  font-family: "IBM Plex Sans";
   font-weight: 500;
- }
+}
 
 main article {
   gap: 1rem;
+  flex-direction: column;
+  display: flex;
 }
 
-footer{
+footer {
   padding-top: 1.5rem;
   padding-bottom: 1rem;
   z-index: 10;
@@ -98,16 +102,14 @@ header .topbar {
   justify-content: space-between;
   align-items: center;
   display: flex;
-
 }
 
-header .topbar a{
+header .topbar a {
   display: block;
   color: inherit;
   text-decoration: inherit;
   width: 10rem;
 }
-
 
 nav {
   --tw-bg-opacity: 1;
@@ -116,13 +118,14 @@ nav {
   overflow: hidden;
   width: 100%;
   max-height: 12rem;
+  display: none;
 }
 
 header button {
   font-variation-settings: "TIME" 1;
-  transition-duration: .4s;
+  transition-duration: 0.4s;
   --tw-text-opacity: 1;
-  color: rgb(255 221 0/var(--tw-text-opacity));
+  color: rgb(255 221 0 / var(--tw-text-opacity));
   font-weight: 400;
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -134,31 +137,32 @@ header button {
   padding: 0;
   background-color: transparent;
   background-image: none;
-  border:none;
+  border: none;
 }
 
 hr {
-  border-top-width:1px;
-  color:inherit;
-  height:0
+  border-top-width: 1px;
+  color: inherit;
+  height: 0;
 }
 
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 nav ul {
-  margin-bottom: .5rem;
-  margin-top: .5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 nav ul li {
   font-size: 1.875rem;
-  line-height: 2.25rem; 
+  line-height: 2.25rem;
 }
 
-.title{
+.title {
   font-size: 1.5rem;
 }
 
@@ -168,22 +172,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-size:inherit;
-  font-weight:inherit
+  font-size: inherit;
+  font-family: "Space Grotesk";
 }
 
-/* Typography */
-.title,
-.post-meta,
-.plus-button,
-#back-to-top {
-  font-family: var(--font-family-grotesk);
-}
 
 ::selection {
   background: rgb(var(--color-highlight));
 }
-
 
 /* Tables */
 table,
@@ -198,8 +194,8 @@ td {
 pre,
 code {
   font-size: inherit;
-  font-feature-settings:normal;
-  font-variation-settings:normal;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
   background-color: rgb(var(--color-primary));
   color: rgb(var(--color-background));
   padding: 1em;
@@ -220,23 +216,15 @@ img {
   margin: 0 auto;
 }
 
-
 .dropdown img {
   width: 36px;
   height: 40px;
 }
 
-.hamburger, .cross {
+.hamburger,
+.cross {
   filter: invert(0);
 }
-
-
-
-.mobile .tooltip {
-  color: rgb(var(--color-secondary));
-  margin-top: .375rem;
-}
-
 
 /* Utility Classes */
 .flex-between {
@@ -244,7 +232,12 @@ img {
   justify-content: space-between;
 }
 
-
+article .content {
+  flex-direction: column;
+  flex-grow: 1;
+  display: flex;
+  gap: 1rem;
+}
 
 .theme-toggle {
   background: none;
@@ -255,6 +248,21 @@ img {
   fill: rgb(var(--color-primary));
 }
 
+blockquote,
+dd,
+dl,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+pre {
+  margin: 0;
+}
 
 .sun-icon {
   display: none;
@@ -269,7 +277,7 @@ html.dark-mode .moon-icon {
   display: none;
 }
 
-.post-meta{
+.post-meta {
   margin-top: 0;
   font-weight: 600;
   display: flex;
@@ -278,44 +286,81 @@ html.dark-mode .moon-icon {
 }
 
 .tooltip {
-  margin-top: .375rem;
+  margin-top: 0.375rem;
   color: rgb(var(--color-secondary));
+  width: fit-content;
 }
 
-@media (min-width: 1200px) {
+.toc {
+  display: none;
+}
 
-  .container{
-    padding-left: 2rem;
-    padding-right: 2rem;
+main {
+  font-size: 1.25rem;
+}
 
+article .metadata {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+@media (min-height: 480px) {
+  header {
+    margin-bottom: 0;
   }
 
-  header{
-    padding-bottom: 2rem;
-    padding-top: 2rem;
+  header .topbar {
+    width: 100%;
+  }
+}
 
+@media (min-width: 576px) {
+  .container {
+    gap: 4rem;
+    flex-direction: row;
+  }
+
+  header {
+    margin-bottom: var(--footer-height);
+    z-index: 10;
+  }
+
+  header .topbar .dropdown {
+    display: none;
+  }
+
+  nav {
+    display: block !important;
+    position: relative;
+  }
+
+  nav ul {
+    margin-top: 1rem;
+    margin-bottom: 0;
   }
 
   main {
-    font-size: 1.5rem;
-    line-height: 2.25rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
   }
 
-  footer{
-    padding-bottom: 2rem;
-    padding-top: 2rem;
+  main article {
+    gap: 2rem;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
   }
 }
 
 @media (min-width: 960px) {
-
-  .post-meta{
-    margin-top: 0;
+  .post-meta {
     font-weight: 600;
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
-
+    flex-direction: column;
   }
 
   .tooltip {
@@ -323,56 +368,53 @@ html.dark-mode .moon-icon {
     padding: 0 0.25em;
     color: rgb(var(--color-secondary));
   }
+
+  main article {
+    gap: 2rem;
+    flex-direction: row;
+  }
+
+  article .metadata {
+    flex-shrink: 0;
+    min-width: 16rem;
+    width: 20%;
+    position: sticky;
+    top: 2rem;
+    flex-direction: column;
+    display: flex;
+    height: fit-content;
+    align-self: flex-start; /* or any other value like flex-end or center */
+  }
+
+  .toc {
+    display: inline;
+    margin-top: 2rem;
+  }
+
+  .toc ul {
+    margin-left: 1rem;
+  }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 1200px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 
-.container{
-  gap: 4rem;
-  flex-direction: row;
-}
+  header {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+  }
 
-header{
-  margin-bottom: var(--footer-height);
-  z-index: 10;
-}
+  main {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    line-height: 2.25rem;
+  }
 
-header .topbar .dropdown {
-  display: none;
-}
-
-nav{
-  display: block !important;
-  position: relative;
-}
-
-nav ul {
-  margin-top: 1rem;
-  margin-bottom: 0;
-}
-
-main {
-  padding-bottom: 1rem;
-    padding-top: 1rem;
-}
-
-main article {
-  gap: 2rem;
-}
-
-footer{
-  position: fixed;
-  bottom: 0;
-}
-
-}
-
-@media (min-height: 480px) {
-header{
-  margin-bottom: 0;
-}
-
-header .topbar{
-  width: 100%;
-}
+  footer {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+  }
 }
