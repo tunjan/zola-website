@@ -77,7 +77,6 @@
           localStorage.getItem("theme") || (isDarkMode ? "dark" : "light");
         html.classList.toggle("dark-mode", isDarkMode);
       }
-
       applyColorScheme();
     </script>
     {% endblock metatags %} {% block css %}
@@ -89,93 +88,157 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
       @import url("https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,500;0,700;1,500;1,700&display=swap");
     </style>
   </head>
 
   <body>
-    <header>
-      {% if title %}
-      <!-- <a class="title" href="/">{{ config.title }}</a> -->
-      <a class="title" href="/">Home</a>
-      {% endif %} {% if config.extra.header_nav %}
-      <nav>
-        {% for nav_item in config.extra.header_nav %}
-        <a
-          href="{{ nav_item.url | safe }}"
-          {%
-          if
-          nav_item.new_tab
-          %}
-          target="_blank"
-          rel="noreferrer noopener"
-          {%
-          endif
-          %}
-          >{{ nav_item.name }}</a
-        >
-        {% endfor %}
-        <button
-          class="theme-toggle"
-          id="theme-toggle"
-          aria-label="Toggle Dark Mode"
-        >
-          <svg viewBox="0 0 24 24" width="24" height="24">
-            <path
-              d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z"
-              class="sun-icon"
-            ></path>
-            <path
-              d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z"
-              class="moon-icon"
-            ></path>
-          </svg>
-        </button>
-      </nav>
-      {% endif %}
-    </header>
+    <div class="container">
+      <header>
+        {% if title %}
+        <div class="topbar">
+          <a class="title" href="/">{{ config.title }}</a>
+          <button
+            class="dropdown"
+            aria-label="Toggln"
+            aria-expanded="false"
+          ><img src="{{ get_url(path='hamburger.svg')}}" class="hamburger" ></img></button>
+        </div>
+        {% endif %} {% if config.extra.header_nav %}
+        <nav>
+          <ul>
+            {% for nav_item in config.extra.header_nav %}
+            <li>
+              <a
+                href="{{ nav_item.url | safe }}"
+                {%
+                if
+                nav_item.new_tab
+                %}
+                target="_blank"
+                rel="noreferrer noopener"
+                {%
+                endif
+                %}
+                >{{ nav_item.name }}</a
+              >
+            </li>
+            {% endfor %}
+            <li>
+              <button
+                class="theme-toggle"
+                id="theme-toggle"
+                aria-label="Toggle Dark Mode"
+              >
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                  <path
+                    d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z"
+                    class="sun-icon"
+                  ></path>
+                  <path
+                    d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z"
+                    class="moon-icon"
+                  ></path>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </nav>
+        {% endif %}
+      </header>
 
-    <main>
-      {% block content %} {% endblock content %} {% if config.extra.bottom_nav
-      %}
-      <nav>
-        {% for nav_item in config.extra.bottom_nav %}
-        <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
-        {% endfor %}
-      </nav>
+      <main>
+        <div>
+          {% block content %} {% endblock content %} {% if
+          config.extra.bottom_nav %}
+          <nav>
+            {% for nav_item in config.extra.bottom_nav %}
+            <a href="{{ nav_item.url | safe }}">{{ nav_item.name }}</a>
+            {% endfor %}
+          </nav>
 
-      {% endif %}
-    </main>
+          {% endif %}
+        </div>
+      </main>
 
-    <footer>
-      <div>Alberto Trigo Medina © 2024</div>
-      <div>BY-NC-SA 4.0</div>
-    </footer>
-    <script>
-      const themeToggle = document.querySelector(".theme-toggle");
-      const html = document.documentElement;
+      <footer>
+        <div>Alberto Trigo Medina © 2024</div>
+        <div>BY-NC-SA 4.0</div>
+      </footer>
+      <script>
+        const themeToggle = document.querySelector(".theme-toggle");
+        const html = document.documentElement;
+        const elements = document.querySelectorAll('.hamburger, .cross');
 
-      function toggleTheme() {
-        html.classList.toggle("dark-mode");
-        const isDarkMode = html.classList.contains("dark-mode");
-        localStorage.setItem("darkMode", isDarkMode);
-        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+        function toggleTheme() {
+          html.classList.toggle("dark-mode");
+          const isDarkMode = html.classList.contains("dark-mode");
+          localStorage.setItem("darkMode", isDarkMode);
+          localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+          elements.forEach(element => {
+            const currentFilter = window.getComputedStyle(element).filter;
+            if (currentFilter === 'invert(0)') {
+              element.style.filter = 'invert(1)';
+            } else {
+              element.style.filter = 'invert(0)';
+            }
+        })}
+
+        themeToggle.addEventListener("click", toggleTheme);
+      </script>
+      <script>
+        const htmlElement = document.documentElement;
+        const hasDarkMode = htmlElement.classList.contains("dark-mode");
+        document
+          .getElementById("theme-toggle")
+          .addEventListener("click", () => {
+            if (htmlElement.classList.contains("dark-mode")) {
+              localStorage.setItem("pref-theme", "light");
+              window.REMARK42.changeTheme("dark");
+            } else {
+              localStorage.setItem("pref-theme", "dark");
+              window.REMARK42.changeTheme("light");
+            }
+          });
+      </script>
+      <script>
+            const nav = document.querySelector('header nav');
+            const dropdown = document.querySelector('.dropdown');
+      function checkViewport() {
+      if (window.innerWidth < 575) {
+        nav.style.display = 'none';
+        dropdown.style.display = '';
+      } else {
+        nav.style.display = '';
+        dropdown.style.display = 'none';
+      }
+    }
+
+    window.onload = checkViewport;
+
+    dropdown.addEventListener('click', function() {
+      const img = this.querySelector('img');
+
+      if (nav.style.display === 'none' || nav.style.display === '') {
+        nav.style.display = 'block'
+      } else {
+        nav.style.display = 'none';
       }
 
-      themeToggle.addEventListener("click", toggleTheme);
-    </script>
-    <script>
-      const htmlElement = document.documentElement;
-      const hasDarkMode = htmlElement.classList.contains("dark-mode");
-      document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (htmlElement.classList.contains("dark-mode")) {
-          localStorage.setItem("pref-theme", "light");
-          window.REMARK42.changeTheme("dark");
-        } else {
-          localStorage.setItem("pref-theme", "dark");
-          window.REMARK42.changeTheme("light");
-        }
-      });
-    </script>
+      if (img.classList.contains('cross')) {
+        img.classList.add('hamburger');
+        img.classList.remove('cross');
+        img.src = "{{ get_url(path='hamburger.svg')}}"; // Set back to three lines icon
+      } else {
+        img.classList.remove('hamburger');
+        img.classList.add('cross');
+        img.src = "{{ get_url(path='cross.svg')}}"; // Set to cross icon
+      }
+    });
+
+    // Optional: handle window resize to update nav visibility dynamically
+    window.onresize = checkViewport;
+          </script>
+    </div>
   </body>
 </html>

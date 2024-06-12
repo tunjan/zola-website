@@ -23,5 +23,5 @@ list_pages = true
 add_toc = true
 #list_pages = true
 author = "Alberto Trigo"
-header_nav = [{ name = "Posts", url = "/blog" }]
+header_nav = [{ name = "Posts", url = "/posts" }]
 bottom_nav = []
