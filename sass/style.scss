@@ -1,3 +1,43 @@
+@font-face {
+  font-family: 'Drafting Mono';
+  src: 
+  url('DraftingMono/DraftingMono-Medium.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Drafting Mono';
+  src: 
+  url('DraftingMono/DraftingMono-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Drafting Mono';
+  src: 
+  url('DraftingMono/DraftingMono-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Drafting Mono';
+  src: 
+  url('DraftingMono/DraftingMono-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Drafting Mono';
+  src: 
+  url('DraftingMono/DraftingMono-BoldItalic.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+}
+
 :root {
   --color-primary: 0, 0, 0;
   --color-secondary: 25, 84, 193;
@@ -17,6 +57,9 @@ html.dark-mode {
 *::before,
 *::after {
   box-sizing: border-box;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+
 }
 
 a {
@@ -45,11 +88,9 @@ html {
 body {
   hyphens: auto;
   min-height: 100vh;
-  --tw-bg-opacity: 1;
   background-color: rgb(var(--color-background));
   font-weight: 700;
   line-height: 1.25;
-  --tw-text-opacity: 1;
   color: rgb(var(--color-primary));
   margin: 0;
 }
@@ -80,7 +121,6 @@ main {
   flex-grow: 1;
   width: 100%;
   position: relative;
-  font-family: "Inter", sans-serif;
   font-weight: 400;
 }
 
@@ -172,7 +212,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: inherit;
+  font-size: 1.125rem;
 }
 
 ::selection {
@@ -188,17 +228,6 @@ td {
   padding: 0.4rem;
 }
 
-/* Code */
-pre,
-code {
-  font-size: inherit;
-  font-feature-settings: normal;
-  font-variation-settings: normal;
-  background-color: rgb(var(--color-primary));
-  color: rgb(var(--color-background));
-  padding: 1em;
-  font-family: var(--font-family-monospace);
-}
 
 /* Blockquotes */
 blockquote {
@@ -236,6 +265,12 @@ article .content {
   display: flex;
   gap: 1rem;
   line-height: 1.5;
+  font-family: 'Drafting Mono', sans-serif;
+  font-weight: 300;
+}
+
+article li{
+  line-height: 1.5;
 }
 
 .theme-toggle {
@@ -261,6 +296,18 @@ hr,
 p,
 pre {
   margin: 0;
+}
+
+pre{
+  background-color: rgb(var(--color-primary));
+  color: rgb(var(--color-background));
+  padding: 1rem;
+}
+code{
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .sun-icon {
@@ -387,6 +434,7 @@ article .metadata {
 
   .toc {
     display: inline;
+    line-height: 2rem;
     margin-top: 2rem;
   }
 

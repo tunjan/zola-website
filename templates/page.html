@@ -2,13 +2,7 @@
 %} {% block content %} {% if page.title %}
 <article>
   <div class="metadata">
-    <h1
-      style="
-        margin-bottom: 0.25rem;
-        font-size: 1.75rem;
-        font-family: 'Space Grotesk';
-      "
-    >
+    <h1 style="font-size: 1.375rem; font-family: 'Space Grotesk'">
       {{ page.title }}
     </h1>
     {% endif %}
@@ -19,9 +13,7 @@
         >
         / {{ page.reading_time }} min read</span
       >
-      <span class="tooltip"
-        >{{page.updated | date(format="%d %B %Y")}}</span
-      >
+      <span class="tooltip">{{page.updated | date(format="%d %B %Y")}}</span>
     </p>
 
     {% if page.toc and page.extra.add_toc %}

@@ -1,14 +1,16 @@
 +++
 author = 'Alberto Trigo'
 title = "Hosting websites"
-draft = true
+draft = false
 importance = 2
 date = 2024-04-26
 updated = 2024-05-06
+toc = true
 [taxonomies]
 tags=["websites"]
 [extra]
 status = 'seed'
+add_toc = true
 +++
 
 A few days ago I decided to learn how to self-host multiple services (calibre, quartz, etc) on my own server. This lead me through a bit of a rabbithole and mutiple conversations with LLMs, which were of great help. After that, I decided to write this post to remind myself in case I need to do it in the future.
