@@ -97,6 +97,9 @@ body {
 
 .container {
   min-width: 20rem;
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
   min-height: max(100vh, 480px);
   display: flex;
   position: relative;
@@ -421,7 +424,6 @@ article .metadata {
   article .metadata {
     flex-shrink: 0;
     min-width: 16rem;
-    width: 30%;
     position: sticky;
     top: 1rem;
     flex-direction: column;
