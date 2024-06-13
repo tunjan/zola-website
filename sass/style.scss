@@ -461,6 +461,8 @@ article .metadata {
   main {
     padding-bottom: 2rem;
     padding-top: 2rem;
+    font-size: 1.25rem;
+
   }
 
   footer {
@@ -470,5 +472,19 @@ article .metadata {
   
   article .metadata {
     top: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .metadata h1{
+    font-size: 1.875rem;
+  }
+
+  .metadata .toc h1{
+    font-size: 1.5rem;
+    margin-bottom: .25rem;
+  }
+
+  .content > h1, h2, h3, h4{
+    font-size: 1.375rem;
   }
 }
