@@ -5,11 +5,13 @@
 <article>
 
 <div class="content">
+    {{ section.content | safe }}
+</div>
 
-{{ section.content | safe }}
-
+<div class="metadata">
 {% if config.extra.list_pages %}
-<hr>
+
+
 <h3 ">Latest Posts</h3>
 <ul>
 {% set posts = get_section(path="posts/_index.md") %}

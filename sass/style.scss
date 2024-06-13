@@ -80,7 +80,7 @@ main {
   flex-grow: 1;
   width: 100%;
   position: relative;
-  font-family: sans-serif;
+  font-family: "Inter";
   font-weight: 400;
 }
 
@@ -173,7 +173,6 @@ h4,
 h5,
 h6 {
   font-size: inherit;
-  font-family: "Space Grotesk";
 }
 
 ::selection {
@@ -236,6 +235,7 @@ article .content {
   flex-grow: 1;
   display: flex;
   gap: 1rem;
+  line-height: 1.5;
 }
 
 .theme-toggle {
@@ -295,7 +295,7 @@ html.dark-mode .moon-icon {
 }
 
 main {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 article .metadata {
@@ -393,6 +393,10 @@ article .metadata {
   .toc ul {
     margin-left: 1rem;
   }
+
+  article .content{
+    max-width: 40rem;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -409,7 +413,6 @@ article .metadata {
   main {
     padding-bottom: 2rem;
     padding-top: 2rem;
-    line-height: 2.25rem;
   }
 
   footer {
