@@ -266,10 +266,9 @@ article .content {
   gap: 1rem;
   line-height: 1.5;
   font-family: 'Drafting Mono', sans-serif;
-  font-weight: 300;
 }
 
-article li{
+main li{
   line-height: 1.5;
 }
 
@@ -425,7 +424,7 @@ article .metadata {
     min-width: 16rem;
     width: 30%;
     position: sticky;
-    top: 2rem;
+    top: 1rem;
     flex-direction: column;
     display: flex;
     height: fit-content;
@@ -466,5 +465,9 @@ article .metadata {
   footer {
     padding-bottom: 2rem;
     padding-top: 2rem;
+  }
+  
+  article .metadata {
+    top: 2rem;
   }
 }
