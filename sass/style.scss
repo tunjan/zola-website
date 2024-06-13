@@ -63,9 +63,10 @@ html.dark-mode {
 }
 
 a {
-  color: rgb(var(--color-secondary));
-  text-decoration: inherit;
+  color: rgb(var(--color-primary));
+  text-decoration: underline;
   text-decoration-color: rgb(var(--color-primary));
+  text-underline-offset: .25rem;
 }
 
 a:hover,
@@ -73,7 +74,7 @@ button:hover,
 input[type="submit"]:hover {
   text-decoration-color: rgb(var(--color-primary));
   text-decoration-line: line-through;
-  text-decoration-thickness: 0.1em;
+  text-decoration-thickness: 0.125em;
 }
 
 /* Base Styles */
@@ -82,7 +83,7 @@ html {
   font-variation-settings: normal;
   tab-size: 4;
   line-height: 1.5;
-  font-family: "Space Grotesk";
+  font-family: "Lexend", "Space Grotesk";
 }
 
 body {
@@ -147,11 +148,15 @@ header .topbar {
   display: flex;
 }
 
-header .topbar a {
+.topbar a {
   display: block;
   color: inherit;
   text-decoration: inherit;
-  width: 10rem;
+  width: 11rem;
+}
+
+header nav a{
+  text-decoration: none;
 }
 
 nav {
@@ -352,6 +357,10 @@ article .metadata {
   flex-direction: column;
 }
 
+#togglebutton{
+  text-align: right;
+}
+
 @media (min-height: 480px) {
   header {
     margin-bottom: 0;
@@ -400,6 +409,10 @@ article .metadata {
     position: fixed;
     bottom: 0;
   }
+  #togglebutton{
+    text-align: left;
+  }
+
 }
 
 @media (min-width: 960px) {
@@ -411,8 +424,6 @@ article .metadata {
   }
 
   .tooltip {
-    background-color: rgba(var(--color-secondary), 0.201);
-    padding: 0 0.25em;
     color: rgb(var(--color-secondary));
   }
 
@@ -442,9 +453,7 @@ article .metadata {
     margin-left: 1rem;
   }
 
-  article .content{
-    max-width: 40rem;
-  }
+
 }
 
 @media (min-width: 1200px) {
@@ -468,11 +477,20 @@ article .metadata {
   footer {
     padding-bottom: 2rem;
     padding-top: 2rem;
+    font-size: 1.25rem;
+  }
+
+  main article {
+    gap: 4rem;
   }
   
   article .metadata {
     top: 2rem;
     font-size: 1.5rem;
+  }
+
+  article .content{
+    max-width: 45rem;
   }
 
   .metadata h1{
