@@ -90,7 +90,7 @@ body {
   hyphens: auto;
   min-height: 100vh;
   background-color: rgb(var(--color-background));
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.25;
   color: rgb(var(--color-primary));
   margin: 0;
@@ -138,7 +138,6 @@ footer {
   padding-top: 1.5rem;
   padding-bottom: 1rem;
   z-index: 10;
-  max-width: 200px;
   position: relative;
 }
 
@@ -221,6 +220,7 @@ h4,
 h5,
 h6 {
   font-size: 1.125rem;
+  font-weight: 580;
 }
 
 ::selection {
@@ -413,6 +413,10 @@ article .metadata {
     text-align: left;
   }
 
+  footer {
+    max-width: 200px;
+  }
+
 }
 
 @media (min-width: 960px) {
@@ -449,10 +453,21 @@ article .metadata {
     margin-top: 2rem;
   }
 
-  .toc ul {
+  .toc ul ul {
     margin-left: 1rem;
   }
 
+  .toc ul {
+    font-size: 1.25rem;
+  }
+
+  .toc a {
+    text-decoration: none;
+  }
+
+  .toc a:hover {
+    color: rgb(var(--color-secondary));
+  }
 
 }
 
@@ -499,7 +514,7 @@ article .metadata {
 
   .metadata .toc h1{
     font-size: 1.5rem;
-    margin-bottom: .25rem;
+    margin-bottom: .75rem;
   }
 
   .content > h1, h2, h3, h4{
