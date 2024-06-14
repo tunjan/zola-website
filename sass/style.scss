@@ -83,10 +83,13 @@ html {
   font-variation-settings: normal;
   tab-size: 4;
   line-height: 1.5;
-  font-family: "Lexend", "Space Grotesk";
+  font-family: "Inter", sans-serif;
+
 }
 
 body {
+  transition-duration: 0.5s;
+
   hyphens: auto;
   min-height: 100vh;
   background-color: rgb(var(--color-background));
@@ -94,6 +97,7 @@ body {
   line-height: 1.25;
   color: rgb(var(--color-primary));
   margin: 0;
+
 }
 
 .container {
@@ -114,7 +118,6 @@ header {
   padding-bottom: 1rem;
   padding-top: 1rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-background));
   height: fit-content;
   z-index: 20;
   top: 0;
@@ -160,8 +163,6 @@ header nav a{
 
 nav {
   --tw-bg-opacity: 1;
-  transition-timing-function: ease-in-out;
-  background-color: rgb(var(--color-background));
   overflow: hidden;
   width: 100%;
   max-height: 12rem;
@@ -170,7 +171,6 @@ nav {
 
 header button {
   font-variation-settings: "TIME" 1;
-  transition-duration: 0.4s;
   --tw-text-opacity: 1;
   color: rgb(255 221 0 / var(--tw-text-opacity));
   font-weight: 400;
@@ -257,7 +257,8 @@ img {
 }
 
 .hamburger,
-.cross {
+.cross,
+.font-switch {
   filter: invert(0);
 }
 
@@ -359,6 +360,17 @@ article .metadata {
 
 #togglebutton{
   text-align: right;
+}
+
+.font-toggle{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.font-toggle svg {
+  width: 30px;
+  height: 30px;
+  stroke: black;
 }
 
 @media (min-height: 480px) {
