@@ -46,10 +46,10 @@
 }
 
 html.dark-mode {
-  --color-primary: 255, 255, 255;
+  --color-primary: 232, 230, 227;
   --color-secondary: 255, 221, 0;
   --color-highlight: 25, 84, 193;
-  --color-background: 0, 0, 0;
+  --color-background: 24, 26, 27;
 }
 
 /* Reset */
@@ -414,7 +414,7 @@ article .metadata {
   }
 
   nav {
-    display: block !important;
+    display: inline;
     position: relative;
   }
 
@@ -438,6 +438,7 @@ article .metadata {
   }
   #togglebutton{
     text-align: left;
+    margin-top: .5rem;
   }
 
   footer {
