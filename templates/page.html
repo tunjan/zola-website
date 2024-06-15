@@ -1,16 +1,38 @@
-{% extends "base.html" %} {% block header %}{{ page.title }}{% endblock header
+{% extends "base.html" %}
+{% block header %}{{ page.title }}{% endblock header
 %} {% block content %} {% if page.title %}
 <article>
+  <div class="content">
+    {{ page.content | safe }}
+
+    <div class="bottom">
+      <p class="taxonomies">
+        {% if page.taxonomies.tags %} {% for tag in page.taxonomies.tags %}
+        <a href="/tags/{{ tag | slugify }}">#{{ tag }}</a>
+        {% endfor %} {% endif %}
+      </p>
+
+      {% if page.backlinks %}
+      <h2>Backlinks</h2>
+      <ul>
+        {% for backlink in page.backlinks %}
+        <li>
+          <a href="{{ backlink.permalink }}">[[ {{ backlink.title }} ]]</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    <div id="remark42"></div>
+  </div>
   <div class="metadata">
     <h1>{{ page.title }}</h1>
     {% endif %}
     <p class="post-meta">
       <span>
-        <time datetime="{{ page.date }}"
-          >{{ page.date | date(format="%d %B %Y") }}</time
-        >
-        / {{ page.reading_time }} min read</span
-      >
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%d %B %Y") }}</time>
+        / {{ page.reading_time }} min read</span>
       <span class="tooltip">{{page.updated | date(format="%d %B %Y")}}</span>
     </p>
 
@@ -37,39 +59,12 @@
     {% endif %}
   </div>
 
-  <div class="content">
-    {{ page.content | safe }}
 
-    <div class="bottom">
-      <p class="taxonomies">
-        {% if page.taxonomies.tags %} {% for tag in page.taxonomies.tags %}
-        <a href="/tags/{{ tag | slugify }}">#{{ tag }}</a>
-        {% endfor %} {% endif %}
-      </p>
-
-      {% if page.backlinks %}
-      <h2>Backlinks</h2>
-      <ul>
-        {% for backlink in page.backlinks %}
-        <li>
-          <a href="{{ backlink.permalink }}">[[ {{ backlink.title }} ]]</a>
-        </li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-    </div>
-
-    <div id="remark42" style="margin-top: 2rem"></div>
-  </div>
 </article>
 
 {% if page.extra.math %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>
   MathJax = {
     tex: {

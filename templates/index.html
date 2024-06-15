@@ -4,23 +4,22 @@
 {% block content %}
 <article>
 
-<div class="content">
-    {{ section.content | safe }}
-</div>
+    <div class="content">
+        {{ section.content | safe }}
+    </div>
 
-<div class="content">
-{% if config.extra.list_pages %}
+    <div class="content">
+        {% if config.extra.list_pages %}
 
 
-<h3 ">Latest Posts</h3>
+        <h3 ">Latest Posts</h3>
 <ul>
-{% set posts = get_section(path="posts/_index.md") %}
-{% for page in posts.pages | slice(end=10) %}
-<li>
-    <span style="margin-right: 1em; color: rgb(118, 118, 118);">{{ page.date }} </span><a href="{{ page.permalink }}">{{ page.title }}</a> 
-</li>
-{% endfor %}
-</ul>
-{% endif %}
-</div>
-{% endblock content %}
+{% set posts = get_section(path="posts/_index.md") %} {% for page in posts.pages | slice(end=10) %} <li>
+            <span style="margin-right: 1em; color: rgb(118, 118, 118);">{{ page.date }} </span><a
+                href="{{ page.permalink }}">{{ page.title }}</a>
+            </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+    </div>
+    {% endblock content %}
