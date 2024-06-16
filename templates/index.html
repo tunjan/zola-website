@@ -3,6 +3,11 @@
 
 {% block content %}
 <article style="flex-direction:column">
+
+    <div class="content">
+        {{ section.content | safe }}
+    </div>
+
     <div class="content">
         {% if config.extra.list_pages %}
         <h3 ">Latest Posts</h3>
@@ -16,9 +21,6 @@
             {% endif %}
     </div>
 
-    <div class="content">
-        {{ section.content | safe }}
-    </div>
 
 
     {% endblock content %}
