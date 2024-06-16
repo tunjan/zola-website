@@ -255,13 +255,6 @@ img {
   height: 24px;
 }
 
-.hamburger,
-.cross,
-.font-switch {
-  filter: invert(0);
-}
-
-/* Utility Classes */
 .flex-between {
   display: flex;
   justify-content: space-between;
@@ -271,7 +264,7 @@ article .content {
   flex-direction: column;
   flex-grow: 1;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   line-height: 1.5;
 }
 
@@ -279,7 +272,11 @@ main li {
   line-height: 1.5;
 }
 
-.theme-toggle {
+#togglebutton {
+  text-align: right;
+}
+
+#theme-toggle, #font-toggle {
   background: none;
   border: none;
   cursor: pointer;
@@ -288,7 +285,7 @@ main li {
   fill: rgb(var(--color-primary));
 }
 
-.theme-toggle svg{
+#theme-toggle svg, #font-toggle svg{
   width: 24px;
   height: 24px;
 }
@@ -336,6 +333,10 @@ code {
   display: inline;
 }
 
+.dropdown, .cross{
+  filter: invert(1);
+}
+
 html.dark-mode .sun-icon {
   display: inline;
 }
@@ -343,6 +344,8 @@ html.dark-mode .sun-icon {
 html.dark-mode .moon-icon {
   display: none;
 }
+
+
 
 .post-meta {
   margin-top: 0;
@@ -373,21 +376,7 @@ main {
   border-bottom: .25px solid rgba(0,0,0,.15);
 }
 
-#togglebutton {
-  text-align: right;
-}
 
-.font-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.font-toggle svg {
-  width: 24px;
-  height: 24px;
-  stroke: black;
-}
 
 @media (min-height: 480px) {
   header .topbar {
