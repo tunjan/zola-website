@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const fonts = {
         primary: 'Lexend, sans-serif',
-        secondary: 'IBM Plex Serif, serif'
+        secondary: 'Bitter, serif'
     };
 
     /**
