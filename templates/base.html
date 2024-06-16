@@ -19,8 +19,84 @@
   <script type="text/javascript" id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
-
   {% endif %}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const html = document.documentElement;
+      const themeToggle = document.querySelector(".theme-toggle");
+      const fontToggle = document.getElementById("font-toggle");
+      const themeToggleButton = document.getElementById("theme-toggle");
+      const elements = document.querySelectorAll('.hamburger, .cross, .font-switch');
+      const nav = document.querySelector('header nav');
+      const dropdown = document.querySelector('.dropdown');
+
+      function toggleTheme() {
+        html.classList.toggle("dark-mode");
+        const isDarkMode = html.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode);
+        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+        updateElements(isDarkMode);
+        window.REMARK42.changeTheme(isDarkMode ? "dark" : "light");
+      }
+
+      function updateElements(isDarkMode) {
+        elements.forEach(element => {
+          element.style.filter = isDarkMode ? 'invert(1)' : 'invert(0)';
+        });
+      }
+
+      function initializeTheme() {
+        const isDarkMode = localStorage.getItem("darkMode") === "true";
+        if (isDarkMode) {
+          html.classList.add("dark-mode");
+        } else {
+          html.classList.remove("dark-mode");
+        }
+        updateElements(isDarkMode);
+      }
+
+      function toggleFontFamily() {
+        const currentFont = getComputedStyle(html).fontFamily;
+        const newFont = currentFont.includes('Lexend') ? 'Inter, sans-serif' : 'Lexend, sans-serif';
+        html.style.fontFamily = newFont;
+        localStorage.setItem("fontFamily", newFont);
+      }
+
+      function initializeFontFamily() {
+        const storedFont = localStorage.getItem("fontFamily");
+        if (storedFont) {
+          html.style.fontFamily = storedFont;
+        }
+      }
+
+      dropdown.addEventListener('click', function () {
+        const img = this.querySelector('img');
+        if (nav.style.display === 'none' || nav.style.display === '') {
+          nav.style.display = 'block';
+        } else {
+          nav.style.display = 'none';
+        }
+        if (img.classList.contains('cross')) {
+          img.classList.add('hamburger');
+          img.classList.remove('cross');
+          img.src = "{{ get_url(path='hamburger.svg') }}"; // Set back to three lines icon
+        } else {
+          img.classList.remove('hamburger');
+          img.classList.add('cross');
+          img.src = "{{ get_url(path='cross.svg') }}"; // Set to cross icon
+        }
+      });
+
+      window.addEventListener("load", () => {
+        initializeTheme();
+        initializeFontFamily();
+      });
+
+      themeToggle.addEventListener("click", toggleTheme);
+      fontToggle.addEventListener("click", toggleFontFamily);
+      themeToggleButton.addEventListener("click", toggleTheme);
+    });
+  </script>
 
 
   {% if page.title %} {% set title = page.title %} {% elif section.title %} {%
@@ -166,83 +242,6 @@
       <div>Alberto Trigo Medina © 2024</div>
       <div>BY-NC-SA 4.0</div>
     </footer>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const html = document.documentElement;
-        const themeToggle = document.querySelector(".theme-toggle");
-        const fontToggle = document.getElementById("font-toggle");
-        const themeToggleButton = document.getElementById("theme-toggle");
-        const elements = document.querySelectorAll('.hamburger, .cross, .font-switch');
-        const nav = document.querySelector('header nav');
-        const dropdown = document.querySelector('.dropdown');
-
-        function toggleTheme() {
-          html.classList.toggle("dark-mode");
-          const isDarkMode = html.classList.contains("dark-mode");
-          localStorage.setItem("darkMode", isDarkMode);
-          localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-          updateElements(isDarkMode);
-          window.REMARK42.changeTheme(isDarkMode ? "dark" : "light");
-        }
-
-        function updateElements(isDarkMode) {
-          elements.forEach(element => {
-            element.style.filter = isDarkMode ? 'invert(1)' : 'invert(0)';
-          });
-        }
-
-        function initializeTheme() {
-          const isDarkMode = localStorage.getItem("darkMode") === "true";
-          if (isDarkMode) {
-            html.classList.add("dark-mode");
-          } else {
-            html.classList.remove("dark-mode");
-          }
-          updateElements(isDarkMode);
-        }
-
-        function toggleFontFamily() {
-          const currentFont = getComputedStyle(html).fontFamily;
-          const newFont = currentFont.includes('Lexend') ? 'Inter, sans-serif' : 'Lexend, sans-serif';
-          html.style.fontFamily = newFont;
-          localStorage.setItem("fontFamily", newFont);
-        }
-
-        function initializeFontFamily() {
-          const storedFont = localStorage.getItem("fontFamily");
-          if (storedFont) {
-            html.style.fontFamily = storedFont;
-          }
-        }
-
-        dropdown.addEventListener('click', function () {
-          const img = this.querySelector('img');
-          if (nav.style.display === 'none' || nav.style.display === '') {
-            nav.style.display = 'block';
-          } else {
-            nav.style.display = 'none';
-          }
-          if (img.classList.contains('cross')) {
-            img.classList.add('hamburger');
-            img.classList.remove('cross');
-            img.src = "{{ get_url(path='hamburger.svg') }}"; // Set back to three lines icon
-          } else {
-            img.classList.remove('hamburger');
-            img.classList.add('cross');
-            img.src = "{{ get_url(path='cross.svg') }}"; // Set to cross icon
-          }
-        });
-
-        window.addEventListener("load", () => {
-          initializeTheme();
-          initializeFontFamily();
-        });
-
-        themeToggle.addEventListener("click", toggleTheme);
-        fontToggle.addEventListener("click", toggleFontFamily);
-        themeToggleButton.addEventListener("click", toggleTheme);
-      });
-    </script>
   </div>
 </body>
 
