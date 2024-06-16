@@ -6,9 +6,9 @@
 paginator.pages %} {% else %} {% set pages = section.pages %} {% endif %}
 <ul>
   {% for page in pages %}
-  <li>
-    <span style="margin-right: 1em; color: grey">{{ page.date }} </span
-    ><a href="{{ page.permalink | safe }}"> {{ page.title }}</a>
+  <li style="display: flex;  padding-bottom: .25rem;">
+    <span style="min-width: 7.5rem">{{ page.date }} </span>
+    <a href=" {{ page.permalink | safe }}"> {{ page.title }}</a>
   </li>
   {% endfor %}
 </ul>

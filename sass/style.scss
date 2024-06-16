@@ -65,7 +65,8 @@ a {
   color: rgb(var(--color-primary));
   text-decoration: underline;
   text-decoration-color: rgb(var(--color-primary));
-  text-underline-offset: 0.125rem;
+  text-underline-offset: 0.2rem;
+  text-decoration-thickness:.05rem ;
 }
 
 a:hover,
@@ -132,10 +133,9 @@ main {
 }
 
 main article {
-  gap: 1rem;
+  gap: 1.5rem;
   flex-direction: column-reverse;
   display: flex;
-  font-size: 1.125rem;
 }
 
 footer {
@@ -296,6 +296,11 @@ main li {
   fill: rgb(var(--color-primary));
 }
 
+.theme-toggle svg{
+  width: 24px;
+  height: 24px;
+}
+
 blockquote,
 dd,
 dl,
@@ -345,7 +350,7 @@ html.dark-mode .moon-icon {
 
 .post-meta {
   margin-top: 0;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -369,6 +374,8 @@ article .metadata {
   display: flex;
   gap: 0.5rem;
   flex-direction: column;
+  padding-bottom: 1.5rem;
+  border-bottom: .25px solid rgba(0,0,0,.15);
 }
 
 #togglebutton {
@@ -382,8 +389,8 @@ article .metadata {
 }
 
 .font-toggle svg {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   stroke: black;
 }
 
@@ -437,7 +444,7 @@ article .metadata {
 
   main article {
     gap: 2rem;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   footer {
@@ -453,11 +460,16 @@ article .metadata {
   footer {
     max-width: 200px;
   }
+
+  article .metadata{
+    padding-bottom: 0;
+    border-bottom: none;
+  }
 }
 
 @media (min-width: 960px) {
   .post-meta {
-    font-weight: 600;
+    font-weight: 500;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -470,7 +482,7 @@ article .metadata {
   main article {
     gap: 2rem;
     flex-direction: row;
-    justify-content: end;
+    justify-content: center;
   }
 
   article .metadata {
@@ -522,13 +534,12 @@ article .metadata {
   main {
     padding-bottom: 2rem;
     padding-top: 2rem;
-    font-size: 1.25rem;
   }
 
   footer {
     padding-bottom: 2rem;
     padding-top: 2rem;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
   }
 
   main article {
@@ -537,27 +548,27 @@ article .metadata {
 
   article .metadata {
     top: 2rem;
-    font-size: 1.5rem;
-  }
-
-  article .content {
-    max-width: 45rem;
-  }
-
-  .metadata h1 {
-    font-size: 1.875rem;
-  }
-
-  .toc ul {
     font-size: 1.25rem;
   }
 
-  .metadata .toc h1 {
+  article .content {
+    max-width: 40rem;
+  }
+
+  .metadata h1 {
     font-size: 1.5rem;
+  }
+
+  .toc ul {
+    font-size: 1.125rem;
+  }
+
+  .metadata .toc h1 {
+    font-size: 1.375rem;
     margin-bottom: 0.75rem;
   }
 
-  .h1,
+  h1,
   h2,
   h3,
   h4 {
