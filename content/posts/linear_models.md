@@ -2,7 +2,7 @@
 author = 'Alberto Trigo'
 title = "Linear Models"
 date = 2024-06-16
-draft = false
+draft = true
 updated = 2024-02-06
 [extra]
 math = true
