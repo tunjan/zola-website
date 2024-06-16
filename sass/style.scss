@@ -69,14 +69,6 @@ a {
   text-decoration-thickness:.05rem ;
 }
 
-a:hover,
-button:hover,
-input[type="submit"]:hover {
-  text-decoration-color: rgb(var(--color-primary));
-  text-decoration-line: line-through;
-  text-decoration-thickness: 0.125em;
-}
-
 /* Base Styles */
 html {
   font-feature-settings: normal;
@@ -134,7 +126,7 @@ main {
 
 main article {
   gap: 1.5rem;
-  flex-direction: column-reverse;
+  flex-direction: column;
   display: flex;
 }
 
@@ -481,7 +473,7 @@ article .metadata {
 
   main article {
     gap: 2rem;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: center;
   }
 
