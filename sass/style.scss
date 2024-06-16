@@ -115,29 +115,34 @@ body {
   flex-direction: column;
 }
 
+
+
 header {
   --footer-height: 164px;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+  padding: 1rem;
   --tw-bg-opacity: 1;
   height: fit-content;
   z-index: 20;
   top: 0;
-  position: sticky;
   background-color: inherit;
+  border-bottom: 1px solid rgb(var(--color-primary));
+  margin: 0 -1rem;
 }
+
 
 main {
   flex-grow: 1;
   width: 100%;
   position: relative;
   font-weight: 400;
+  margin-top:1rem;
 }
 
 main article {
   gap: 1rem;
   flex-direction: column-reverse;
   display: flex;
+  font-size: 1.125rem;
 }
 
 footer {
@@ -389,16 +394,13 @@ article .metadata {
 }
 
 @media (min-height: 480px) {
-  header {
-    margin-bottom: 0;
-  }
 
   header .topbar {
     width: 100%;
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 650px) {
   .container {
     gap: 4rem;
     flex-direction: row;
@@ -407,6 +409,13 @@ article .metadata {
   header {
     margin-bottom: var(--footer-height);
     z-index: 10;
+    padding: 0;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    position: sticky;
+    border-bottom:none;
+    margin: 0;
+    min-width: 10rem;
   }
 
   header .topbar .dropdown {
@@ -426,6 +435,7 @@ article .metadata {
   main {
     padding-bottom: 1rem;
     padding-top: 1rem;
+    margin-top:0;
   }
 
   main article {

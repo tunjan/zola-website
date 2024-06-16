@@ -5,6 +5,23 @@
   <meta charset="utf-8" />
   <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
+  {% if page.extra.math %}
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"],
+        ],
+      },
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+  {% endif %}
+
 
   {% if page.title %} {% set title = page.title %} {% elif section.title %} {%
   set title = section.title %} {% elif config.title %} {% set title =
@@ -186,16 +203,6 @@
           html.style.fontFamily = currentFont.includes('Lexend') ? 'Inter, sans-serif' : 'Lexend, sans-serif';
         }
 
-        function checkViewport() {
-          if (window.innerWidth < 575) {
-            nav.style.display = 'none';
-            dropdown.style.display = '';
-          } else {
-            nav.style.display = '';
-            dropdown.style.display = 'none';
-          }
-        }
-
         dropdown.addEventListener('click', function () {
           const img = this.querySelector('img');
           if (nav.style.display === 'none' || nav.style.display === '') {
@@ -216,10 +223,8 @@
 
         window.addEventListener("load", () => {
           initializeTheme();
-          checkViewport();
         });
 
-        window.addEventListener("resize", checkViewport);
         themeToggle.addEventListener("click", toggleTheme);
         fontToggle.addEventListener("click", toggleFontFamily);
         themeToggleButton.addEventListener("click", toggleTheme);
