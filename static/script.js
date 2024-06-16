@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const isNavHidden = nav.style.display === 'none' || nav.style.display === '';
       nav.style.display = isNavHidden ? 'block' : 'none';
       if (img) {
-        img.src = isNavHidden ? "cross.svg" : "hamburger.svg";
+        img.src = isNavHidden ? "/cross.svg" : "/hamburger.svg";
       }
     }
 
