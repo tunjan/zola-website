@@ -108,13 +108,13 @@ document.addEventListener("DOMContentLoaded", () => {
      */
     function initializeEventListeners() {
       themeToggle.addEventListener("click", toggleTheme);
-      fontToggle.addEventListener("click", toggleFontFamily);
+      // fontToggle.addEventListener("click", toggleFontFamily);
       dropdown.addEventListener("click", toggleNavigationDisplay);
     }
 
     window.addEventListener("load", () => {
       initializeTheme();
-      initializeFontFamily();
+      // initializeFontFamily();
     });
 
     initializeEventListeners();
