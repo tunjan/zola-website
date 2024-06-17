@@ -60,6 +60,7 @@ html.dark-mode {
 *::after {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  transition-duration: 0.25;
   scrollbar-width: none;
 }
 
@@ -68,6 +69,7 @@ a {
   text-decoration: underline;
   text-decoration-color: rgb(var(--color-primary));
   text-underline-offset: 0.2rem;
+  
   text-decoration-thickness:.05rem ;
 }
 
@@ -81,7 +83,6 @@ html {
 }
 
 body {
-  transition-duration: 0.5s;
   hyphens: auto;
   min-height: 100vh;
   background-color: rgb(var(--color-background));
