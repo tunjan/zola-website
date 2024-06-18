@@ -1,4 +1,6 @@
-:root {
+html,
+html[data-theme="light"] {
+  color-scheme: light;
   --color-primary: 0, 0, 0;
   --color-secondary: 25, 84, 193;
   --color-highlight: 255, 221, 0;
@@ -6,13 +8,25 @@
   --nav-border-color-light: #c1c1c1;
 }
 
-html.dark-mode {
+html[data-theme="dark"] {
+  color-scheme: dark;
   --color-primary: 232, 230, 227;
   --color-secondary: 255, 221, 0;
   --color-highlight: 25, 84, 193;
   --color-background: 24, 26, 27;
   --nav-border-color-light: #e8e8e8;
 }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    color-scheme: dark;
+    --color-primary: 232, 230, 227;
+    --color-secondary: 255, 221, 0;
+    --color-highlight: 25, 84, 193;
+    --color-background: 24, 26, 27;
+    --nav-border-color-light: #e8e8e8;
+  }
+}
+
 
 /* Reset */
 *,
@@ -20,8 +34,8 @@ html.dark-mode {
 *::after {
   box-sizing: border-box;
   scroll-behavior: smooth;
-  transition-duration: 0.25s;
   scrollbar-width: none;
+  transition-duration: .25s;
 }
 
 a {
@@ -112,6 +126,8 @@ header .topbar {
 header nav a {
   text-decoration: none;
 }
+
+img + em {font-family: monospace; font-style: normal; opacity: 0.65; font-size: .8rem;}
 
 nav {
   --tw-bg-opacity: 1;
@@ -470,6 +486,13 @@ html.dark-mode .moon-icon {
   article .content {
     min-width: 18rem;
   }
+
+  #togglebutton{
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+
 }
 
 @media (min-width: 1200px) {
@@ -529,4 +552,5 @@ html.dark-mode .moon-icon {
     font-size: 1.375rem;
   }
   
+
 }

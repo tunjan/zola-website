@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
      * Initializes event listeners for theme, font, and navigation toggles.
      */
     function initializeEventListeners() {
-      themeToggle.addEventListener("click", toggleTheme);
+      // themeToggle.addEventListener("click", toggleTheme);
       // fontToggle.addEventListener("click", toggleFontFamily);
       dropdown.addEventListener("click", toggleNavigationDisplay);
     }
