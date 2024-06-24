@@ -71,7 +71,7 @@ html {
 body {
   hyphens: auto;
   min-height: 100vh;
-  background-color: rgb(var(--color4));
+  background-color: rgb(var(--color9));
   font-weight: 500;
   line-height: 1.25;
   color: rgb(var(--color1));
@@ -480,8 +480,7 @@ html.dark-mode .moon-icon {
   }
 
   .toc ul ul {
-    margin-left: 1rem;
-  }
+    margin-left: 1r;
 
   .toc a {
     text-decoration: none;
@@ -498,6 +497,10 @@ html.dark-mode .moon-icon {
 }
 
 @media (min-width: 1200px) {
+
+  body {
+    background-color: rgb(var(--color4));
+  }
 
 
   nav ul {
@@ -581,4 +584,5 @@ html.dark-mode .moon-icon {
   }
   
 
+}
 }
