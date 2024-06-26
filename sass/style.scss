@@ -19,8 +19,9 @@
 body {
   display: flex;
   flex-direction: column;
-  font-family: "Open Sans";
+  font-family: "Drafting* Mono";
   height: 100vh;
+  text-rendering: optimizeLegibility;
 }
 
 header{
@@ -86,7 +87,7 @@ article p{
 footer {
   border-top: 2px solid #000;
   display: flex;
-  padding: 2rem;
+  padding: 1.5rem;
   justify-content: space-between;
 }
 
