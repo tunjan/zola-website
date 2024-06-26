@@ -117,4 +117,20 @@ footer {
   footer{
     padding: 1rem;
   }
+
+  #dropdown{
+    display: inline;
+    filter: invert(1);
+
+  }
+
+  nav ul{
+    display: none;
+  }
+
+  #topbar{
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 }
