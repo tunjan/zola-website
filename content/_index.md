@@ -2,8 +2,6 @@
 title  = 'Alberto Trigo'
 +++
 
-## About
-
 I very much enjoy learning and teaching science, mathematics, statistics and physics.
 Having tutored those subjects privately before, I always try to give the historical
 context behind concepts - why they were developed and what makes them so fascinating
