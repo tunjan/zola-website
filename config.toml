@@ -8,7 +8,6 @@ default_language = "en"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
-generate_feed = false
 
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
@@ -23,6 +22,6 @@ list_pages = true
 add_toc = true
 #list_pages = true
 author = "Alberto Trigo"
-header_nav = [{ name = "posts", url = "/posts" },
-{ name = "about", url = "/"}]
+header_nav = [{ name = "Posts", url = "/posts" },
+{ name = "About", url = "/"}]
 bottom_nav = []

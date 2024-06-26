@@ -13,7 +13,7 @@
     <span>
       <time datetime="{{ page.date }}">{{ page.date | date(format="%d %B %Y") }}</time>
       / {{ page.reading_time }} min read</span>
-    {% if page.updated %}<span class="tooltip">{{page.updated | date(format="%d %B %Y")}}</span> {% endif %}
+    <!-- {% if page.updated %}<span class="tooltip">{{page.updated | date(format="%d %B %Y")}}</span> {% endif %} -->
   </div>
   {{ page.content | safe }}
 

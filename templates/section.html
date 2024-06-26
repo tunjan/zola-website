@@ -4,22 +4,20 @@
 <!-- <h2>{{ section.title }}</h2> -->
 {% endif %} {{ section.content | safe }} {% if paginator %} {% set pages =
 paginator.pages %} {% else %} {% set pages = section.pages %} {% endif %}
-<article>
-  <ul>
-    {% for page in pages %}
-    <li style="display: flex;  padding-bottom: .25rem;">
-      <span style="min-width: 7.5rem">{{ page.date }} </span>
-      <a href=" {{ page.permalink | safe }}"> {{ page.title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-  <div class="pagination">
-    {% if paginator.previous %}
-    <a class="previous" href="{{ paginator.previous }}">‹ Previous</a>
-    {% endif %} {% if paginator.next %}
-    <a class="next" href="{{ paginator.next }}">Next ›</a>
-    {% endif %}
-  </div>
-</article>
+<ul>
+  {% for page in pages %}
+  <li style="display: flex;  padding-bottom: .25rem;">
+    <span style="min-width: 7.5rem">{{ page.date }} </span>
+    <a href=" {{ page.permalink | safe }}"> {{ page.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+<div class="pagination">
+  {% if paginator.previous %}
+  <a class="previous" href="{{ paginator.previous }}">‹ Previous</a>
+  {% endif %} {% if paginator.next %}
+  <a class="next" href="{{ paginator.next }}">Next ›</a>
+  {% endif %}
+</div>
 
 {% endblock content %}
