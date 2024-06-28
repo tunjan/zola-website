@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const html = document.documentElement;
   const themeToggle = document.getElementById("theme-toggle");
   const fontToggle = document.getElementById("font-toggle");
-  const nav = document.querySelector('header nav ul');
+  const nav = document.querySelector('nav ul');
   const dropdown = document.getElementById('dropdown');
 
   const storageKeys = {

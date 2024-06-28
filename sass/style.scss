@@ -19,7 +19,7 @@
 body {
   display: flex;
   flex-direction: column;
-  font-family: "DraftingMono";
+  font-family: "Source Sans 3", sans-serif;
   height: 100vh;
   text-rendering: optimizeLegibility;
 }
@@ -32,30 +32,29 @@ header{
 nav {
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
-  width: 80rem;
-  max-width: 80%;
   margin: 0 auto;
-  padding: 2rem 0;
+  max-width: 1200px;
+  width: 1200px;
+  padding: 1.375rem 1rem;
+  border-bottom: 1px solid black;
 }
 
 nav ul {
   display: flex;
   gap: 2rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
 main {
-  padding: 2rem 0;
   display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-  width: 80rem;
-  max-width: 80%;
   margin: 0 auto;
+  max-width: 1200px;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1.75rem;
   flex:1;
   line-height: 1.5;
-
+  font-size: 1.125rem;
 }
 
 main article {
@@ -98,6 +97,7 @@ footer {
 #title {
   font-size: 1.25rem;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 @media (max-width:1200px) {
@@ -114,7 +114,8 @@ footer {
     width: auto;
     padding: 1rem;
     max-width: 100%;
-    gap:1.25rem;
+    gap: 1rem;
+    font-size: 1rem;
   }
 
   footer{
@@ -136,102 +137,7 @@ footer {
     justify-content: space-between;
     width: 100%;
   }
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-Bold.woff2') format('woff2');
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-BoldItalic.woff2') format('woff2');
-  font-weight: bold;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-ExtraLight.woff2') format('woff2');
-  font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-ExtraLightItalic.woff2') format('woff2');
-  font-weight: 200;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-Italic.woff2') format('woff2');
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-LightItalic.woff2') format('woff2');
-  font-weight: 300;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono-MediumItalic.woff2') format('woff2');
-  font-weight: 500;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-SemiBold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-SemiBoldItalic.woff2') format('woff2');
-  font-weight: 600;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-Thin.woff2') format('woff2');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'DraftingMono';
-  src: url('DraftingMono/DraftingMono-ThinItalic.woff2') format('woff2');
-  font-weight: 100;
-  font-style: italic;
+  #title {
+    font-size: 1.125rem;
+  }
 }

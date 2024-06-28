@@ -76,36 +76,33 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
     rel="stylesheet">
 </head>
 
 <body>
-  <header>
-    <nav>
-      {% if title %}
-      <div id="topbar">
-        <a id="title" href="/">{{ config.title }}</a>
-        <button id="dropdown" aria-label="Toggle navigation" aria-expanded="false">
-          <img src="{{ get_url(path='hamburger.svg') }}" alt="Menu icon">
-        </button>
-      </div>
-      {% endif %}
+  <nav>
+    {% if title %}
+    <div id="topbar">
+      <a id="title" href="/">{{ config.title }}</a>
+      <button id="dropdown" aria-label="Toggle navigation" aria-expanded="false">
+        <img src="{{ get_url(path='hamburger.svg') }}" alt="Menu icon">
+      </button>
+    </div>
+    {% endif %}
 
-      {% if config.extra.header_nav %}
-      <ul>
-        {% for nav_item in config.extra.header_nav %}
-        <li>
-          <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %} target="_blank" rel="noreferrer noopener" {%
-            endif %}>
-            {{ nav_item.name }}
-          </a>
-        </li>
-        {% endfor %}
-        {% endif %}
-    </nav>
-  </header>
+    {% if config.extra.header_nav %}
+    <ul>
+      {% for nav_item in config.extra.header_nav %}
+      <li>
+        <a href="{{ nav_item.url | safe }}" {% if nav_item.new_tab %} target="_blank" rel="noreferrer noopener" {% endif
+          %}>
+          {{ nav_item.name }}
+        </a>
+      </li>
+      {% endfor %}
+      {% endif %}
+  </nav>
 
   <main>
     {% block content %}
