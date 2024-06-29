@@ -5,7 +5,7 @@
   --bg-color: transparent;
   --font-family: "Poppins", sans-serif;
   --max-width: 1200px;
-  --gap-large: 2rem;
+  --gap-large: 2.5rem;
   --gap-medium: 1.5rem;
   --gap-small: 1rem;
   --line-height: 1.5;
@@ -29,8 +29,8 @@ body {
   font-family: var(--font-family);
   height: 100vh;
   text-rendering: optimizeLegibility;
-  background-color: #faf6ef;
-  color: var(--text-color);
+  background-color: #fffbf5;
+    color: var(--text-color);
 }
 
 /* Header styles */
@@ -47,6 +47,9 @@ nav {
   margin: 0 auto;
   max-width: var(--max-width);
   padding: var(--gap-medium);
+  color: white;
+  font-size: 1.25rem;
+
 }
 
 nav ul {
@@ -113,11 +116,13 @@ article .post-meta {
   flex-direction: column;
   gap: var(--gap-medium);
   padding-bottom: var(--gap-medium);
-  border-bottom: 1px solid grey;
+  color: #626D79;
 }
 
-.post-meta h1 {
+article .post-meta h1 {
   text-decoration: none;
+  font-size: 2rem;
+  color: black;
 }
 
 /* Link styles */
@@ -140,14 +145,14 @@ footer {
   align-items: center;
   padding: var(--gap-medium);
   background-color: white;
-  border-top: 2px solid var(--text-color);
+  border-top: 1px solid #05192D1A;
 }
 
 /* Responsive design */
 @media (max-width: 1200px) {
   nav {
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     padding: var(--gap-small);
     gap:1rem;
   }
@@ -180,6 +185,7 @@ footer {
 
   article .post-meta {
     gap: 1.25rem;
+    padding-bottom: 0;
   }
   #topbar {
     display: flex;
