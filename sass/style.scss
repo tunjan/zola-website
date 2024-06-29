@@ -97,8 +97,8 @@ main article {
 }
 
 /* Article heading styles */
-article :is(h1, h2, h3, h4, h5, h6) {
-  margin-bottom: -1rem;
+main :is(h1, h2, h3, h4, h5, h6) {
+  margin-bottom: -.75rem;
   text-decoration: none;
   text-decoration-color: var(--secondary-color);
   text-decoration-thickness: 4px;
@@ -159,7 +159,7 @@ footer {
   }
 
   main {
-    padding: var(--gap-small);
+    padding: var(--gap-medium);
     font-size: 1rem;
   }
 
@@ -170,6 +170,7 @@ footer {
   #title {
     font-size: 1.125rem;
   }
+
 
   article .post-meta {
     gap: 1.25rem;
