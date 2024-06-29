@@ -46,7 +46,6 @@ nav {
   align-items: center;
   margin: 0 auto;
   max-width: var(--max-width);
-  width: 100%;
   padding: var(--gap-medium);
 }
 
@@ -82,7 +81,6 @@ main {
   flex-direction: column;
   margin: 0 auto;
   max-width: var(--max-width);
-  width: 100%;
   padding: var(--gap-large);
   gap: 1.75rem;
   flex: 1;
@@ -175,5 +173,10 @@ footer {
 
   article .post-meta {
     gap: 1.25rem;
+  }
+  #topbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 }
