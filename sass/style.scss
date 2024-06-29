@@ -15,18 +15,24 @@
   border: none
 }
 
+article :is(h1, h2, h3, h4, h5, h6) {
+  margin-bottom: -1rem;
+  text-decoration: underline;
+  text-decoration-color: #cbfa10;
+  text-decoration-thickness: 4px;
+}
+
 
 body {
   display: flex;
   flex-direction: column;
-  font-family: "Source Sans 3", sans-serif;
+  font-family: "Poppins", sans-serif;
   height: 100vh;
   text-rendering: optimizeLegibility;
 }
 
 header{
   background-color: rgb(255, 255, 255);
-  border-bottom: 2px solid black;
 }
 
 nav {
@@ -35,8 +41,7 @@ nav {
   margin: 0 auto;
   max-width: 1200px;
   width: 1200px;
-  padding: 1.375rem 1rem;
-  border-bottom: 1px solid black;
+  padding: 1.5rem;
 }
 
 nav ul {
@@ -49,6 +54,7 @@ main {
   display: flex;
   margin: 0 auto;
   max-width: 1200px;
+  width: 1200px;
   flex-direction: column;
   padding: 1.5rem;
   gap: 1.75rem;
@@ -68,15 +74,26 @@ main article {
 main a {
   text-decoration: underline;
   text-underline-offset: 2px;
-  font-weight: 500;
+  font-weight: 400;
+  text-decoration-color: #b717e8;
+  text-underline-offset: 4px;
+}
+
+main a:hover {
+  color: #b717e8;
+  text-decoration: none;
 }
 
 article .post-meta{
   display: flex;
   flex-direction: column;
-  gap:.725rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid black;
+  gap: 1.5rem;
+  border-bottom: 1px solid grey;
+}
+
+.post-meta h1{
+  text-decoration: none;
 }
 
 article p{
@@ -97,7 +114,7 @@ footer {
 #title {
   font-size: 1.25rem;
   font-weight: 600;
-  text-transform: uppercase;
+  border-bottom: 2px solid #b717e8;
 }
 
 @media (max-width:1200px) {
@@ -140,4 +157,10 @@ footer {
   #title {
     font-size: 1.125rem;
   }
+
+  article .post-meta{
+
+    gap: 1.25rem;
+  }
+  
 }
