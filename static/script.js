@@ -39,17 +39,14 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   const getStoredFontFamily = () => localStorage.getItem(storageKeys.fontFamily);
 
-  /**
-   * Applies the dark mode filter to specified elements.
-   * @param {boolean} isDarkMode - The current dark mode status.
-   */
+/* 
   function updateElementFilters(isDarkMode) {
     [dropdown.querySelector('img')].forEach(element => {
       if (element) {
         element.style.filter = isDarkMode ? 'invert(0)' : 'invert(1)';
       }
     });
-  }
+  } */
 
   /**
    * Initializes the theme based on the stored settings.

@@ -1,14 +1,14 @@
 :root {
-  --primary-color: #0075ad;
+  --primary-color: #084ccf;
   --secondary-color: #cbfa10;
-  --text-color: black;
+  --text-color: #4b5361;
   --bg-color: transparent;
   --font-family: "Poppins", sans-serif;
   --max-width: 1200px;
   --gap-large: 2.5rem;
   --gap-medium: 1.5rem;
   --gap-small: 1rem;
-  --line-height: 1.5;
+  --line-height: 1.625;
 }
 
 /* Global reset */
@@ -29,14 +29,8 @@ body {
   font-family: var(--font-family);
   height: 100vh;
   text-rendering: optimizeLegibility;
-  background-color: #fffbf5;
-    color: var(--text-color);
-}
-
-/* Header styles */
-header {
-  background-color: #05192d;
-  border-bottom: 1px solid rgba(5, 25, 45, 0.15);
+  background-color: #f6f5f0;
+  color: var(--text-color);
 }
 
 /* Navigation styles */
@@ -47,21 +41,18 @@ nav {
   margin: 0 auto;
   max-width: var(--max-width);
   padding: var(--gap-medium);
-  color: white;
-  font-size: 1.25rem;
 
+}
+
+nav a {
+  color: inherit;
 }
 
 nav ul {
   display: flex;
   gap: var(--gap-large);
-  font-size: 1.25rem;
-  font-weight: 500;
 }
 
-nav ul a {
-  color: white;
-}
 
 /* Dropdown menu for smaller screens */
 #dropdown {
@@ -73,11 +64,16 @@ nav ul a {
   height: 20px;
 }
 
-#title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: white;
+#title{
+  background-color: #dde4f1;
+  border: 1px solid #a8bee9;
+  color:#084ccf;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
 }
+
 
 /* Main content styles */
 main {
@@ -89,14 +85,13 @@ main {
   gap: 1.75rem;
   flex: 1;
   line-height: var(--line-height);
-  font-size: 1.125rem;
 }
 
 main article {
   display: flex;
   flex-direction: column;
   gap: var(--gap-large);
-  max-width: 50rem;
+  max-width: 48rem;
   margin: 0 auto;
 }
 
@@ -108,7 +103,8 @@ main :is(h1, h2, h3, h4, h5, h6) {
   text-decoration-thickness: 4px;
 }
 main :is(h1, h2, h3, h4, h5, h6) {
-  font-weight: 600;
+  font-weight: inherit;
+  color:var(--primary-color)
 }
 
 article .post-meta {
@@ -116,13 +112,12 @@ article .post-meta {
   flex-direction: column;
   gap: var(--gap-medium);
   padding-bottom: var(--gap-medium);
-  color: #626D79;
 }
 
 article .post-meta h1 {
   text-decoration: none;
-  font-size: 2rem;
-  color: black;
+  font-size: 4rem;
+  font-weight: 300;
 }
 
 /* Link styles */
@@ -171,7 +166,6 @@ footer {
 
   main {
     padding: var(--gap-medium);
-    font-size: 1rem;
   }
 
   footer {
