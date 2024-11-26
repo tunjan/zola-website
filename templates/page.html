@@ -7,13 +7,15 @@
 
   <div class="content">
     <div class="post-meta">
+ <span id="reading-time">
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+        <!--/ {{ page.reading_time }} min read-->
+ </span>
+
       {% if page.title %}
-      <h1>{{ page.title }}</h1>
-      {% endif %}
-      <span>
-        <time datetime="{{ page.date }}">{{ page.date | date(format="%d %B %Y") }}</time>
-        / {{ page.reading_time }} min read</span>
-      {% if page.updated %}<span class="tooltip">{{page.updated | date(format="%d %B %Y")}}</span> {% endif %}
+      <h1 id="page-title">{{ page.title }}</h1>
+      <!--{% endif %}-->
+      <!--     {% if page.updated %}<span class="tooltip">{{page.updated | date(format="%d %B %Y")}}</span> {% endif %}-->
     </div>
     {{ page.content | safe }}
 
@@ -41,27 +43,27 @@
 
   <div class="metadata">
 
-    {% if page.toc and page.extra.add_toc %}
-    <div class="toc">
-      <h1>Table of contents</h1>
-      <ul>
-        {% for h1 in page.toc %}
-        <li>
-          <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
-          {% if h1.children %}
-          <ul>
-            {% for h2 in h1.children %}
-            <li>
-              <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
-            </li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
+    <!--{% if page.toc and page.extra.add_toc %}-->
+    <!--<div class="toc">-->
+    <!--  <h1>Table of contents</h1>-->
+    <!--  <ul>-->
+    <!--    {% for h1 in page.toc %}-->
+    <!--    <li>-->
+    <!--      <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>-->
+    <!--      {% if h1.children %}-->
+    <!--      <ul>-->
+    <!--        {% for h2 in h1.children %}-->
+    <!--        <li>-->
+    <!--          <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>-->
+    <!--        </li>-->
+    <!--        {% endfor %}-->
+    <!--      </ul>-->
+    <!--      {% endif %}-->
+    <!--    </li>-->
+    <!--    {% endfor %}-->
+    <!--  </ul>-->
+    <!--</div>-->
+    <!--{% endif %}-->
   </div>
 
 
