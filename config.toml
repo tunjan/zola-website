@@ -1,12 +1,9 @@
 # The URL the site will be built for
 title = "Alberto Trigo"
 base_url = "https://albertotrigo.eu"
-theme = "no-style-please"
-description = "My personal website"
+description = ""
 default_language = "en"
-
-
-# Whether to automatically compile all Sass files in the sass directory
+author = "Alberto Trigo"
 compile_sass = true
 
 # Whether to build a search index to be used later on by a JavaScript library
@@ -25,3 +22,9 @@ author = "Alberto Trigo"
 header_nav = [{ name = "posts", url = "/posts" },
 { name = "about", url = "/"}]
 bottom_nav = []
+
+[extra.profile]
+avatar_url = "icons/github.svg"
+[[extra.profile.social]]
+name = "github"
+url = "https://github.com/tunjan"
