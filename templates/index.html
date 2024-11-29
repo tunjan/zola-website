@@ -1,20 +1,26 @@
 {% extends "base.html" %}
+{% block main %}
+<div class="index-page">
+<h1>About</h1>
+
+<p>I teach mathematics and physics at the International Baccalaureate level. You can arrange a tutoring session in <a  href="{{ get_url(path="@/classes.md") }}">this</a> page.</p>
+
+<h1  class="mt-14">Contact</h1>
+
+<p>Feel free to contact me through <a class="" href= "mailto: contact@albertotrigo.eu">email</a> or <a href="https://mathstodon.xyz/@tunjan">mastodon</a></p>
+
+{{ section.content | safe }}
+
+{% if config.extra.list_pages %}
+<h1 class="mt-14">Posts</h1>
+<ul>
+  {% set posts = get_section(path="posts/_index.md") %} {% for page in posts.pages | slice(end=10) %} <li class="flex justify-between">
+    <a href="{{ page.permalink }}">{{ page.title }}</a> <span>{{ page.date }}</span>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+</div>
 
 
-{% block content %}
-
-        {{ section.content | safe }}
-
-        {% if config.extra.list_pages %}
-        <h2>Posts</h2>
-        <ul>
-            {% set posts = get_section(path="posts/_index.md") %} {% for page in posts.pages | slice(end=10) %} <li style="display:flex; justify-content:space-between">
-              <a href="{{ page.permalink }}">{{ page.title }}</a> <span>{{ page.date }}</span>
-            </li>
-            {% endfor %}
-            </ul>
-            {% endif %}
-
-
-
-    {% endblock content %}
+{% endblock main %}

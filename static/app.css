@@ -1,0 +1,13 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.index-page h1 {
+    @apply text-4xl mb-10;
+}
+
+.index-page a {
+    @apply underline decoration-2 underline-offset-4;
+}

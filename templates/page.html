@@ -1,95 +1,38 @@
 {% extends "base.html" %}
-{% block header %}{{ page.title }}{% endblock header
-%} {% block content %}
+{% block main %}
+<article class="max-w-3xl mx-auto prose-lg prose-img:rounded-lg prose-a:underline ">
+  <!-- Page Start inject -->
+  {% include "injects/page_start.html" ignore missing %}
 
-<article>
+  <header class="mb-16 my-20 text-center">
+    <time class="text-sm antialiased ">{{ page.date | date(format="%B %d, %Y") }}</time>
 
+    <h1 class="pb-2.5 my-2 text-7xl ">{{ page.title }}</h1>
+  </header>
 
-<div class="content">
-<div class="post-meta">
- <span id="reading-time">
-        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
-        <!--/ {{ page.reading_time }} min read-->
- </span>
+  {% if page.extra.cover.image %}
+  <figure class="mb-12 mt-0">
+    <img
+      class="h-auto w-full rounded-lg"
+      src="{{ get_url(path=page.extra.cover.image) }}"
+      alt="{{ page.extra.cover.alt | default(value='cover') }}"
+    />
+  </figure>
+  {% endif %}
 
-      {% if page.title %}
-      <h1 id="page-title">{{ page.title }}</h1>
-      <!--{% endif %}-->
-      <!--     {% if page.updated %}<span class="tooltip">{{page.updated | date(format="%d %B %Y")}}</span> {% endif %}-->
-    </div>
-    {{ page.content | safe }}
+  <!-- Content -->
+  <section class="text-xl prose dark:prose-invert">{{ page.content | safe }}</section>
 
-    <div class="bottom">
-      <p class="taxonomies">
-        {% if page.taxonomies.tags %} {% for tag in page.taxonomies.tags %}
-        <a href="/tags/{{ tag | slugify }}">#{{ tag }}</a>
-        {% endfor %} {% endif %}
-      </p>
+  <!-- Post Taxonomies -->
+  <!-- Post Nav -->
+  {% include "partials/post_navigation.html" %}<!---->
 
-      {% if page.backlinks %}
-      <h2>Backlinks</h2>
-      <ul>
-        {% for backlink in page.backlinks %}
-        <li>
-          <a href="{{ backlink.permalink }}">[[ {{ backlink.title }} ]]</a>
-        </li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-    </div>
+  <!-- Comment -->
+  {% if page.extra.comment | default(value=config.extra.comment) %}<!---->
+  {% include "partials/comment.html" %}<!---->
+  {% endif %}
 
-    <div id="remark42"></div>
-  </div>
-
-  <div class="metadata">
-
-    <!--{% if page.toc and page.extra.add_toc %}-->
-    <!--<div class="toc">-->
-    <!--  <h1>Table of contents</h1>-->
-    <!--  <ul>-->
-    <!--    {% for h1 in page.toc %}-->
-    <!--    <li>-->
-    <!--      <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>-->
-    <!--      {% if h1.children %}-->
-    <!--      <ul>-->
-    <!--        {% for h2 in h1.children %}-->
-    <!--        <li>-->
-    <!--          <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>-->
-    <!--        </li>-->
-    <!--        {% endfor %}-->
-    <!--      </ul>-->
-    <!--      {% endif %}-->
-    <!--    </li>-->
-    <!--    {% endfor %}-->
-    <!--  </ul>-->
-    <!--</div>-->
-    <!--{% endif %}-->
-  </div>
-
+  <!-- Page End inject -->
+  {% include "injects/page_end.html" ignore missing %}
 </article>
-
-<script>
-  var remark_config = {
-    host: "https://remark42.albertotrigo.eu",
-    site_id: "albertotrigo",
-    components: ["embed"],
-    theme: localStorage.getItem("theme")
-      ? localStorage.getItem("theme")
-      : "light",
-  };
-</script>
-<script>
-  !(function (e, n) {
-    for (var o = 0; o < e.length; o++) {
-      var r = n.createElement("script"),
-        c = ".js",
-        d = n.head || n.body;
-      "noModule" in r ? ((r.type = "module"), (c = ".mjs")) : (r.async = !0),
-        (r.defer = !0),
-        (r.src = remark_config.host + "/web/" + e[o] + c),
-        d.appendChild(r);
-    }
-  })(remark_config.components || ["embed"], document);
-</script>
-
-{% endblock content %}
+{% endblock main %}

@@ -1,23 +1,10 @@
-{% extends "base.html" %} {% block header %} {#
-<p><a href="{{ section.path }}..">..</a>{{ section.path }}</p>
-#} {% endblock header %} {% block content %} {% if section.title %}
-<!-- <h2>{{ section.title }}</h2> -->
-{% endif %} {{ section.content | safe }} {% if paginator %} {% set pages =
-paginator.pages %} {% else %} {% set pages = section.pages %} {% endif %}
-<ul>
-  {% for page in pages %}
-  <li style="display: flex; gap:1rem; padding-bottom: .25rem;">
-    <span style="min-width: 7.5rem">{{ page.date }} </span>
-    <a href=" {{ page.permalink | safe }}"> {{ page.title }}</a>
-  </li>
-  {% endfor %}
-</ul>
-<nav class="pagination">
-  {% if paginator.previous %}
-  <a class="previous" href="{{ paginator.previous }}">‹ Previous</a>
-  {% endif %} {% if paginator.next %}
-  <a class="next" href="{{ paginator.next }}">Next ›</a>
-  {% endif %}
-</nav>
+{% extends "base.html" %}
+bg-slate-200
+{% block main %}
+<div class="mx-auto">
+<h1 class="mb-16 text-4xl">{{ section.title }}</h1>
+</div>
+{% include "partials/page_list.html" %}
 
-{% endblock content %}
+
+{% endblock main %}

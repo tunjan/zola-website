@@ -4,22 +4,22 @@
 <html lang="{{ lang }}">
   {% include "partials/head.html" %}
 
-<body>
+<body class="flex flex-col text-2xl  min-h-screen mx-4 dark:bg-black dark:text-white">
 
   {% include "partials/header.html" %}
 
-    <main>
+    <main class="flex grow w-full max-w-5xl flex-col justify-center mx-auto">
 
-      {% block content %}
+      {% block main %}
 
-      {% endblock content %}
+      <h1>what is this</h1>
+
+      {% endblock %}
 
     </main>
 
-    <footer>
-      <div>Alberto Trigo Medina © 2024</div>
-      <div>BY-NC-SA 4.0</div>
-    </footer>
+    {% include "partials/footer.html" %}
+
 </body>
 
 </html>

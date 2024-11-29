@@ -2,8 +2,11 @@
 module.exports = {
   content: ["./templates/**/*.html"],
   theme: {
+    fontFamily: {
+      'sans': ['Inter']
+    },
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 }
 
