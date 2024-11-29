@@ -1,6 +1,6 @@
 +++
 title = "Classes"
-template = "class.html"
+template = "classes.html"
 date= "2024-05-05"
 +++
 
