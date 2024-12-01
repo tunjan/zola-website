@@ -1,9 +1,13 @@
-<header class="text-xl">
-    <nav class="flex mx-auto justify-between my-4 max-w-5xl">
-    {% if config.title %}
-      <a class="title" href="/">{{ config.title }}</a>
-    {% endif %}
-
+<header class="text-lg md:text-xl border-gray-200 p-4 md:p-4">
+    <nav class="flex mx-auto justify-between max-w-5xl items-center gap-10">
+      <a class="title hidden md:inline" href="/">Alberto Trigo</a>
+    <div class="relative w-28">
+      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 w-5 h-5 text-gray-500 dark:text-gray-400">   <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /> </svg>
+      </div>
+      <input type="text" class="text-sm h-8 bg-bark text-forest rounded-lg  block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search">
+    </div>
+  
     {% if config.extra.header_nav %}
       <ul class="flex gap-4">
         {% for nav_item in config.extra.header_nav %}

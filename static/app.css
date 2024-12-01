@@ -5,9 +5,9 @@
 @tailwind utilities;
 
 .index-page h1 {
-    @apply text-4xl mb-10;
+    @apply text-2xl lg:text-4xl mb-10;
 }
 
 .index-page a {
-    @apply underline decoration-2 underline-offset-4;
+    @apply underline decoration-1 underline-offset-2;
 }

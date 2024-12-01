@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block main %}
-<article class="max-w-3xl mx-auto  ">
+<article class="max-w-4xl mx-auto">
   <!-- Page Start inject -->
   {% include "injects/page_start.html" ignore missing %}
 
-  <header class="mb-16 my-20 text-center">
+  <header class="mb-16 mt-16 text-center">
     <time class="text-sm antialiased ">{{ page.date | date(format="%B %d, %Y") }}</time>
 
     <h1 class="pb-2.5 my-2 text-4xl lg:text-7xl">{{ page.title }}</h1>
@@ -21,7 +21,7 @@
   {% endif %}
 
   <!-- Content -->
-  <section class="prose prose-zinc dark:prose-invert prose-lg prose-img:rounded-lg prose-a:underline">{{ page.content | safe }}</section>
+  <section class="prose prose-lg prose-headings:text-bark text-bark dark:prose-invert lg:prose-xl prose-img:rounded-lg prose-a:underline">{{ page.content | safe }}</section>
 
   <!-- Post Taxonomies -->
   <!-- Post Nav -->

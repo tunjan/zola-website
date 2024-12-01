@@ -11,7 +11,7 @@
 
 {% for page in pages %}
 <section
-  class="block-bg relative mb-4 rounded-lg p-4 first-of-type:mt-0 last-of-type:mb-0 lg:mb-6 lg:p-6"
+  class="mb-4 p-4 first-of-type:mt-0 last-of-type:mb-0 lg:mb-6 lg:p-6 border-b border-gray-400/50"
 >
   {% if page.extra.cover.image %}
   <figure class="mb-4 mt-0">
@@ -24,7 +24,7 @@
   {% endif %}<!---->
 
   <a class="" href="{{ page.permalink }}">{{ page.title }}</a>
-  <div class="not-prose my-1 truncate">
+  <div class="not-prose my-1 truncate ">
     {% if page.description %}
     <p>{{ page.description }}</p>
     {% elif page.summary %}<!---->
