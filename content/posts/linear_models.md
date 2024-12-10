@@ -3,7 +3,7 @@ author = 'Alberto Trigo'
 title = "Linear Models"
 date = 2024-06-16
 draft = false
-updated = 2024-02-06
+description = "An adventure"
 [extra]
 math = true
 +++

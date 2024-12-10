@@ -1,8 +1,8 @@
-<div class="text-sm antialiased opacity-60 font-sans">
+<div class="text antialiased opacity-60 font-sans text-lg w-56">
     {% if page.date %}
-    <time>{{ page.date | date }}</time>
-    <span class="mx-1">&middot;</span>
-    <span>{{ page.reading_time }}min</span>
+    <time>{{ page.date | date(format="%B %d, %Y") }}</time>
+    <!-- <span class="mx-1">&middot;</span>
+    <span>{{ page.reading_time }}min</span> -->
     {% endif %}<!---->
     {% if page.authors | length > 0 %}<!---->
     {% set author = page.authors | join(sep=", ") %}<!---->
@@ -10,8 +10,8 @@
     {% set author = config.author %}<!---->
     {% endif %}<!---->
     {% if author %}
-    <span class="mx-1">&middot;</span>
-    <span>{{ author }}</span>
+    <!-- <span class="mx-1">&middot;</span> -->
+    <!-- <span>{{ author }}</span> -->
     {% endif %}
     <!-- Page Info inject -->
     {% include "injects/page_info.html" ignore missing %}

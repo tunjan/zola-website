@@ -4,7 +4,7 @@ module.exports = {
   content: ["./templates/**/*.html"],
   theme: {
     fontFamily: {
-      'sans': ['IBM Plex Sans'],
+      'sans': ['Inter'],
       'serif': ['IBM Plex Serif']
 
     },

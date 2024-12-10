@@ -17,10 +17,9 @@ smart_punctuation = true
 [extra]
 list_pages = true
 add_toc = true
-#list_pages = true
 author = "Alberto Trigo"
-header_nav = [{ name = "posts", url = "/posts" },
-{ name = "about", url = "/"}]
+header_nav = [{ name = "Blog", url = "/posts" },
+{ name = "Home", url = "/"}]
 bottom_nav = []
 
 [extra.profile]

@@ -3,7 +3,6 @@ author = 'Alberto Trigo'
 title = "Test page"
 draft = false
 date = 2024-05-26
-updated = 2024-06-10
 toc  = true
 [taxonomies]
 tags=["tests"]
