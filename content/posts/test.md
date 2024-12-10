@@ -1,14 +1,16 @@
 +++
 author = 'Alberto Trigo'
-title = "Test page"
+title = "Test page for testing"
 draft = false
 date = 2024-05-26
 toc  = true
+description = "Only a test"
 [taxonomies]
 tags=["tests"]
 [extra]
 math = true
 add_toc = true
+cover.image = "photo2.jpg"
 +++
 
 Ut suscipit felis vel molestie pulvinar. Etiam at velit elit. Vestibulum faucibus hendrerit maximus. Etiam mattis, augue a condimentum sodales, massa libero pulvinar magna, non placerat enim mi sed neque. Sed ac sapien a elit sollicitudin cursus ac vitae nibh. Donec massa ligula, tincidunt eget pulvinar ut, pulvinar eget enim. Nullam non turpis eget justo commodo fermentum eu id nisl. Sed a interdum magna, non lacinia nibh. Sed vel lorem laoreet, tempor leo at, faucibus turpis. Pellentesque pulvinar pellentesque mi vel commodo. Etiam egestas pharetra pretium.

@@ -1,6 +1,6 @@
 +++
 author = 'Alberto Trigo'
-title = "Linear Models"
+title = "On the class of facts that affect information distribution"
 date = 2024-06-16
 draft = false
 description = "An adventure"
