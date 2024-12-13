@@ -1,28 +1,23 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require('tailwindcss/colors')
 module.exports = {
   content: ["./templates/**/*.html"],
   theme: {
     fontFamily: {
-      'sans': ['Inter'],
-      'serif': ['IBM Plex Serif']
-
+      sans: ["IBM Plex Sans"],
+      serif: ["IBM Plex Serif"],
     },
-    colors: {
-      'forest': '#2f3c1d',
-      'bark': '#fdf8db',
-      transparent: 'transparent',
-      current: 'currentColor',
-      black: colors.black,
-      white: colors.white,
-      gray: colors.gray,
-      emerald: colors.emerald,
-      indigo: colors.indigo,
-      yellow: colors.yellow,
-
+    extend: {
+      animation: {
+        "search-icon": "search-icon 0.8s ease-in-out",
+      },
+      keyframes: {
+        "search-icon-animation": {
+          "0%": { transform: "rotate(0deg) scale(1)" },
+          "50%": { transform: "rotate(10deg) scale(1.1)" },
+          "100%": { transform: "rotate(0deg) scale(1)" },
+        },
+      },
     },
-    extend: {},
   },
   plugins: [require("@tailwindcss/typography")],
-}
-
+};

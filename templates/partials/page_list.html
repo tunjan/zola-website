@@ -7,29 +7,27 @@
 {% set pages = section.pages %}<!---->
 {% endif %}<!---->
 
-
 {% for page in pages %}
-<section class="font-sans py-6 first-of-type:mt-0 last-of-type:mb-0 lg:py-12 border-t border-gray-400/50 flex flex-col gap-4 md:flex-row-reverse md:justify-end">
-
-
-  <a class="text-xl md:text-2xl hover:text-gray-500" href="{{ page.permalink }}">{{ page.title }}
-  <div class="not-prose text-lg opacity-60 my-1 truncate ">
-    {% if page.description %}
-    <p class="italic">{{ page.description }}</p>
-    {% elif page.summary %}<!---->
-    {{ page.summary | striptags | safe }}<!---->
-    {% endif %}
-  </div></a>
+<section
+  class="flex flex-col gap-4 border-t border-gray-400/50 py-6 font-sans first-of-type:mt-0 last-of-type:mb-0 md:flex-row-reverse md:justify-end lg:py-12"
+>
+  <a class="text-xl hover:text-gray-500 md:text-2xl" href="{{ page.permalink }}"
+    >{{ page.title }}
+    <div class="not-prose my-1 truncate text-lg opacity-60">
+      {% if page.description %}
+      <p class="italic">{{ page.description }}</p>
+      {% elif page.summary %}<!---->
+      {{ page.summary | striptags | safe }}<!---->
+      {% endif %}
+    </div></a
+  >
   {% include "partials/page_info.html" %}
-<!--   {% if page.extra.cover.image %}
+  <!--   {% if page.extra.cover.image %}
   <figure class="ml-auto">
     <img class="w-60 rounded-md" src="{{ get_url(path=page.extra.cover.image) }}"
       alt="{{ page.extra.cover.alt | default(value='cover') }}" />
   </figure>
   {% endif %} -->
-
-
-
 </section>
 {% endfor %}
 
@@ -37,12 +35,18 @@
 {% if paginator is defined %}
 <nav class="mt-16 flex">
   {% if paginator.previous %}
-  <a class="rounded-full bg-black px-4 py-3 text-sm text-white no-underline shadow duration-100 active:scale-95 dark:bg-white/80 dark:text-black"
-    href="{{ paginator.previous }}">← Prev Page</a>
+  <a
+    class="rounded-full bg-black px-4 py-3 text-sm text-white no-underline shadow duration-100 active:scale-95 dark:bg-white/80 dark:text-black"
+    href="{{ paginator.previous }}"
+    >← Prev Page</a
+  >
   {% endif %}<!---->
   {% if paginator.next %}
-  <a class="ml-auto rounded-full bg-black px-4 py-3 text-sm text-white no-underline shadow duration-100 active:scale-95 dark:bg-white/80 dark:text-black"
-    href="{{ paginator.next }}">Next Page →</a>
+  <a
+    class="ml-auto rounded-full bg-black px-4 py-3 text-sm text-white no-underline shadow duration-100 active:scale-95 dark:bg-white/80 dark:text-black"
+    href="{{ paginator.next }}"
+    >Next Page →</a
+  >
   {% endif %}
 </nav>
 {% endif %}

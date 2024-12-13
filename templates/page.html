@@ -1,13 +1,14 @@
-{% extends "base.html" %}
-{% block main %}
-<article class=" max-w-full md:max-w-4xl mx-auto">
+{% extends "base.html" %} {% block main %}
+<article class="mx-auto max-w-full md:max-w-4xl">
   <!-- Page Start inject -->
   {% include "injects/page_start.html" ignore missing %}
 
   <header class="mb-16 mt-16 text-center">
-    <time class="text-sm antialiased ">{{ page.date | date(format="%B %d, %Y") }}</time>
+    <time class="text-base antialiased"
+      >{{ page.date | date(format="%B %d, %Y") }}</time
+    >
 
-    <h1 class="pb-2.5 my-2 text-4xl lg:text-7xl">{{ page.title }}</h1>
+    <h1 class="my-2 pb-2.5 text-4xl lg:text-7xl">{{ page.title }}</h1>
   </header>
 
   {% if page.extra.cover.image %}
@@ -21,7 +22,11 @@
   {% endif %}
 
   <!-- Content -->
-  <section class="prose prose-lg prose-headings:text-black text-black dark:prose-invert lg:prose-xl prose-img:rounded-lg prose-a:underline">{{ page.content | safe }}</section>
+  <section
+    class="prose prose-lg text-black lg:prose-xl dark:prose-invert prose-headings:text-black prose-a:underline prose-img:rounded-lg"
+  >
+    {{ page.content | safe }}
+  </section>
 
   <!-- Post Taxonomies -->
   <!-- Post Nav -->

@@ -1,25 +1,51 @@
 {% import "macros.html" as macros %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ lang }}">
   {% include "partials/head.html" %}
 
-<body class="bg-white text-black flex flex-col text-lg md:text-xl min-h-screen dark:bg-black dark:text-white font-sans selection:bg-gray-200">
+  <body
+    class="flex min-h-screen flex-col bg-gray-50 font-sans text-lg text-black selection:bg-gray-200 md:text-xl dark:bg-black dark:text-white"
+  >
+    {% include "partials/header.html" %}
 
-  {% include "partials/header.html" %}
-
-    <main class="p-6 md:p-8 lg:p-0 lg:mt-8 flex grow w-full max-w-5xl flex-col mx-auto">
-
+    <main
+      id="main"
+      class="lg-pd-8 mx-auto flex w-full max-w-5xl grow flex-col rounded-lg p-6 align-middle md:justify-center lg:mt-8 lg:p-0"
+    >
       {% block main %}
 
       <h1>what is this</h1>
 
       {% endblock %}
-
     </main>
 
     {% include "partials/footer.html" %}
+    <script>
+      const header = document.getElementById("header");
+      const main = document.getElementById("main");
 
-</body>
+      let lastScrollY = window.scrollY; // Track last scroll position
+      const headerHeight = header.offsetHeight; // Get header's height
 
+      // Set the initial margin-top for the main content based on the header height
+      main.style.marginTop = `${headerHeight}px`;
+
+      window.addEventListener("scroll", () => {
+        const currentScrollY = window.scrollY;
+
+        // Check if the user is scrolling down or up
+        if (currentScrollY > lastScrollY) {
+          // Scrolling down - hide the header
+          header.classList.add("transform", "-translate-y-full");
+        } else {
+          // Scrolling up - show the header
+          header.classList.remove("transform", "-translate-y-full");
+        }
+
+        // Update last scroll position
+        lastScrollY = currentScrollY;
+      });
+    </script>
+  </body>
 </html>

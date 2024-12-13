@@ -1,10 +1,9 @@
-{% extends "base.html" %}
-bg-slate-200
-{% block main %}
+{% extends "base.html" %} bg-slate-200 {% block main %}
 <div class="">
-<h1 class="font-serif italic mb-6 md:mb-14 text-4xl lg:text-5xl">{{ section.title }}</h1>
-{% include "partials/page_list.html" %}
+  <h1 class="my-6 font-serif text-4xl italic md:mb-14 lg:text-5xl">
+    {{ section.title }}
+  </h1>
+  {% include "partials/page_list.html" %}
 </div>
-
 
 {% endblock main %}

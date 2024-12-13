@@ -1,18 +1,20 @@
-<div class="text antialiased opacity-60 font-sans text-right md:text-left text-base md:w-40 w-full">
-    {% if page.date %}
-    <time>{{ page.date | date(format="%B %d, %Y") }}</time>
-    <!-- <span class="mx-1">&middot;</span>
+<div
+  class="text w-full text-right font-sans text-base antialiased opacity-60 md:w-40 md:text-left"
+>
+  {% if page.date %}
+  <time>{{ page.date | date(format="%B %d, %Y") }}</time>
+  <!-- <span class="mx-1">&middot;</span>
     <span>{{ page.reading_time }}min</span> -->
-    {% endif %}<!---->
-    {% if page.authors | length > 0 %}<!---->
-    {% set author = page.authors | join(sep=", ") %}<!---->
-    {% else %}<!---->
-    {% set author = config.author %}<!---->
-    {% endif %}<!---->
-    {% if author %}
-    <!-- <span class="mx-1">&middot;</span> -->
-    <!-- <span>{{ author }}</span> -->
-    {% endif %}
-    <!-- Page Info inject -->
-    {% include "injects/page_info.html" ignore missing %}
-  </div>
+  {% endif %}<!---->
+  {% if page.authors | length > 0 %}<!---->
+  {% set author = page.authors | join(sep=", ") %}<!---->
+  {% else %}<!---->
+  {% set author = config.author %}<!---->
+  {% endif %}<!---->
+  {% if author %}
+  <!-- <span class="mx-1">&middot;</span> -->
+  <!-- <span>{{ author }}</span> -->
+  {% endif %}
+  <!-- Page Info inject -->
+  {% include "injects/page_info.html" ignore missing %}
+</div>

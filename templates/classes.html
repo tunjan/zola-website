@@ -1,12 +1,5 @@
-{% extends "base.html" %}
- {% block main %}
+{% extends "base.html" %} {% block main %}
 
-<article class="m-6">
-
-
-    {{ page.content | safe }}
-
-
-</article>
+<article class="m-6">{{ page.content | safe }}</article>
 
 {% endblock main %}

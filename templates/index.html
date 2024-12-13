@@ -1,12 +1,12 @@
 {% extends "base.html" %} {% block main %}
-<div class="index-page md:w-3/5 mx-auto">
-  <!-- <img class="rounded-lg mx-auto my-10" src="{{ get_url(path="photo3.jpg") }}"> -->
+<!-- <div class="index-page mx-auto md:w-3/5"> -->
+<!-- <img class="rounded-lg mx-auto my-10" src="{{ get_url(path="photo3.jpg") }}"> -->
 
-  <div class="pb-10 flex flex-col gap-10">
-    <!--<p>I teach mathematics and physics at the International Baccalaureate level. You can arrange a tutoring session in-->
-    <!--<a href="{{ get_url(path="@/classes.md") }}">this</a> page.-->
-    <!--</p>-->
-    <!-- <div class="flex gap-8 justify-center">
+<!-- <div class="flex flex-col gap-10 pb-10"> -->
+<!--<p>I teach mathematics and physics at the International Baccalaureate level. You can arrange a tutoring session in-->
+<!--<a href="{{ get_url(path="@/classes.md") }}">this</a> page.-->
+<!--</p>-->
+<!-- <div class="flex gap-8 justify-center">
       <a href="https://signal.me/#eu/zGI0w8ZXeYYkJyynC0aakaC4_5EG2ziUGTkAPIjar9p81Kk1EFRD4Jnk4isfRsLn">
       <svg width="32" height="32" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -37,23 +37,35 @@
       </svg></a>
 
     </div> -->
-  </div>
-</div>
+<!-- </div> -->
+<!-- </div> -->
 
 {% if config.extra.list_pages %}
-<div class="pt-10">
-  <h1 class="text-5xl mb-12 border-b border-gray-400 pb-10 font-serif italic">Posts</h1>
+<div class="pt-0">
+  <h1
+    class="my-6 border-b border-gray-400 pb-10 font-serif text-5xl italic md:mb-12 dark:border-gray-200"
+  >
+    Posts
+  </h1>
   <ul class="flex flex-col gap-8">
-    {% set posts_section = get_section(path="posts/_index.md") %}
-    {% for page in posts_section.pages | slice(end=10) %}
-    <li class="flex flex-col lg:flex-row justify-between hover:text-gray-600 text-xl md:text-2xl gap-4 border-b pb-8 border-gray-200">
-      <a class="" href="{{ page.permalink | safe }}">{{ page.title }}
-      {% if page.description %}
-      <p class="opacity-50 italic text-base lg:text-lg">{{ page.description }}</p>
-      {% elif page.summary %}<!---->
-      {{ page.summary | striptags | safe }}<!---->
-      {% endif %}</a>
-      <span class="opacity-60 text-right text-base min-w-28 lg:self-center md:text-lg">{{ page.date | date(format="%B %d, %Y") }}</span>
+    {% set posts_section = get_section(path="posts/_index.md") %} {% for page in
+    posts_section.pages | slice(end=10) %}
+    <li
+      class="flex flex-col justify-between gap-4 border-b border-gray-200 pb-8 text-xl hover:text-gray-600 md:text-2xl lg:flex-row dark:border-gray-500"
+    >
+      <a class="" href="{{ page.permalink | safe }}"
+        >{{ page.title }} {% if page.description %}
+        <p class="text-base italic opacity-50 lg:text-lg">
+          {{ page.description }}
+        </p>
+        {% elif page.summary %}<!---->
+        {{ page.summary | striptags | safe }}<!---->
+        {% endif %}</a
+      >
+      <span
+        class="min-w-28 text-right text-base opacity-60 md:text-lg lg:self-center"
+        >{{ page.date | date(format="%B %d, %Y") }}</span
+      >
     </li>
     {% endfor %}
   </ul>

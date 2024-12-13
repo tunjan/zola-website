@@ -60,10 +60,8 @@ body{
 }
 
 main{
-  // text-align:center;
 
     flex-grow: 1; /* Allows <main> to expand and fill the space */
-  // justify-content: center; /* Centres horizontally */
 max-width:68rem;
 width: 100%;
 margin: 0 auto;
