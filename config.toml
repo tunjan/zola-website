@@ -11,7 +11,7 @@ build_search_index = false
 taxonomies = [{ name = "tags" }]
 
 [markdown]
-highlight_code = false
+highlight_code = true
 smart_punctuation = true
 
 [extra]

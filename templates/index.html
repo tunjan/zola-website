@@ -51,7 +51,7 @@
     {% set posts_section = get_section(path="posts/_index.md") %} {% for page in
     posts_section.pages | slice(end=10) %}
     <li
-      class="flex flex-col justify-between gap-4 border-b border-gray-200 pb-8 text-xl hover:text-gray-600 md:text-2xl lg:flex-row dark:border-gray-500"
+      class="flex flex-col justify-between gap-4 border-b border-gray-200 pb-8 text-xl  md:text-2xl lg:flex-row dark:border-gray-500"
     >
       <a class="" href="{{ page.permalink | safe }}"
         >{{ page.title }} {% if page.description %}
