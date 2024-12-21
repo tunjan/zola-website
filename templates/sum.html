@@ -1,52 +1,82 @@
 {% extends "base.html" %}
 
+
 {% block main %}
-      
-        
 <div class="bg-white dark:bg-gray-800  md:mt-10 -md overflow-hidden border border-gray-300 dark:border-gray-700">
-        <div class="bg-gray-100 dark:bg-gray-900 py-4 px-6 border-b border-gray-300 dark:border-gray-700">
-            <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Partial Sum Calculator</h1>
-        </div>
-        <div class="p-6">
-            <div class="mb-4">
-                 <label for="function" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Function: $f(n)$</label>
-                <input type="text" id="function" class=" border-gray-300 hide-spin-button   border w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:-outline dark:bg-gray-700 dark:border-gray-600" placeholder="e.g., n^2 + 1">            </div>
-            <div class="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                    <label for="start" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Start:</label>
-                    <input type="number" id="start" class=" border-gray-300 hide-spin-button   border w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:-outline dark:bg-gray-700 dark:border-gray-600" placeholder="e.g., 10">
-                </div>
-                <div>
-                    <label for="end" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">End:</label>
-                    <input type="number" id="end" class=" border-gray-300 hide-spin-button border w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:-outline dark:bg-gray-700 dark:border-gray-600" placeholder="e.g., 10">
-                </div>
-            </div>
-            <div class="flex justify-end">
-                <button id="calculate" class="bg-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 py-2 px-4 focus:outline-none focus:-outline border border-gray-300 dark:border-gray-600 dark:bg-gray-700" type="button">
-                    Calculate
-                </button>
-            </div>
+    <div class="bg-gray-100 dark:bg-gray-900 py-4 px-6 border-b border-gray-300 dark:border-gray-700">
+        <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Partial Sum Calculator</h1>
+    </div>
+    <div class="bg-white dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 px-4 pb-4">
 
-            <div class="mt-8 chart-container">
-                <div id="formula" class="text-md mb-2 text-gray-700 dark:text-gray-300">
-                    <!-- Formula will be displayed here -->
-                </div>
-                <h3 class="text-md font-semibold mb-2 text-gray-800 dark:text-gray-200">Series Evolution:</h3>
-                <div style="position: relative; height: 400px;">
-                    <canvas id="seriesChart" style="position: absolute; width: 100%; height: 100%;"></canvas>
-                </div>
-            </div>
 
-            <div class="mt-8 border-t pt-4 dark:border-gray-700">
-                <h2 class="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200">Results:</h2>
-                <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Partial Sum: <span id="partial-sum" class="text-gray-800 dark:text-gray-200"><i class="italic text-gray-500 dark:text-gray-400">Awaiting calculation...</i></span></p>
-                <div>
-                    <h3 class="text-md font-semibold mb-2 text-gray-800 dark:text-gray-200">Sequence Terms:</h3>
-                    <ul id="sequence-terms" class="list-disc list-inside text-gray-700 dark:text-gray-300"></ul>
-                </div>
-            </div>
-        </div>
+
+    <div class="py-4">
+      <label for="function" class="block text-black dark:text-gray-300 text-lg font-bold mb-3">
+        Function:
+      </label>
+            
+      
+      
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 px-3 flex items-center border border-gray-300 text-gray-700 dark:text-gray-400 bg-gray-100">
+            $f(n)$ 
+        </span>
+        <input type="text" id="function" 
+          class="pl-20 border-gray-300 hide-spin-button border w-full py-3 px-4 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600"
+          placeholder="e.g., n^2 + 1">
+      </div>
+      
+          
+      
+          
+  
+      
     </div>
 
-    {% endblock main %}
+    <div class="grid grid-cols-2 gap-6 mb-8">
+      <div>
+        <label for="start" class="block text-gray-700 dark:text-gray-300 text-lg font-bold mb-3">Start:</label>
+        <input type="number" id="start"
+          class="border-gray-300 hide-spin-button border w-full py-3 px-4 text-gray-700 dark:text-gray-200 leading-tight   dark:bg-gray-700 dark:border-gray-600"
+          placeholder="e.g., 1">
+      </div>
+      <div>
+        <label for="end" class="block text-gray-700 dark:text-gray-300 text-lg font-bold mb-3">End:</label>
+        <input type="number" id="end"
+          class="border-gray-300 hide-spin-button border w-full py-3 px-4 text-gray-700 dark:text-gray-200 leading-tight   dark:bg-gray-700 dark:border-gray-600"
+          placeholder="e.g., 10">
+      </div>
+    </div>
 
+    <div class="flex justify-end mb-10">
+      <button id="calculate"
+        class=" hover:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black hover:text-white border-dashed text-gray-800 border border-gray-400  font-bold py-3 px-6 uppercase tracking-wider"
+        type="button">
+        Calculate
+      </button>
+    </div>
+
+    <div class="mt-12">
+      <div id="formula" style="font-size: 120%;" class="text-lg text-center mb-6  text-gray-700 dark:text-gray-300 p-8 bg-gray-50 dark:bg-gray-700 border border-dashed dark:border-gray-600">
+        <!-- Formula will be displayed here -->
+      </div>
+      <div class="relative h-96 w-full">
+        <canvas id="seriesChart"></canvas>
+      </div>
+    </div>
+
+    <div class="mt-12 border-t pt-6 dark:border-gray-700">
+      <p class="font-medium text-center border border-gray300 p-6 text-lg mb-6 text-gray-700 dark:text-gray-300  bg-gray-50 dark:bg-gray-700 border border-dashed dark:border-gray-600">
+        <span id="partial-sum" class="text-gray-800 dark:text-gray-200  text-xl">
+          <i class="italic text-gray-500 dark:text-gray-400">Awaiting calculation...</i>
+        </span>
+      </p>
+      <div>
+        <h3 class="text-lg font-semibold mb-6 text-gray-800 dark:text-gray-200">Sequence Terms:</h3>
+        <ul id="sequence-terms" class="list-disc list-inside text-gray-700 dark:text-gray-300 grid grid-cols-2 gap-2"></ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock main %}

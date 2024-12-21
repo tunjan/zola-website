@@ -1,142 +1,26 @@
-let chart;
+// Constants for DOM elements
+const formulaInput = document.getElementById('function');
+const startInput = document.getElementById('start');
+const endInput = document.getElementById('end');
+const calculateButton = document.getElementById('calculate');
+const formulaDisplay = document.getElementById('formula');
+const partialSumDisplay = document.getElementById('partial-sum');
+const sequenceTermsTable = document.getElementById('sequence-terms');
+const chartCanvas = document.getElementById('seriesChart').getContext('2d');
 
-document.getElementById('calculate').addEventListener('click', function() {
-    const functionStr = document.getElementById('function').value;
-    const startInput = document.getElementById('start').value;
-    const endInput = document.getElementById('end').value;
+let chart; // Global chart object
 
-    const start = parseInt(startInput);
-    const end = parseInt(endInput);
-
-    displayFormula(functionStr, start, end);
-    clearError();
-
-    const validationError = validateInputs(start, end);
-    if (validationError) {
-        displayError(validationError);
-        return;
-    }
-
-    displayLoading();
-
-    setTimeout(() => {
-        try {
-            const { partialSums, sequenceTerms } = calculatePartialSums(functionStr, start, end);
-            displayResults(partialSums[partialSums.length - 1], sequenceTerms, start); // Pass start value
-            animateChart(start, partialSums);
-        } catch (error) {
-            console.error("Calculation error:", error);
-            displayError(error.message || "An error occurred during calculation.");
-        } finally {
-            hideLoading();
-        }
-    }, 0);
-});
-
-function displayFormula(funcStr, start, end) {
-    const formulaDiv = document.getElementById('formula');
-    formulaDiv.innerHTML = `$\\sum_{n=${start}}^{${end}} ${funcStr.replace('n', 'n')}$`;
-    MathJax.typesetPromise([formulaDiv]);
-}
-
-function validateInputs(start, end) {
-    if (isNaN(start) || isNaN(end)) {
-        return "Please enter valid numbers for the starting and ending points.";
-    }
-    if (start > end) {
-        return "Starting point cannot be greater than the ending point.";
-    }
-    return null;
-}
-
-function evaluateFunction(n, funcStr) {
-    try {
-        const scope = { n: n };
-        return math.evaluate(funcStr, scope);
-    } catch (error) {
-        console.error("Function evaluation error:", error);
-        throw new Error("Invalid function. Please check your input.");
-    }
-}
-
-function calculatePartialSums(functionStr, start, end) {
-    let partialSum = 0;
-    let partialSums = [];
-    let sequenceTerms = [];
-
-    for (let n = start; n <= end; n++) {
-        const term = evaluateFunction(n, functionStr);
-        if (isNaN(term)) {
-            throw new Error("Function did not evaluate to a number for n = " + n + ".");
-        }
-        partialSum += term;
-        partialSums.push(partialSum);
-        sequenceTerms.push(term);
-    }
-    return { partialSums, sequenceTerms };
-}
-
-function displayResults(sum, terms, start) { // Added start parameter
-    const partialSumElement = document.getElementById('partial-sum');
-    partialSumElement.innerHTML = `$\\approx ${sum.toFixed(10)}$`;
-    MathJax.typesetPromise([partialSumElement]);
-
-    const termsList = document.getElementById('sequence-terms');
-    termsList.innerHTML = "";
-
-    terms.forEach((term, index) => { // Added index
-        const termNumber = start + index; // Calculate the term number (a_1, a_2, etc.)
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `$a_{${termNumber}} \\approx ${term.toFixed(10)}$`; // Display term with subscript
-        listItem.classList.add('text-gray-700', 'font-medium', 'mb-1', 'dark:text-gray-300');
-        termsList.appendChild(listItem);
-        MathJax.typesetPromise([listItem]);
-    });
-}
-
-function displayError(message) {
-    const errorElement = document.createElement('li');
-    errorElement.textContent = message;
-    errorElement.classList.add('text-red-500', 'font-medium');
-    document.getElementById('sequence-terms').innerHTML = "";
-    document.getElementById('sequence-terms').appendChild(errorElement);
-    document.getElementById('partial-sum').textContent = "";
-    destroyChart();
-}
-
-function clearError() {
-    document.getElementById('sequence-terms').innerHTML = "";
-    destroyChart();
-}
-
-function displayLoading() {
-    document.getElementById('partial-sum').innerHTML = `<i class="italic text-gray-500">Calculating...</i>`;
-    document.getElementById('sequence-terms').innerHTML = "";
-    destroyChart();
-}
-
-function hideLoading() {}
-
-function animateChart(startValue, partialSums) {
-    const ctx = document.getElementById('seriesChart').getContext('2d');
-    const labels = partialSums.map((_, index) => startValue + index);
-
-    if (chart) {
-        chart.destroy();
-    }
-
-    // Calculate min and max values for centering the y-axis
-    const minValue = Math.min(...partialSums);
-    const maxValue = Math.max(...partialSums);
-    const padding = (maxValue - minValue) * 0.1; // 10% padding
-
-    chart = new Chart(ctx, {
+/**
+ * Initializes the Chart.js chart.
+ */
+function initializeChart() {
+    chart = new Chart(chartCanvas, {
         type: 'line',
         data: {
-            labels: labels,
+            labels: [],
             datasets: [{
                 label: 'Partial Sum',
-                data: partialSums,
+                data: [],
                 borderColor: 'rgb(51, 65, 85)',
                 borderWidth: 2,
                 tension: 0.4,
@@ -154,18 +38,22 @@ function animateChart(startValue, partialSums) {
             },
             scales: {
                 y: {
-                    // Do not begin at zero
-                    beginAtZero: false,
-                    // Set min and max with padding
-                    min: minValue - padding,
-                    max: maxValue + padding,
+                    beginAtZero: false, // Do not begin at zero
                     grid: {
                         color: 'rgba(0, 0, 0, 0.05)',
+                    },
+                    title: {
+                        display: false,
+                        text: 'Partial Sum Value'
                     }
                 },
                 x: {
                     grid: {
                         color: 'rgba(0, 0, 0, 0.05)',
+                    },
+                    title: {
+                        display: true,
+                        text: 'n'
                     }
                 }
             },
@@ -182,9 +70,211 @@ function animateChart(startValue, partialSums) {
     });
 }
 
-function destroyChart() {
-    if (chart) {
-        chart.destroy();
-        chart = null;
+/**
+ * Displays the mathematical formula using MathJax.
+ * @param {string} formulaString - The formula string.
+ * @param {number} start - The starting value of n.
+ * @param {number} end - The ending value of n.
+ */
+function displayFormula(formulaString, start, end) {
+    formulaDisplay.innerHTML = `$\\sum\\limits_{n=${start}}^{${end}} ${formulaString}$`;
+    // Use a separate microtask queue to ensure MathJax processing after DOM updates
+    queueMicrotask(() => {
+        MathJax.typesetPromise([formulaDisplay]).catch((err) => console.error("MathJax typesetting error:", err));
+    });
+}
+
+/**
+ * Validates the input values.
+ * @param {number} start - The starting value of n.
+ * @param {number} end - The ending value of n.
+ * @returns {string|null} - An error message if validation fails, null otherwise.
+ */
+function validateInputs(start, end) {
+    if (isNaN(start) || isNaN(end)) {
+        return "Please enter valid numbers for the starting and ending points.";
+    }
+    if (start < 0 || end < 0) {
+        return "Please enter non-negative numbers for the starting and ending points.";
+    }
+    if (start > end) {
+        return "Starting point cannot be greater than the ending point.";
+    }
+    return null;
+}
+
+/**
+ * Evaluates the mathematical function for a given value of n.
+ * @param {number} n - The value of n.
+ * @param {string} formulaString - The formula string.
+ * @returns {number} - The result of the function evaluation.
+ * @throws {Error} - If the function is invalid.
+ */
+function evaluateFunction(n, formulaString) {
+    try {
+        const scope = { n };
+        return math.evaluate(formulaString, scope);
+    } catch (error) {
+        console.error("Function evaluation error:", error);
+        throw new Error("Invalid function. Please check your input.");
     }
 }
+
+/**
+ * Calculates the partial sums of the series.
+ * @param {string} formulaString - The formula string.
+ * @param {number} start - The starting value of n.
+ * @param {number} end - The ending value of n.
+ * @returns {{partialSums: number[], sequenceTerms: number[]}} - An object containing the partial sums and sequence terms.
+ * @throws {Error} - If the function evaluation results in NaN.
+ */
+function calculatePartialSums(formulaString, start, end) {
+    let partialSum = 0;
+    const partialSums = [];
+    const sequenceTerms = [];
+
+    for (let n = start; n <= end; n++) {
+        const term = evaluateFunction(n, formulaString);
+        if (isNaN(term)) {
+            throw new Error(`Function did not evaluate to a number for n = ${n}.`);
+        }
+        partialSum += term;
+        partialSums.push(partialSum);
+        sequenceTerms.push(term);
+    }
+
+    return { partialSums, sequenceTerms };
+}
+
+/**
+ * Displays the results of the calculation.
+ * @param {number} sum - The final partial sum.
+ * @param {number[]} terms - The sequence terms.
+ */
+function displayResults(sum, terms) {
+    partialSumDisplay.textContent = sum.toFixed(12);
+    updateSequenceTermsTable(terms);
+}
+
+/**
+ * Displays an error message.
+ * @param {string} message - The error message.
+ */
+function displayError(message) {
+    const errorElement = document.createElement('li');
+    errorElement.textContent = message;
+    errorElement.classList.add('text-red-500', 'font-medium');
+    sequenceTermsTable.innerHTML = ''; // Clear table
+    sequenceTermsTable.appendChild(errorElement);
+    partialSumDisplay.textContent = ''; // Clear partial sum
+}
+
+/**
+ * Clears the error message.
+ */
+function clearError() {
+    sequenceTermsTable.innerHTML = ''; // Clear table
+}
+
+/**
+ * Displays a loading message.
+ */
+function displayLoading() {
+    partialSumDisplay.innerHTML = `<i class="italic text-gray-500">Calculating...</i>`;
+    sequenceTermsTable.innerHTML = '';
+}
+
+/**
+ * Hides the loading message (not currently used).
+ */
+function hideLoading() {
+    // Not needed in this case, as displayResults will replace the loading message
+}
+
+/**
+ * Updates the Chart.js chart with new data.
+ * @param {number} startValue - The starting value of n.
+ * @param {number[]} partialSums - The partial sums.
+ */
+function updateChart(startValue, partialSums) {
+    const labels = partialSums.map((_, index) => startValue + index);
+
+    // Calculate min and max values for centering the y-axis
+    const minValue = Math.min(...partialSums);
+    const maxValue = Math.max(...partialSums);
+    const padding = (maxValue - minValue) * 0.1; // 10% padding
+
+    // Update chart data and options
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = partialSums;
+    chart.options.scales.y.min = minValue - padding;
+    chart.options.scales.y.max = maxValue + padding;
+
+    try {
+        chart.update(); // Efficiently update the chart
+    } catch (error) {
+        console.error("Chart.js update error:", error);
+        displayError("An error occurred while updating the chart.");
+    }
+}
+
+/**
+ * Updates the table with the sequence terms.
+ * @param {number[]} terms - The sequence terms.
+ */
+function updateSequenceTermsTable(terms) {
+    sequenceTermsTable.innerHTML = '';
+
+    for (let i = 0; i < terms.length; i++) {
+        const row = document.createElement('tr');
+        const nCell = document.createElement('td');
+        const termCell = document.createElement('td');
+
+        nCell.textContent = i + startInput.value; // Use the correct 'n' value
+        termCell.textContent = terms[i].toFixed(6); // Display to 6 decimal places
+
+        nCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'bg-gray-50', 'text-gray-500', 'dark:text-gray-300');
+        termCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-gray-800', 'dark:text-gray-200');
+        row.classList.add('border', 'border-gray-200');
+
+        row.appendChild(nCell);
+        row.appendChild(termCell);
+        sequenceTermsTable.appendChild(row);
+    }
+}
+
+// Event Listener and Main Logic
+calculateButton.addEventListener('click', async () => {
+    const formulaString = formulaInput.value;
+    const start = parseInt(startInput.value);
+    const end = parseInt(endInput.value);
+
+    displayFormula(formulaString, start, end);
+    clearError();
+
+    const validationError = validateInputs(start, end);
+    if (validationError) {
+        displayError(validationError);
+        return;
+    }
+
+    displayLoading();
+
+    try {
+        const { partialSums, sequenceTerms } = await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(calculatePartialSums(formulaString, start, end));
+            }, 0); // Keep the setTimeout for demonstration, but consider removing
+        });
+        displayResults(partialSums[partialSums.length - 1], sequenceTerms);
+        updateChart(start, partialSums);
+    } catch (error) {
+        console.error("Calculation error:", error);
+        displayError(error.message || "An error occurred during calculation.");
+    } finally {
+        hideLoading();
+    }
+});
+
+// Initialize the chart on page load
+initializeChart();
