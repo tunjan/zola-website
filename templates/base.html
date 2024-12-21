@@ -15,13 +15,16 @@
     >
       {% block main %}
 
-      <h1>what is this</h1>
+      <h1>Error</h1>
 
       {% endblock %}
     </main>
 
-    {% include "partials/footer.html" %}
-    <script>
+    {% include "partials/footer.html" %} {% if page.extra.javascript %} {% for
+    js_file in page.extra.javascript %}
+    <script src="{{ get_url(path=js_file) }}"></script>
+    {% endfor %} {% endif %}
+  <script>
       const header = document.getElementById("header");
       const main = document.getElementById("main");
 

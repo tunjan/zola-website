@@ -1,0 +1,45 @@
+.partial-sum-calculator {
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+.input-area label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-area input[type="text"],
+.input-area input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box; /* Added for consistent sizing */
+}
+
+.input-area button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.output-area {
+  margin-top: 20px;
+}
+
+#sequence-terms {
+  list-style-type: none;
+  padding: 0;
+}
+
+#sequence-terms li {
+  margin-bottom: 5px;
+}

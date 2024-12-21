@@ -134,6 +134,16 @@
   {% endif %}
   <!---->
 
+ {% if page.extra.chart  %}
+  <!---->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
+  <!---->
+  {% endif %}
+
+      
+
+    
   <!-- Mermaid -->
   {% if page.extra.mermaid | default(value=config.extra.mermaid) %}
   <!---->
@@ -175,6 +185,13 @@
     rel="canonical"
     href="{{ page.permalink | default(value=get_url(path=``)) }}"
   />
+
+    {% if page.extra.css %}
+        {% for css_file in page.extra.css %}
+            <link rel="stylesheet" href="{{ get_url(path=css_file) }}">
+        {% endfor %}
+    {% endif %}
+
 
   <!-- Head inject -->
   {% include "injects/head.html" ignore missing %}

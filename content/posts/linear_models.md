@@ -2,7 +2,7 @@
 author = 'Alberto Trigo'
 title = "On the class of facts that affect information distribution"
 date = 2024-06-16
-draft = false
+draft = true
 description = "An adventure"
 [extra]
 math = true
