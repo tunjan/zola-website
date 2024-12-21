@@ -224,13 +224,12 @@ function updateChart(startValue, partialSums) {
  */
 function updateSequenceTermsTable(terms) {
     sequenceTermsTable.innerHTML = '';
-
     for (let i = 0; i < terms.length; i++) {
         const row = document.createElement('tr');
         const nCell = document.createElement('td');
         const termCell = document.createElement('td');
 
-        nCell.textContent = i + startInput.value; // Use the correct 'n' value
+        nCell.textContent = parseInt(i) + parseInt(startInput.value); // Use the correct 'n' value
         termCell.textContent = terms[i].toFixed(6); // Display to 6 decimal places
 
         nCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'bg-gray-50', 'text-gray-500', 'dark:text-gray-300');
