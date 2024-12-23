@@ -1,8 +1,7 @@
 <header
   id="header"
-  class="header-transition fixed w-full border-b border-zinc-200 bg-zinc-50/50 p-4 text-lg md:p-6 md:text-xl md:backdrop-blur-xl dark:bg-zinc-900/50"
+  class=" flex fixed h-full flex-col overflow-auto gap-10 header-transition min-w-60  basis-20 bg-zinc-100 border-zinc-200 bg-zinc-50/50 p-4 text-lg md:p-6 md:text-xl md:backdrop-blur-xl dark:bg-zinc-900/50"
 >
-  <nav class="mx-auto flex max-w-5xl items-center justify-between gap-10">
     <a class="title hidden font-sans md:inline" href="/">Alberto Trigo</a>
     <div class="flex items-center gap-4">
       <button
@@ -39,7 +38,7 @@
     </div>
 
     {% if config.extra.header_nav %}
-    <ul class="flex gap-4">
+    <ul class="flex flex-col gap-4">
       {% for nav_item in config.extra.header_nav %}
       <li>
         <a
@@ -59,6 +58,5 @@
       </li>
       {% endfor %}
     </ul>
-  </nav>
   {% endif %}
 </header>
