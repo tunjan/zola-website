@@ -10,64 +10,67 @@ const chartCanvas = document.getElementById('seriesChart').getContext('2d');
 
 let chart; // Global chart object
 
+// Chart configuration object for better readability and maintainability
+const chartConfig = {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Partial Sum',
+            data: [],
+            borderColor: 'rgb(51, 65, 85)',
+            borderWidth: 2,
+            tension: 0.4,
+            pointRadius: 3,
+            pointBackgroundColor: 'rgb(51, 65, 85)',
+            pointHoverRadius: 5
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+            duration: 800,
+            easing: 'easeInOutQuad',
+        },
+        scales: {
+            y: {
+                beginAtZero: false,
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.05)',
+                },
+                title: {
+                    display: false,
+                    text: 'Partial Sum Value'
+                }
+            },
+            x: {
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.05)',
+                },
+                title: {
+                    display: true,
+                    text: 'n'
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltip: {
+                mode: 'index',
+                intersect: false,
+            }
+        }
+    }
+};
+
 /**
  * Initializes the Chart.js chart.
  */
 function initializeChart() {
-    chart = new Chart(chartCanvas, {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: [{
-                label: 'Partial Sum',
-                data: [],
-                borderColor: 'rgb(51, 65, 85)',
-                borderWidth: 2,
-                tension: 0.4,
-                pointRadius: 3,
-                pointBackgroundColor: 'rgb(51, 65, 85)',
-                pointHoverRadius: 5
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: {
-                duration: 800,
-                easing: 'easeInOutQuad',
-            },
-            scales: {
-                y: {
-                    beginAtZero: false, // Do not begin at zero
-                    grid: {
-                        color: 'rgba(0, 0, 0, 0.05)',
-                    },
-                    title: {
-                        display: false,
-                        text: 'Partial Sum Value'
-                    }
-                },
-                x: {
-                    grid: {
-                        color: 'rgba(0, 0, 0, 0.05)',
-                    },
-                    title: {
-                        display: true,
-                        text: 'n'
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false,
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                }
-            }
-        }
-    });
+    chart = new Chart(chartCanvas, chartConfig);
 }
 
 /**
@@ -80,7 +83,8 @@ function displayFormula(formulaString, start, end) {
     formulaDisplay.innerHTML = `$\\sum\\limits_{n=${start}}^{${end}} ${formulaString}$`;
     // Use a separate microtask queue to ensure MathJax processing after DOM updates
     queueMicrotask(() => {
-        MathJax.typesetPromise([formulaDisplay]).catch((err) => console.error("MathJax typesetting error:", err));
+        MathJax.typesetPromise([formulaDisplay])
+            .catch((err) => console.error("MathJax typesetting error:", err));
     });
 }
 
@@ -93,6 +97,9 @@ function displayFormula(formulaString, start, end) {
 function validateInputs(start, end) {
     if (isNaN(start) || isNaN(end)) {
         return "Please enter valid numbers for the starting and ending points.";
+    }
+    if (!Number.isInteger(start) || !Number.isInteger(end)) {
+        return "Please enter integer values for the starting and ending points.";
     }
     if (start < 0 || end < 0) {
         return "Please enter non-negative numbers for the starting and ending points.";
@@ -115,8 +122,8 @@ function evaluateFunction(n, formulaString) {
         const scope = { n };
         return math.evaluate(formulaString, scope);
     } catch (error) {
-        console.error("Function evaluation error:", error);
-        throw new Error("Invalid function. Please check your input.");
+        console.error(`Function evaluation error for n = ${n}:`, error);
+        throw new Error(`Invalid function at n = ${n}. Please check your input.`);
     }
 }
 
@@ -150,10 +157,11 @@ function calculatePartialSums(formulaString, start, end) {
  * Displays the results of the calculation.
  * @param {number} sum - The final partial sum.
  * @param {number[]} terms - The sequence terms.
+ * @param {number} decimalPlaces - The number of decimal places to display.
  */
-function displayResults(sum, terms) {
-    partialSumDisplay.textContent = sum.toFixed(12);
-    updateSequenceTermsTable(terms);
+function displayResults(sum, terms, decimalPlaces = 18) { // Increased decimal places to 18
+    partialSumDisplay.textContent = sum.toFixed(decimalPlaces);
+    updateSequenceTermsTable(terms, decimalPlaces);
 }
 
 /**
@@ -182,13 +190,6 @@ function clearError() {
 function displayLoading() {
     partialSumDisplay.innerHTML = `<i class="italic text-gray-500">Calculating...</i>`;
     sequenceTermsTable.innerHTML = '';
-}
-
-/**
- * Hides the loading message (not currently used).
- */
-function hideLoading() {
-    // Not needed in this case, as displayResults will replace the loading message
 }
 
 /**
@@ -221,8 +222,9 @@ function updateChart(startValue, partialSums) {
 /**
  * Updates the table with the sequence terms.
  * @param {number[]} terms - The sequence terms.
+ * @param {number} decimalPlaces - The number of decimal places to display.
  */
-function updateSequenceTermsTable(terms) {
+function updateSequenceTermsTable(terms, decimalPlaces = 12) { // Increased default to 12
     sequenceTermsTable.innerHTML = '';
     for (let i = 0; i < terms.length; i++) {
         const row = document.createElement('tr');
@@ -230,7 +232,7 @@ function updateSequenceTermsTable(terms) {
         const termCell = document.createElement('td');
 
         nCell.textContent = parseInt(i) + parseInt(startInput.value); // Use the correct 'n' value
-        termCell.textContent = terms[i].toFixed(6); // Display to 6 decimal places
+        termCell.textContent = terms[i].toFixed(decimalPlaces); // Display to specified decimal places
 
         nCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'bg-gray-50', 'text-gray-500', 'dark:text-gray-300');
         termCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-gray-800', 'dark:text-gray-200');
@@ -260,18 +262,13 @@ calculateButton.addEventListener('click', async () => {
     displayLoading();
 
     try {
-        const { partialSums, sequenceTerms } = await new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(calculatePartialSums(formulaString, start, end));
-            }, 0); // Keep the setTimeout for demonstration, but consider removing
-        });
+        // Perform calculations synchronously since they are not inherently asynchronous in this context
+        const { partialSums, sequenceTerms } = calculatePartialSums(formulaString, start, end);
         displayResults(partialSums[partialSums.length - 1], sequenceTerms);
         updateChart(start, partialSums);
     } catch (error) {
         console.error("Calculation error:", error);
         displayError(error.message || "An error occurred during calculation.");
-    } finally {
-        hideLoading();
     }
 });
 

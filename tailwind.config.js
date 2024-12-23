@@ -2,8 +2,8 @@ module.exports = {
   content: ["./templates/**/*.html"],
   theme: {
     fontFamily: {
-      sans: ["IBM Plex Sans"],
-      serif: ["IBM Plex Serif"],
+      sans: ["Inter"],
+      serif: ["Alegreya"],
     },
     extend: {
       animation: {
