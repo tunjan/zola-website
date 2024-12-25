@@ -9,9 +9,9 @@
 
 {% for page in pages %}
 <section
-  class="flex flex-col gap-4 border-t border-gray-400/50 py-6 font-sans first-of-type:mt-0 last-of-type:mb-0 md:flex-row-reverse md:justify-end lg:py-12"
+  class="flex flex-col gap-4 border-b-2 border-stone-800 py-6 font-sans first-of-type:mt-0 last-of-type:mb-0  md:flex-row-reverse md:justify-end lg:py-10"
 >
-  <a class="text-xl hover:text-gray-500 md:text-2xl" href="{{ page.permalink }}"
+  <a class="text-xl hover:text-stone-500 font-medium md:text-2xl" href="{{ page.permalink }}"
     >{{ page.title }}
     <div class="not-prose my-1 truncate text-lg opacity-60">
       {% if page.description %}

@@ -209,9 +209,9 @@ function updateSequenceTermsTable(terms, decimalPlaces = DEFAULT_DECIMAL_PLACES_
         nCell.textContent = i + startValue;
         termCell.textContent = terms[i].toFixed(decimalPlaces);
 
-        nCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'bg-gray-50', 'text-gray-500', 'dark:text-gray-300');
-        termCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-gray-800', 'dark:text-gray-200');
-        row.classList.add('border', 'border-gray-200');
+        nCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'bg-stone-50', 'text-stone-500', 'dark:text-stone-300', 'dark:bg-stone-900');
+        termCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-stone-800', 'dark:text-stone-200', 'dark:bg-stone-800');
+        row.classList.add('border', 'border-stone-400');
 
         row.appendChild(nCell);
         row.appendChild(termCell);
@@ -313,7 +313,7 @@ function clearError() {
  * Displays a loading message.
  */
 function displayLoading() {
-    partialSumDisplay.innerHTML = '<i class="italic text-gray-500 dark:text-gray-400">Calculating...</i>';
+    partialSumDisplay.innerHTML = '<i class="italic text-stone-500 dark:text-stone-400">Calculating...</i>';
     sequenceTermsTableBody.innerHTML = '';
     sequenceTermsTable.classList.add('hidden');
     maxTermDisplay.textContent = '';

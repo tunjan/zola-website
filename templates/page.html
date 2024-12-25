@@ -1,18 +1,17 @@
 {% extends "base.html" %} {% block main %}
-<article class="mx-auto max-w-full md:max-w-4xl ">
+<article class="mx-auto max-w-full md:max-w-6xl">
   <!-- Page Start inject -->
   {% include "injects/page_start.html" ignore missing %}
 
-  <header class="mb-16 mt-0 md:mt-16 text-center">
+  <header class="mb-10 mt-0 md:mt-16">
+    <h1 class="my-2 pb-2.5 text-4xl font-medium lg:text-7xl">{{ page.title }}</h1>
     <time class="text-base antialiased"
       >{{ page.date | date(format="%B %d, %Y") }}</time
     >
-
-    <h1 class="my-2 pb-2.5 text-4xl lg:text-7xl">{{ page.title }}</h1>
   </header>
 
   {% if page.extra.cover.image %}
-  <figure class="mb-12 mt-0">
+  <figure class="-mx-6 mb-12 mt-0 md:my-16">
     <img
       class="h-auto w-full"
       src="{{ get_url(path=page.extra.cover.image) }}"
@@ -21,18 +20,17 @@
   </figure>
   {% endif %}
 
-  <hr class="mb-12">
-
+  <hr class="h-px my-8 bg-stone-900 border-0 dark:bg-gray-700">
   <!-- Content -->
   <section
-    class="prose font-sans prose-zinc mx-auto prose-lg prose-a:underline prose-h2:font-semibold prose-headings:text-3xl dark:prose-invert"
+    class="prose prose-xl prose-zinc mx-auto font-sans dark:prose-invert prose-headings:text-3xl prose-h2:font-semibold prose-a:underline md:mt-20"
   >
     {{ page.content | safe }}
   </section>
 
   <!-- Post Taxonomies -->
   <!-- Post Nav -->
-   <hr class="mt-14">
+  <hr class="mt-14" />
   {% include "partials/post_navigation.html" %}<!---->
 
   <!-- Comment -->
