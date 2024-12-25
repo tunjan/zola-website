@@ -5,8 +5,26 @@ const endInput = document.getElementById('end');
 const calculateButton = document.getElementById('calculate');
 const formulaDisplay = document.getElementById('formula');
 const partialSumDisplay = document.getElementById('partial-sum');
-const sequenceTermsTable = document.getElementById('sequence-terms');
+const sequenceTermsTableBody = document.getElementById('sequence-terms-body');
+const sequenceTermsTable = document.getElementById('sequence-terms-table');
+const showTermsButton = document.getElementById('show-terms');
 const chartCanvas = document.getElementById('seriesChart').getContext('2d');
+
+// Analysis Display Elements
+const maxTermDisplay = document.getElementById('max-term');
+const minTermDisplay = document.getElementById('min-term');
+const averageTermDisplay = document.getElementById('average-term');
+const monotonicityDisplay = document.getElementById('monotonicity');
+const maxPartialSumDisplay = document.getElementById('max-partial-sum');
+const minPartialSumDisplay = document.getElementById('min-partial-sum');
+const convergenceTrendDisplay = document.getElementById('convergence-trend');
+
+// Other Constants
+const CHART_BORDER_COLOR = 'rgb(51, 65, 85)';
+const CHART_ANIMATION_DURATION = 800;
+const PARTIAL_SUM_LABEL = 'Partial Sum';
+const DEFAULT_DECIMAL_PLACES_TABLE = 6;
+const DEFAULT_DECIMAL_PLACES_DISPLAY = 6;
 
 let chart; // Global chart object
 
@@ -16,13 +34,13 @@ const chartConfig = {
     data: {
         labels: [],
         datasets: [{
-            label: 'Partial Sum',
+            label: PARTIAL_SUM_LABEL,
             data: [],
-            borderColor: 'rgb(51, 65, 85)',
+            borderColor: CHART_BORDER_COLOR,
             borderWidth: 2,
-            tension: 0.4,
+            tension: 0, // Set tension to 0 for straight lines
             pointRadius: 3,
-            pointBackgroundColor: 'rgb(51, 65, 85)',
+            pointBackgroundColor: CHART_BORDER_COLOR,
             pointHoverRadius: 5
         }]
     },
@@ -30,7 +48,7 @@ const chartConfig = {
         responsive: true,
         maintainAspectRatio: false,
         animation: {
-            duration: 800,
+            duration: CHART_ANIMATION_DURATION,
             easing: 'easeInOutQuad',
         },
         scales: {
@@ -49,7 +67,7 @@ const chartConfig = {
                     color: 'rgba(0, 0, 0, 0.05)',
                 },
                 title: {
-                    display: true,
+                    display: false,
                     text: 'n'
                 }
             }
@@ -74,14 +92,35 @@ function initializeChart() {
 }
 
 /**
+ * Converts a user-input formula string to LaTeX format.
+ * @param {string} formula - The user-input formula string.
+ * @returns {string} - The LaTeX formatted string.
+ */
+function convertToLatex(formula) {
+    // Basic fraction conversion: a/b to \frac{a}{b}
+    formula = formula.replace(/(\w+)\/(\w+)/g, '\\frac{$1}{$2}');
+
+    // More complex fraction handling (allowing expressions in numerator/denominator)
+    formula = formula.replace(/([^/\s]+)\/([^/\s]+)/g, '\\frac{$1}{$2}');
+
+    // Square root conversion: sqrt(x) to \sqrt{x}
+    formula = formula.replace(/sqrt\(([^)]+)\)/g, '\\sqrt{$1}');
+
+    // Multiplication (optional): * to \times
+    formula = formula.replace(/\*/g, '\\times');
+
+    return formula;
+}
+
+/**
  * Displays the mathematical formula using MathJax.
  * @param {string} formulaString - The formula string.
  * @param {number} start - The starting value of n.
  * @param {number} end - The ending value of n.
  */
 function displayFormula(formulaString, start, end) {
-    formulaDisplay.innerHTML = `$\\sum\\limits_{n=${start}}^{${end}} ${formulaString}$`;
-    // Use a separate microtask queue to ensure MathJax processing after DOM updates
+    const latexFormula = convertToLatex(formulaString);
+    formulaDisplay.innerHTML = `$\\sum\\limits_{n=${start}}^{${end}} ${latexFormula}$`;
     queueMicrotask(() => {
         MathJax.typesetPromise([formulaDisplay])
             .catch((err) => console.error("MathJax typesetting error:", err));
@@ -123,7 +162,8 @@ function evaluateFunction(n, formulaString) {
         return math.evaluate(formulaString, scope);
     } catch (error) {
         console.error(`Function evaluation error for n = ${n}:`, error);
-        throw new Error(`Invalid function at n = ${n}. Please check your input.`);
+        const errorMessage = error.message ? `Invalid function at n = ${n}: ${error.message}` : `Invalid function at n = ${n}. Please check your input.`;
+        throw new Error(errorMessage);
     }
 }
 
@@ -154,14 +194,84 @@ function calculatePartialSums(formulaString, start, end) {
 }
 
 /**
- * Displays the results of the calculation.
- * @param {number} sum - The final partial sum.
+ * Updates the content of the sequence terms table.
  * @param {number[]} terms - The sequence terms.
  * @param {number} decimalPlaces - The number of decimal places to display.
  */
-function displayResults(sum, terms, decimalPlaces = 18) { // Increased decimal places to 18
-    partialSumDisplay.textContent = sum.toFixed(decimalPlaces);
-    updateSequenceTermsTable(terms, decimalPlaces);
+function updateSequenceTermsTable(terms, decimalPlaces = DEFAULT_DECIMAL_PLACES_TABLE) {
+    sequenceTermsTableBody.innerHTML = '';
+    const startValue = parseInt(startInput.value);
+    for (let i = 0; i < terms.length; i++) {
+        const row = document.createElement('tr');
+        const nCell = document.createElement('td');
+        const termCell = document.createElement('td');
+
+        nCell.textContent = i + startValue;
+        termCell.textContent = terms[i].toFixed(decimalPlaces);
+
+        nCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'bg-gray-50', 'text-gray-500', 'dark:text-gray-300');
+        termCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-gray-800', 'dark:text-gray-200');
+        row.classList.add('border', 'border-gray-200');
+
+        row.appendChild(nCell);
+        row.appendChild(termCell);
+        sequenceTermsTableBody.appendChild(row);
+    }
+}
+
+/**
+ * Displays the results of the calculation.
+ * @param {number} sum - The final partial sum.
+ */
+function displayResults(sum) {
+    partialSumDisplay.textContent = sum.toFixed(DEFAULT_DECIMAL_PLACES_DISPLAY);
+}
+
+/**
+ * Displays the analysis of the series.
+ * @param {number[]} sequenceTerms - The sequence terms.
+ * @param {number[]} partialSums - The partial sums.
+ */
+function displayAnalysis(sequenceTerms, partialSums) {
+    const maxTerm = Math.max(...sequenceTerms);
+    const minTerm = Math.min(...sequenceTerms);
+    const averageTerm = sequenceTerms.reduce((sum, term) => sum + term, 0) / sequenceTerms.length;
+    const maxPartialSum = Math.max(...partialSums);
+    const minPartialSum = Math.min(...partialSums);
+
+    let isIncreasing = true;
+    let isDecreasing = true;
+    for (let i = 1; i < sequenceTerms.length; i++) {
+        if (sequenceTerms[i] > sequenceTerms[i - 1]) {
+            isDecreasing = false;
+        }
+        if (sequenceTerms[i] < sequenceTerms[i - 1]) {
+            isIncreasing = false;
+        }
+    }
+
+    let monotonicity = 'Neither increasing nor decreasing';
+    if (isIncreasing) {
+        monotonicity = 'Increasing';
+    } else if (isDecreasing) {
+        monotonicity = 'Decreasing';
+    }
+
+    let convergenceTrend = "Cannot determine convergence with this range.";
+    if (partialSums.length > 2) {
+        const lastDiff = Math.abs(partialSums[partialSums.length - 1] - partialSums[partialSums.length - 2]);
+        if (lastDiff < 0.001) { // Arbitrary small value for demonstration
+            convergenceTrend = "Partial sums may be converging.";
+        }
+    }
+
+    maxTermDisplay.textContent = maxTerm.toFixed(DEFAULT_DECIMAL_PLACES_DISPLAY);
+    minTermDisplay.textContent = minTerm.toFixed(DEFAULT_DECIMAL_PLACES_DISPLAY);
+    averageTermDisplay.textContent = averageTerm.toFixed(DEFAULT_DECIMAL_PLACES_DISPLAY);
+    monotonicityDisplay.textContent = monotonicity;
+    maxPartialSumDisplay.textContent = maxPartialSum.toFixed(DEFAULT_DECIMAL_PLACES_DISPLAY);
+    minPartialSumDisplay.textContent = minPartialSum.toFixed(DEFAULT_DECIMAL_PLACES_DISPLAY);
+    convergenceTrendDisplay.textContent = convergenceTrend;
 }
 
 /**
@@ -172,24 +282,47 @@ function displayError(message) {
     const errorElement = document.createElement('li');
     errorElement.textContent = message;
     errorElement.classList.add('text-red-500', 'font-medium');
-    sequenceTermsTable.innerHTML = ''; // Clear table
-    sequenceTermsTable.appendChild(errorElement);
-    partialSumDisplay.textContent = ''; // Clear partial sum
+    sequenceTermsTableBody.innerHTML = '';
+    sequenceTermsTable.classList.add('hidden');
+    partialSumDisplay.textContent = '';
+    maxTermDisplay.textContent = '';
+    minTermDisplay.textContent = '';
+    averageTermDisplay.textContent = '';
+    monotonicityDisplay.textContent = '';
+    maxPartialSumDisplay.textContent = '';
+    minPartialSumDisplay.textContent = '';
+    convergenceTrendDisplay.textContent = '';
 }
 
 /**
  * Clears the error message.
  */
 function clearError() {
-    sequenceTermsTable.innerHTML = ''; // Clear table
+    sequenceTermsTableBody.innerHTML = '';
+    sequenceTermsTable.classList.add('hidden');
+    maxTermDisplay.textContent = '';
+    minTermDisplay.textContent = '';
+    averageTermDisplay.textContent = '';
+    monotonicityDisplay.textContent = '';
+    maxPartialSumDisplay.textContent = '';
+    minPartialSumDisplay.textContent = '';
+    convergenceTrendDisplay.textContent = '';
 }
 
 /**
  * Displays a loading message.
  */
 function displayLoading() {
-    partialSumDisplay.innerHTML = `<i class="italic text-gray-500">Calculating...</i>`;
-    sequenceTermsTable.innerHTML = '';
+    partialSumDisplay.innerHTML = '<i class="italic text-gray-500 dark:text-gray-400">Calculating...</i>';
+    sequenceTermsTableBody.innerHTML = '';
+    sequenceTermsTable.classList.add('hidden');
+    maxTermDisplay.textContent = '';
+    minTermDisplay.textContent = '';
+    averageTermDisplay.textContent = '';
+    monotonicityDisplay.textContent = '';
+    maxPartialSumDisplay.textContent = '';
+    minPartialSumDisplay.textContent = '';
+    convergenceTrendDisplay.textContent = '';
 }
 
 /**
@@ -199,50 +332,44 @@ function displayLoading() {
  */
 function updateChart(startValue, partialSums) {
     const labels = partialSums.map((_, index) => startValue + index);
-
-    // Calculate min and max values for centering the y-axis
     const minValue = Math.min(...partialSums);
     const maxValue = Math.max(...partialSums);
-    const padding = (maxValue - minValue) * 0.1; // 10% padding
+    const padding = (maxValue - minValue) * 0.1;
 
-    // Update chart data and options
     chart.data.labels = labels;
     chart.data.datasets[0].data = partialSums;
     chart.options.scales.y.min = minValue - padding;
     chart.options.scales.y.max = maxValue + padding;
 
     try {
-        chart.update(); // Efficiently update the chart
+        chart.update();
     } catch (error) {
         console.error("Chart.js update error:", error);
         displayError("An error occurred while updating the chart.");
     }
 }
 
-/**
- * Updates the table with the sequence terms.
- * @param {number[]} terms - The sequence terms.
- * @param {number} decimalPlaces - The number of decimal places to display.
- */
-function updateSequenceTermsTable(terms, decimalPlaces = 12) { // Increased default to 12
-    sequenceTermsTable.innerHTML = '';
-    for (let i = 0; i < terms.length; i++) {
-        const row = document.createElement('tr');
-        const nCell = document.createElement('td');
-        const termCell = document.createElement('td');
+// Event Listener to show sequence terms
+showTermsButton.addEventListener('click', () => {
+    const formulaString = formulaInput.value;
+    const start = parseInt(startInput.value);
+    const end = parseInt(endInput.value);
 
-        nCell.textContent = parseInt(i) + parseInt(startInput.value); // Use the correct 'n' value
-        termCell.textContent = terms[i].toFixed(decimalPlaces); // Display to specified decimal places
-
-        nCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'bg-gray-50', 'text-gray-500', 'dark:text-gray-300');
-        termCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-gray-800', 'dark:text-gray-200');
-        row.classList.add('border', 'border-gray-200');
-
-        row.appendChild(nCell);
-        row.appendChild(termCell);
-        sequenceTermsTable.appendChild(row);
+    const validationError = validateInputs(start, end);
+    if (validationError) {
+        displayError(validationError);
+        return;
     }
-}
+
+    try {
+        const { sequenceTerms } = calculatePartialSums(formulaString, start, end);
+        updateSequenceTermsTable(sequenceTerms);
+        sequenceTermsTable.classList.remove('hidden');
+    } catch (error) {
+        console.error("Error calculating or displaying sequence terms:", error);
+        displayError(error.message || "An error occurred while displaying sequence terms.");
+    }
+});
 
 // Event Listener and Main Logic
 calculateButton.addEventListener('click', async () => {
@@ -252,6 +379,7 @@ calculateButton.addEventListener('click', async () => {
 
     displayFormula(formulaString, start, end);
     clearError();
+    displayLoading();
 
     const validationError = validateInputs(start, end);
     if (validationError) {
@@ -259,13 +387,11 @@ calculateButton.addEventListener('click', async () => {
         return;
     }
 
-    displayLoading();
-
     try {
-        // Perform calculations synchronously since they are not inherently asynchronous in this context
         const { partialSums, sequenceTerms } = calculatePartialSums(formulaString, start, end);
-        displayResults(partialSums[partialSums.length - 1], sequenceTerms);
+        displayResults(partialSums[partialSums.length - 1]);
         updateChart(start, partialSums);
+        displayAnalysis(sequenceTerms, partialSums);
     } catch (error) {
         console.error("Calculation error:", error);
         displayError(error.message || "An error occurred during calculation.");
