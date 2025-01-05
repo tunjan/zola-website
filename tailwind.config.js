@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ["Inter"],
-      serif: ["Alegreya"],
+      serif: ["EB Garamond"],
     },
     extend: {
       animation: {

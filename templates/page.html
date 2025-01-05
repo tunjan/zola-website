@@ -1,17 +1,17 @@
 {% extends "base.html" %} {% block main %}
-<article class="mx-auto max-w-full md:max-w-6xl">
+<article class="mx-auto max-w-full lg:max-w-6xl">
   <!-- Page Start inject -->
   {% include "injects/page_start.html" ignore missing %}
 
-  <header class="mb-10 mt-0 md:mt-16">
-    <h1 class="my-2 pb-2.5 text-4xl font-medium lg:text-7xl">{{ page.title }}</h1>
+  <header class="mb-10 mt-0">
     <time class="text-base antialiased"
-      >{{ page.date | date(format="%B %d, %Y") }}</time
-    >
+    >{{ page.date | date(format="%B %d, %Y") }}</time
+  >
+    <h1 class="my-2 pb-2.5 text-2xl font-medium lg:text-5xl">{{ page.title }}</h1>
   </header>
 
   {% if page.extra.cover.image %}
-  <figure class="-mx-6 mb-12 mt-0 md:my-16">
+  <figure class="-mx-6 mb-12 mt-0 lg:my-16">
     <img
       class="h-auto w-full"
       src="{{ get_url(path=page.extra.cover.image) }}"
@@ -23,7 +23,7 @@
   <hr class="h-px my-8 bg-stone-900 border-0 dark:bg-gray-700">
   <!-- Content -->
   <section
-    class="prose prose-xl prose-zinc mx-auto font-sans dark:prose-invert prose-headings:text-3xl prose-h2:font-semibold prose-a:underline md:mt-20"
+    class="prose prose-lg prose-zinc mx-auto dark:prose-invert prose-headings:text-3xl prose-h2:font-semibold prose-a:underline lg:mt-20"
   >
     {{ page.content | safe }}
   </section>

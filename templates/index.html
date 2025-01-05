@@ -2,22 +2,22 @@
 
 <div class="">
   <h1
-    class="border-stone-400 mb-10 font-sans font-semibold text-5xl  dark:border-stone-200"
+    class="border-stone-400 mb-10  font-semibold text-4xl  dark:border-stone-200"
   >
     Tools
   </h1>
-  <ul class="flex font-medium flex-col gap-8">
+  <ul class="flex  flex-col gap-8">
     <li
-      class="flex flex-col justify-between gap-4  border-stone-200 pb-8 text-xl  md:text-2xl lg:flex-row dark:border-stone-500"
+      class="flex flex-col justify-between gap-4 font-medium  border-stone-200 pb-8 text-xl  lg:text-xl lg:flex-row dark:border-stone-500"
     >
       <a href="{{ get_url(path="@/sum.md") }}"
         >Summation
-        <p class="text-base italic opacity-50 lg:text-lg">
+        <p class="text-base italic opacity-50 lg:text-base">
           Plot partial sums
         </p></a
       >
       <span
-        class="min-w-28 text-right text-base opacity-60 md:text-lg lg:self-center"
+        class="min-w-28 text-right text-base opacity-60 lg:text-base lg:self-center"
         >December 21, 2024</span
       >
     </li>
@@ -28,19 +28,19 @@
 {% if config.extra.list_pages %}
 <div class="mt-16">
   <h1
-    class="mb-10 border-stone-400 font-sans font-semibold text-5xl  dark:border-stone-200"
+    class="mb-10 border-stone-400  font-semibold text-4xl  dark:border-stone-200"
   >
     Posts
   </h1>
-  <ul class="flex font-medium flex-col gap-8">
+  <ul class="flex  flex-col gap-8">
     {% set posts_section = get_section(path="posts/_index.md") %} {% for page in
     posts_section.pages | slice(end=10) %}
     <li
-      class="flex flex-col justify-between gap-4 border-b-2 border-stone-900 pb-8 text-xl  md:text-2xl lg:flex-row dark:border-stone-500"
+      class="flex flex-col font-medium justify-between gap-4 border-b-2 border-stone-900 pb-8 text-xl  lg:text-xl lg:flex-row dark:border-stone-500"
     >
       <a class="" href="{{ page.permalink | safe }}"
         >{{ page.title }} {% if page.description %}
-        <p class="text-base italic opacity-50 lg:text-lg">
+        <p class="text-base italic opacity-50 lg:text-base">
           {{ page.description }}
         </p>
         {% elif page.summary %}<!---->
@@ -48,7 +48,7 @@
         {% endif %}</a
       >
       <span
-        class="min-w-28 text-right text-base opacity-60 md:text-lg lg:self-center"
+        class="min-w-28 text-right text-base opacity-60 lg:text-base lg:self-center"
         >{{ page.date | date(format="%B %d, %Y") }}</span
       >
     </li>
