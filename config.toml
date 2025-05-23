@@ -1,6 +1,6 @@
 # The URL the site will be built for
 title = "Alberto Trigo"
-base_url = "https://albertotrigo.eu"
+base_url = "https://albertotrigo.netlify.app"
 description = ""
 default_language = "en"
 author = "Alberto Trigo"
