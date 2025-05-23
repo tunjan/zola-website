@@ -1,12 +1,12 @@
-// --- CONFIGURATION CONSTANTS ---
+
 const CHART_BORDER_COLOR = 'rgb(51, 65, 85)';
 const CHART_ANIMATION_DURATION = 800;
 const PARTIAL_SUM_LABEL = 'Partial Sum';
 const DEFAULT_DECIMAL_PLACES_TABLE = 6;
 const DEFAULT_DECIMAL_PLACES_DISPLAY = 6;
-const CONVERGENCE_THRESHOLD = 0.0001; // More explicit threshold
+const CONVERGENCE_THRESHOLD = 0.0001; 
 
-// --- UI ELEMENT REFERENCES ---
+
 const UI = {
     formulaInput: document.getElementById('function'),
     startInput: document.getElementById('start'),
@@ -17,12 +17,12 @@ const UI = {
     sequenceTermsTableBody: document.getElementById('sequence-terms-body'),
     sequenceTermsTable: document.getElementById('sequence-terms-table'),
     showTermsButton: document.getElementById('show-terms'),
-    get chartCanvasContext() { // Use a getter to ensure context is fetched when needed
+    get chartCanvasContext() { 
         const canvas = document.getElementById('seriesChart');
         return canvas ? canvas.getContext('2d') : null;
     },
 
-    // Analysis Display Elements
+    
     maxTermDisplay: document.getElementById('max-term'),
     minTermDisplay: document.getElementById('min-term'),
     averageTermDisplay: document.getElementById('average-term'),
@@ -32,18 +32,18 @@ const UI = {
     convergenceTrendDisplay: document.getElementById('convergence-trend'),
 };
 
-// --- APPLICATION STATE ---
-let chartInstance; // To hold the Chart.js instance
+
+let chartInstance; 
 let currentCalculationResults = {
     terms: [],
     partialSums: [],
     formula: '',
     start: NaN,
     end: NaN,
-    isValid: false, // To track if current results are based on a valid calculation
+    isValid: false, 
 };
 
-// --- CHART CONFIGURATION ---
+
 const chartConfig = {
     type: 'line',
     data: {
@@ -53,11 +53,11 @@ const chartConfig = {
             data: [],
             borderColor: CHART_BORDER_COLOR,
             borderWidth: 2,
-            tension: 0.1, // Slightly smoother lines
+            tension: 0.1, 
             pointRadius: 3,
             pointBackgroundColor: CHART_BORDER_COLOR,
             pointHoverRadius: 5,
-            fill: false, // common for line charts
+            fill: false, 
         }]
     },
     options: {
@@ -69,7 +69,7 @@ const chartConfig = {
         },
         scales: {
             y: {
-                beginAtZero: false, // Auto-scale based on data
+                beginAtZero: false, 
                 grid: {
                     color: 'rgba(0, 0, 0, 0.05)',
                 },
@@ -90,7 +90,7 @@ const chartConfig = {
         },
         plugins: {
             legend: {
-                display: true, // Often useful to show the label
+                display: true, 
                 position: 'top',
             },
             tooltip: {
@@ -101,7 +101,7 @@ const chartConfig = {
     }
 };
 
-// --- CORE FUNCTIONS ---
+
 
 /**
  * Initializes the Chart.js chart.
@@ -112,7 +112,7 @@ function initializeChart() {
         return;
     }
     if (chartInstance) {
-        chartInstance.destroy(); // Destroy existing chart if any
+        chartInstance.destroy(); 
     }
     chartInstance = new Chart(UI.chartCanvasContext, chartConfig);
 }
@@ -142,7 +142,7 @@ function convertToLatex(formula) {
         return node.toTex();
     } catch (error) {
         console.warn("Error parsing formula for LaTeX conversion:", error.message);
-        // Return a safe, non-LaTeX representation of the problematic formula
+        
         return `\\text{Invalid formula: } ${formula.replace(/[{}]/g, '').replace(/\\/g, '\\textbackslash ')}`;
     }
 }
@@ -189,13 +189,13 @@ function validateInputs(formulaString, start, end) {
     if (!Number.isInteger(start) || !Number.isInteger(end)) {
         return "Please enter integer values for the starting and ending points.";
     }
-    if (start < 0 || end < 0) { // Allow start=0
+    if (start < 0 || end < 0) { 
         return "Please enter non-negative integers for starting and ending points.";
     }
     if (start > end) {
         return "Starting point cannot be greater than the ending point.";
     }
-    if (end - start > 10000) { // Performance guard
+    if (end - start > 10000) { 
         return "The range is too large (max 10,000 terms). Please choose a smaller range.";
     }
     return null;
@@ -210,8 +210,8 @@ function validateInputs(formulaString, start, end) {
  */
 function evaluateFunction(n, formulaString) {
     try {
-        // `math.evaluate` is generally safer than `new Function` or `eval`.
-        // Ensure `n` is the only variable available in the scope for security.
+        
+        
         const compiledFormula = math.compile(formulaString);
         return compiledFormula.evaluate({ n });
     } catch (error) {
@@ -235,7 +235,7 @@ function calculateSeriesData(formulaString, start, end) {
 
     for (let n = start; n <= end; n++) {
         const term = evaluateFunction(n, formulaString);
-        if (!Number.isFinite(term)) { // Checks for NaN and Infinity
+        if (!Number.isFinite(term)) { 
             throw new Error(`Term at n = ${n} evaluated to a non-finite number (${term}).`);
         }
         sequenceTerms.push(term);
@@ -245,7 +245,7 @@ function calculateSeriesData(formulaString, start, end) {
     return { partialSums, sequenceTerms };
 }
 
-// --- UI UPDATE FUNCTIONS ---
+
 
 /**
  * Resets all analysis display elements to empty.
@@ -260,13 +260,13 @@ function resetAnalysisDisplays() {
     if (UI.sequenceTermsTableBody) UI.sequenceTermsTableBody.innerHTML = '';
     if (UI.sequenceTermsTable) UI.sequenceTermsTable.classList.add('hidden');
 
-    // Reset chart to an empty state
+    
     if (chartInstance) {
         chartInstance.data.labels = [];
         chartInstance.data.datasets[0].data = [];
-        chartInstance.options.scales.y.min = undefined; // Let Chart.js auto-scale
+        chartInstance.options.scales.y.min = undefined; 
         chartInstance.options.scales.y.max = undefined;
-        chartInstance.update('none'); // Update without animation
+        chartInstance.update('none'); 
     }
 }
 
@@ -285,11 +285,11 @@ function displayLoadingState() {
  * @param {string} message - The error message.
  */
 function displayErrorState(message) {
-    resetAnalysisDisplays(); // Clear previous results/loading
-    if (UI.partialSumDisplay) { // Use partialSumDisplay as a general status/error area
+    resetAnalysisDisplays(); 
+    if (UI.partialSumDisplay) { 
         UI.partialSumDisplay.innerHTML = `<span class="text-red-600 dark:text-red-400 font-semibold">${message}</span>`;
     }
-    currentCalculationResults.isValid = false; // Mark current results as invalid
+    currentCalculationResults.isValid = false; 
 }
 
 /**
@@ -300,7 +300,7 @@ function displayErrorState(message) {
 function updateSequenceTermsTable(terms, startValue) {
     if (!UI.sequenceTermsTableBody || !UI.sequenceTermsTable) return;
 
-    UI.sequenceTermsTableBody.innerHTML = ''; // Clear existing rows
+    UI.sequenceTermsTableBody.innerHTML = ''; 
     const fragment = document.createDocumentFragment();
 
     if (terms.length === 0) {
@@ -350,7 +350,7 @@ function displayMainResults(finalSum) {
  * @param {number[]} partialSums - Array of partial sums.
  */
 function displaySeriesAnalysis(sequenceTerms, partialSums) {
-    if (sequenceTerms.length === 0) return; // No analysis if no terms
+    if (sequenceTerms.length === 0) return; 
 
     const maxTerm = Math.max(...sequenceTerms);
     const minTerm = Math.min(...sequenceTerms);
@@ -381,13 +381,13 @@ function displaySeriesAnalysis(sequenceTerms, partialSums) {
     let convergenceTrend = "Trend unclear with this range.";
     if (partialSums.length > 2) {
         const lastDiff = Math.abs(partialSums[partialSums.length - 1] - partialSums[partialSums.length - 2]);
-        const secondLastDiff = Math.abs(partialSums[partialSums.length - 2] - partialSums[partialSums.length - 3] || lastDiff); // Handle short series
+        const secondLastDiff = Math.abs(partialSums[partialSums.length - 2] - partialSums[partialSums.length - 3] || lastDiff); 
         if (lastDiff < CONVERGENCE_THRESHOLD) {
             convergenceTrend = "Suggests convergence (small change in partial sums).";
-            if (lastDiff < secondLastDiff / 2 && lastDiff !== 0) { // If change is decreasing rapidly
+            if (lastDiff < secondLastDiff / 2 && lastDiff !== 0) { 
                  convergenceTrend = "Strongly suggests convergence (rapidly diminishing change).";
             }
-        } else if (lastDiff > secondLastDiff * 1.5 && lastDiff > 0.1) { // If change is increasing significantly
+        } else if (lastDiff > secondLastDiff * 1.5 && lastDiff > 0.1) { 
             convergenceTrend = "Suggests divergence (increasing change in partial sums).";
         }
     } else if (partialSums.length > 0 && partialSums.length <=2) {
@@ -411,7 +411,7 @@ function displaySeriesAnalysis(sequenceTerms, partialSums) {
 function updateChart(startValue, partialSumsData) {
     if (!chartInstance) {
         console.warn("Chart not initialized, cannot update.");
-        initializeChart(); // Attempt to initialize if not already
+        initializeChart(); 
         if(!chartInstance) return;
     }
 
@@ -420,12 +420,12 @@ function updateChart(startValue, partialSumsData) {
     chartInstance.data.labels = labels;
     chartInstance.data.datasets[0].data = partialSumsData;
 
-    // Dynamic Y-axis scaling with padding
+    
     if (partialSumsData.length > 0) {
         const minValue = Math.min(...partialSumsData);
         const maxValue = Math.max(...partialSumsData);
         const range = maxValue - minValue;
-        // Add 10% padding, or a fixed small amount if range is 0
+        
         const padding = range === 0 ? 1 : range * 0.1; 
         chartInstance.options.scales.y.min = minValue - padding;
         chartInstance.options.scales.y.max = maxValue + padding;
@@ -435,14 +435,14 @@ function updateChart(startValue, partialSumsData) {
     }
 
     try {
-        chartInstance.update(); // Update with animation (default)
+        chartInstance.update(); 
     } catch (error) {
         console.error("Chart.js update error:", error);
         displayErrorState("Error updating chart. Check console.");
     }
 }
 
-// --- EVENT HANDLERS ---
+
 
 /**
  * Main calculation logic triggered by the "Calculate" button.
@@ -450,11 +450,11 @@ function updateChart(startValue, partialSumsData) {
 async function handleCalculation() {
     const { formulaString, start, end, rawStart, rawEnd } = getNumericInputs();
 
-    // Update formula display immediately, even if inputs are invalid for calculation
-    // This gives feedback on the formula itself
+    
+    
     await displayFormula(formulaString, rawStart, rawEnd);
 
-    displayLoadingState(); // Show loading and clear previous results
+    displayLoadingState(); 
 
     const validationError = validateInputs(formulaString, start, end);
     if (validationError) {
@@ -478,7 +478,7 @@ async function handleCalculation() {
         displayMainResults(partialSums.length > 0 ? partialSums[partialSums.length - 1] : 0);
         updateChart(start, partialSums);
         displaySeriesAnalysis(sequenceTerms, partialSums);
-        // Do not automatically show terms table here; let user click "Show Terms"
+        
         if (UI.sequenceTermsTable) UI.sequenceTermsTable.classList.add('hidden');
 
 
@@ -496,7 +496,7 @@ function handleShowTerms() {
     if (!UI.sequenceTermsTable || !UI.sequenceTermsTableBody) return;
 
     if (!UI.sequenceTermsTable.classList.contains('hidden')) {
-        UI.sequenceTermsTable.classList.add('hidden'); // Toggle: hide if shown
+        UI.sequenceTermsTable.classList.add('hidden'); 
         if (UI.showTermsButton) UI.showTermsButton.textContent = 'Show Terms';
         return;
     }
@@ -505,7 +505,7 @@ function handleShowTerms() {
 
     const { formulaString, start, end } = getNumericInputs();
 
-    // Check if we can use cached results
+    
     if (currentCalculationResults.isValid &&
         currentCalculationResults.formula === formulaString &&
         currentCalculationResults.start === start &&
@@ -514,44 +514,44 @@ function handleShowTerms() {
     {
         updateSequenceTermsTable(currentCalculationResults.terms, currentCalculationResults.start);
     } else {
-        // Need to recalculate terms (e.g., inputs changed or no valid calculation yet)
+        
         const validationError = validateInputs(formulaString, start, end);
         if (validationError) {
-            // Display a small error notice near the table or button, or reuse main error display
-            // For simplicity, just log it and show an empty table
+            
+            
             console.warn("Validation error for showing terms:", validationError);
-            updateSequenceTermsTable([], start); // Show empty table with message
+            updateSequenceTermsTable([], start); 
             UI.sequenceTermsTableBody.firstElementChild.firstElementChild.textContent = validationError;
-            if (UI.showTermsButton) UI.showTermsButton.textContent = 'Show Terms'; // Revert button text
+            if (UI.showTermsButton) UI.showTermsButton.textContent = 'Show Terms'; 
             return;
         }
 
         try {
-            // Only calculate terms, not full partial sums if not needed for display
+            
             const { sequenceTerms } = calculateSeriesData(formulaString, start, end);
-            // Update cache partially, or decide if this action should trigger a full re-cache
+            
             currentCalculationResults.terms = sequenceTerms;
-            // Note: partialSums in currentCalculationResults might be stale if only terms are re-fetched.
-            // For this specific button, we only care about terms.
+            
+            
             updateSequenceTermsTable(sequenceTerms, start);
         } catch (error) {
             console.error("Error calculating/displaying sequence terms:", error);
             updateSequenceTermsTable([], start);
             UI.sequenceTermsTableBody.firstElementChild.firstElementChild.textContent = error.message || "Error fetching terms.";
-            if (UI.showTermsButton) UI.showTermsButton.textContent = 'Show Terms'; // Revert button text
+            if (UI.showTermsButton) UI.showTermsButton.textContent = 'Show Terms'; 
         }
     }
 }
 
-// --- INITIALIZATION ---
+
 
 /**
  * Sets up event listeners and initial state.
  */
-functioninitializeApp() {
+function initializeApp() {
     if (!UI.calculateButton || !UI.showTermsButton || !UI.formulaInput || !UI.startInput || !UI.endInput) {
         console.error("One or more essential UI elements are missing. Application may not function correctly.");
-        // Display a prominent error to the user on the page itself
+        
         const body = document.querySelector('body');
         if (body) {
             const errorDiv = document.createElement('div');
@@ -566,13 +566,13 @@ functioninitializeApp() {
             errorDiv.style.zIndex = '9999';
             body.prepend(errorDiv);
         }
-        return; // Stop further initialization
+        return; 
     }
 
     UI.calculateButton.addEventListener('click', handleCalculation);
     UI.showTermsButton.addEventListener('click', handleShowTerms);
 
-    // Debounce input changes for live formula display to avoid excessive MathJax calls
+    
     let debounceTimer;
     const liveUpdateFormulaDisplay = async () => {
         const { formulaString, rawStart, rawEnd } = getNumericInputs();
@@ -587,28 +587,28 @@ functioninitializeApp() {
     [UI.formulaInput, UI.startInput, UI.endInput].forEach(input => {
         input.addEventListener('input', () => {
             clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(liveUpdateFormulaDisplay, 500); // 500ms debounce
+            debounceTimer = setTimeout(liveUpdateFormulaDisplay, 500); 
         });
     });
     
     initializeChart();
-    // Initial formula display (e.g., with placeholders)
-    liveUpdateFormulaDisplay(); // Display initial empty/placeholder formula
-    resetAnalysisDisplays(); // Ensure a clean initial state for analysis fields
+    
+    liveUpdateFormulaDisplay(); 
+    resetAnalysisDisplays(); 
 }
 
-// --- START THE APPLICATION ---
-// Ensure DOM is fully loaded before initializing, especially if script is in <head>
+
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeApp);
 } else {
-    initializeApp(); // DOMContentLoaded has already fired
+    initializeApp(); 
 }
 
-// Make sure Math.js is loaded, otherwise provide a fallback or error.
+
 if (typeof math === 'undefined') {
     console.error("Math.js library is not loaded. Formula evaluation will not work.");
-    // Optionally, disable UI elements or show a global error message.
+    
     if (UI.calculateButton) UI.calculateButton.disabled = true;
     if (UI.formulaInput) UI.formulaInput.placeholder = "Error: Math.js not loaded";
     displayErrorState("Math.js library missing. Calculations are disabled.");
